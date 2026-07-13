@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma Nutricional - Anthony Méndez</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #120e0d; 
+            margin: 0;
+            padding: 0;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* LOGO DE FONDO (MARCA DE AGUA GLOBAL) */
+        .watermark {
+            display: none; 
+            position: fixed; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            width: 120%; 
+            max-width: 700px; 
+            opacity: 0.08; 
+            pointer-events: none; 
+            z-index: 0;
+        }
+
+        /* 1. ESTILOS DEL LOGIN */
+        .login-container {
+            max-width: 350px; margin: 80px auto; background-color: #271f1d;
+            padding: 40px 30px; border-radius: 20px; text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8); color: #fff;
+            position: relative; z-index: 2;
+        }
+        .logo { width: 120px; height: 120px; border-radius: 50%; margin-bottom: 15px; object-fit: cover; }
+        .brand-title { font-size: 24px; margin: 0; font-weight: 800; letter-spacing: 1px; }
+        .brand-subtitle { font-size: 13px; color: #c7b28d; margin-top: 5px; margin-bottom: 30px; letter-spacing: 2px; }
+        #client-code {
+            width: 100%; padding: 15px; border-radius: 10px; border: none; 
+            margin-bottom: 20px; font-size: 16px; text-align: center; box-sizing: border-box;
+        }
+        .btn-ingresar {
+            width: 100%; padding: 15px; background-color: #b33928; color: white; border: none;
+            border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s;
+        }
+        .btn-ingresar:hover { background-color: #922c1e; }
+
+        /* 2. ESTILOS DE LA DIETA */
+        .tracking-container { 
+            display: none; max-width: 500px; margin: 0 auto; 
+            background: transparent; 
+            padding: 20px; position: relative; color: #333; z-index: 2;
+        }
+        
+        .header-card {
+            background: white; border-top: 5px solid #b33928; border-radius: 15px;
+            padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .header-card h2 { margin: 0; font-size: 22px; font-weight: 900; }
+        .header-card h4 { color: #b33928; margin: 5px 0 15px 0; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+        .stats-row { display: flex; justify-content: space-between; border-top: 1px solid #eee; padding-top: 15px; }
+        .stat-box { flex: 1; text-align: center; }
+        .stat-box span { display: block; font-size: 9px; color: #888; text-transform: uppercase; margin-bottom: 3px;}
+        .stat-box strong { display: block; font-size: 14px; color: #b33928; font-weight: 900; }
+
+        .section-title { color: #b33928; font-weight: bold; font-size: 13px; margin-bottom: 12px; letter-spacing: 1px;}
+        
+        /* Sistema de Pestañas */
+        .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px;}
+        .tab { 
+            background: white; color: #b33928; padding: 6px 16px; border-radius: 20px; cursor: pointer;
+            font-weight: bold; font-size: 11px; white-space: nowrap; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: 0.2s;
+        }
+        .tab.active { background: #b33928; color: white; }
+        .tab.especial { background: #2c3e50; color: white; }
+        .tab.especial.active { background: #1a252f; border: 2px solid #b33928; }
+        .tabs::-webkit-scrollbar { display: none; }
+        
+        /* Contenedores de Días */
+        .day-content { display: none; }
+        .day-content.active { display: block; }
+
+        .meal-card {
+            background: white; border-left: 5px solid #b33928; border-radius: 12px;
+            padding: 15px 20px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+        }
+        .meal-card h5 { color: #b33928; margin: 0 0 5px 0; font-size: 13px; font-weight: 900; text-transform: uppercase;}
+        .meal-card h6 { color: #666; margin: 0 0 10px 0; font-size: 11px; font-style: italic; font-weight: normal;}
+        .meal-card p { margin: 0; color: #222; font-size: 13.5px; font-weight: 500; line-height: 1.5;}
+        
+        /* Estilos para listas en la sección de alternativas */
+        .meal-card ul { margin: 0; padding-left: 15px; color: #222; font-size: 13.5px; line-height: 1.6; }
+        .meal-card ul li { margin-bottom: 8px; }
+
+        .report-section { background: white; padding: 15px; border-radius: 12px; margin-top: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);}
+        .report-section label { display: block; margin-top: 10px; font-weight: 600; font-size: 13px;}
+        .report-section input[type="number"] { width: 100%; padding: 10px; margin-top: 5px; border-radius: 6px; border: 1px solid #ccc; box-sizing: border-box; }
+        .btn-enviar { width: 100%; padding: 12px; background-color: #27ae60; color: white; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        .btn-enviar:disabled { background-color: #7f8c8d; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+
+<!-- LOGO DE FONDO GIGANTE -->
+<img src="logo gym.jpeg" id="bg-watermark" class="watermark" alt="Fondo">
+
+<!-- 1. PANTALLA DE LOGIN -->
+<div id="login-screen" class="login-container">
+    <img src="logo gym.jpeg" alt="Logo" class="logo">
+    <h1 class="brand-title">PERSONAL TRAINER</h1>
+    <p class="brand-subtitle">ANTHONY MÉNDEZ</p>
+    <input type="text" id="client-code" placeholder="Clave de acceso">
+    <button class="btn-ingresar" onclick="iniciarSistema()">INGRESAR AL SISTEMA</button>
+</div>
+
+<!-- 2. PANTALLA DE LA DIETA -->
+<div id="tracking-screen" class="tracking-container">
+
+    <!-- DATOS DEL CLIENTE -->
+    <div class="header-card">
+        <h2>TATIANA YUNGA</h2>
+        <h4>Objetivo: Déficit Calórico</h4>
+        <div class="stats-row">
+            <div class="stat-box"><span>Peso Act.</span><strong>60 kg</strong></div>
+            <div class="stat-box"><span>Meta</span><strong>55 kg</strong></div>
+            <div class="stat-box"><span>Grasa</span><strong>35%</strong></div>
+            <div class="stat-box"><span>Calorías</span><strong>Por definir</strong></div>
+        </div>
+    </div>
+
+    <div class="section-title">▶ TU PLAN NUTRICIONAL</div>
+
+    <!-- PESTAÑAS DE NAVEGACIÓN -->
+    <div class="tabs">
+        <div class="tab active" onclick="cambiarDia('lunes', this)">LUNES</div>
+        <div class="tab" onclick="cambiarDia('martes', this)">MARTES</div>
+        <div class="tab" onclick="cambiarDia('miercoles', this)">MIÉRCOLES</div>
+        <div class="tab" onclick="cambiarDia('jueves', this)">JUEVES</div>
+        <div class="tab" onclick="cambiarDia('viernes', this)">VIERNES</div>
+        <div class="tab" onclick="cambiarDia('sabado', this)">SÁBADO</div>
+        <div class="tab" onclick="cambiarDia('domingo', this)">DOMINGO</div>
+        <div class="tab especial" onclick="cambiarDia('alternativas', this)">★ OPCIONES RÁPIDAS</div>
+    </div>
+
+    <!-- ==================== LUNES ==================== -->
+    <div id="lunes" class="day-content active">
+        <div class="meal-card">
+            <h5>Comida 1: Desayuno (7:30 AM)</h5>
+            <p>
+                • <strong>Huevo entero:</strong> 50 g (1 unidad).<br>
+                • <strong>Claras de huevo:</strong> 100 g.<br>
+                • <strong>Espinaca fresca:</strong> 50 g (revuelta con los huevos, sin aceite).<br>
+                • <strong>Pan 100% integral:</strong> 30 g (1 rebanada).<br>
+                • <strong>Aguacate:</strong> 40 g (untado en el pan).
+            </p>
+        </div>
+        <div class="meal-card">
+            <h5>Comida 2: Almuerzo de Oficina (13:30 PM)</h5>
+            <p>
+                • <strong>Pechuga de pollo a la plancha:</strong> 180 g.<br>
+                • <strong>Arroz integral cocido:</strong> 100 g.<br>
+                • <strong>Tomates cherry y pepino:</strong> 200 g (mixto).<br>
+                • <strong>Aceite de oliva extra virgen:</strong> 10 g (1 cda sopera rasa como aderezo).
+            </p>
+        </div>
+        <div class="meal-card">
+            <h5>Comida 3: Merienda / Pre-Entreno (17:30 PM)</h5>
+            <p>
+                • <strong>Yogur griego natural:</strong> 150 g (0% grasa, sin azúcar).<br>
+                • <strong>Manzana verde (picada):</strong> 150 g.<br>
+                • <strong>Almendras naturales:</strong> 15 g (sin sal).
+            </p>
+        </div>
+        <div class="meal-card">
+            <h5>Comida 4: Cena Post-Entreno (21:00 PM)</h5>
+            <p>
+                • <strong>Atún en agua (escurrido):</strong> 120 g.<br>
+                • <strong>Papa blanca cocida:</strong> 150 g.<br>
+                • <strong>Brócoli al vapor:</strong> 100 g.<br>
+                • <strong>Aceite de oliva extra virgen:</strong> 5 g (1 cucharadita).
+            </p>
+        </div>
+    </div>
+
+    <!-- ==================== MARTES ==================== -->
+    <div id="martes" class="day-content">
+        <div class="meal-card">
+            <h5>Comida 1: Desayuno (7:30 AM)</h5>
+            <p>
+                • <strong>Yogur griego natural:</strong> 150 g (0% grasa).<br>
+                • <strong>Avena en hojuelas:</strong> 30 g (mezclada con el yogur).<br>
+                • <strong>Fresas o arándanos:</strong> 100 g.<br>
+                • <strong>Nueces picadas:</strong> 15 g.
+            </p>
+        </div>
+        <div class="meal-card">
+            <h5>Comida 2: Almuerzo de Oficina (13:30 PM)</h5>
+            <p>
+                • <strong>Carne molida magra:</strong> 180 g (90% magra, cocida).<br>
+                • <strong>Fideos integrales cocidos:</strong> 100 g.<br>
+                • <strong>Calabacín (zucchini) salteado:</strong> 150 g.<br>
+                • <strong>Aceite de oliva extra virgen:</strong> 10 g.
+            </p>
+        </div>
+        <div class="meal-card">
+            <h5>Comida 3: Merienda / Pre-Entreno (17:30 PM)</h5>
+            <p>
+                • <strong>Proteína de suero de leche (Whey Protein):</strong> 30 g (1 scoop en agua).<br>
+                • <strong>Plátano (guineo):</strong> 100 g.
+            </p>
+        </div>
+        <div class="meal-card">
+            <h5>Comida 4: Cena Post-Entreno (21:00 PM)</h5>
+            <p>
+                • <strong>Pechuga de pollo al horno o plancha:</strong> 150 g.<br>
+                • <strong>Camote (batata) cocido:</strong> 100 g.<br>
+                • <strong>Vainitas (ejotes) al vapor:</strong> 100 g.<br>
+                • <strong>Aguacate:</strong> 30 g.
+            </p>
+        </div>
+    </div>
+
+    <!-- ==================== MIÉRCOLES ==================== -->
+    <div id="miercoles" class="day-content">
+        <div class="meal-card">
+            <h5>Comida 1: Desayuno (7:30 AM)</h5>
+            <p>
+                • <strong>Huevos enteros:</strong> 100 g (2 unidades).<br>
+                • <strong>Arepa de maíz pequeña o tortilla de maíz:</strong> 30 g.<br>
+                • <strong>Aguacate:</strong> 40 g.
+            </p>
+        </div>
+        <div class="meal-card">
+            <h5>Comida 2: Almuerzo de Oficina (13:30 PM)</h5>
+            <p>
+                • <strong>Lomo de cerdo magro (cocido):</strong> 180 g.<br>
+                • <strong>Lentejas cocidas:</strong> 100 g (sin embutidos).<br>
+                • <strong>Ensalada de cebolla y tomate:</strong> 150 g.<br>
+                • <strong>Aceite de oliva extra virgen:</strong> 10 g.
+            </p>
+        </div>
+        <div class="meal-card">
+            <h5>Comida 3: Merienda / Pre-Entreno (17:30 PM)</h5>
+            <p>
+                • <strong>Queso cottage bajo en grasa:</strong> 150 g.<br>
+                • <strong>Piña picada:</strong> 150 g.<br>
+                • <strong>Almendras naturales:</strong> 15 g.
+            </p>
+        </div>
+        <div class="meal-card">
+            <h5>Comida 4: Cena Post-Entreno (21:00 PM)</h5>
+            <p>
+                • <strong>Pescado blanco:</strong> 180 g (tilapia o corvina, a la plancha).<br>
+                • <strong>Arroz blanco cocido:</strong> 100 g.<br>
+                • <strong>Espárragos o champiñones salteados:</strong> 100 g.<br>
+                • <strong>Aceite de oliva extra virgen:</strong> 5 g.
+            </p>
+        </div>
+    </div>
+
+    <!-- ==================== JUEVES ==================== -->
+    <div id="jueves" class="day-content">
+        <div class="meal-card">
+            <h5>Comida 1: Desayuno Rápido (7:30 AM)</h5>
+            <p>
+                • <strong>Jamón de pavo:</strong> 50 g.<br>
+                • <strong>Queso fresco o mozzarella descremado:</strong> 40 g.<br>
+                • <strong>Pan 100% integral:</strong> 60 g (2 rebanadas, tipo sándwich).<br>
+                <em>Nota: Acompañar con café o té sin azúcar.</em>
+            </p>
+        </div>
+        <div class="meal-card">
+            <h5>Comida 2: Almuerzo de Oficina (13:30 PM)</h5>
+            <p>
+                • <strong>Pechuga de pollo desmechada:</strong> 180 g.<br>
+                • <strong>Frijoles negros cocidos:</strong> 100 g.<br>
+                • <strong>Lechuga y zanahoria rallada:</strong> 150 g.<br>
+                • <strong>Aceite de oliva extra virgen:</strong> 10 g.
+            </p>
+        </div>
+        <div class="meal-card">
+            <h5>Comida 3: Merienda / Pre-Entreno (17:30 PM)</h5>
+            <p>
+                • <strong>Proteína de suero de leche (Whey Protein):</strong> 30 g (en agua).<br>
+                • <strong>Manzana verde:</strong> 150 g.<br>
+                • <strong>Mantequilla de maní (100% natural):</strong> 15 g.
+            </p>
+        </div>
+        <div class="meal-card">
+            <h5>Comida 4: Cena Post-Entreno (21:00 PM)</h5>
+            <p>
+                • <strong>Atún en agua (escurrido):</strong> 120 g.<br>
+                • <strong>Choclo (maíz) desgranado cocido:</strong> 80 g.<br>
+                • <strong>Lechuga mixta:</strong> 100 g.<br>
+                • <strong>Aguacate:</strong> 30 g (usar como aderezo cremoso para el atún).
+            </p>
+        </div>
+    </div>
+
+    <!-- ==================== VIERNES ==================== -->
+    <div id="viernes" class="day-content">
+        <div class="meal-card">
+            <h5>Comida 1: Desayuno (7:30 AM)</h5>
+            <p>
+                • <strong>Huevo entero:</strong> 50 g (1 unidad).<br>
+                • <strong>Claras de huevo:</strong> 100 g.<br>
+                • <strong>Avena en hojuelas:</strong> 30 g (mezclada con los huevos tipo pancake o tortilla).<br>
+                • <strong>Mandarina o moras:</strong> 100 g.
+            </p>
+        </div>
+        <div class="meal-card">
+            <h5>Comida 2: Almuerzo de Oficina (13:30 PM)</h5>
+            <p>
+                • <strong>Bife de res magro (cocido):</strong> 180 g.<br>
+                • <strong>Papa cocida (fría, en ensalada):</strong> 100 g.<br>
+                • <strong>Vegetales mixtos:</strong> 150 g (zanahoria, coliflor, brócoli).<br>
+                • <strong>Aceite de oliva extra virgen:</strong> 10 g.
+            </p>
+        </div>
+        <div class="meal-card">
+            <h5>Comida 3: Merienda / Pre-Entreno (17:30 PM)</h5>
+            <p>
+                • <strong>Yogur griego natural (0% grasa):</strong> 150 g.<br>
+                • <strong>Pera o durazno picado:</strong> 150 g.<br>
+                • <strong>Nueces picadas:</strong> 15 g.
+            </p>
+        </div>
+        <div class="meal-card">
+            <h5>Comida 4: Cena Post-Entreno (21:00 PM)</h5>
+            <p>
+                • <strong>Pechuga de pollo (cocida):</strong> 150 g.<br>
+                • <strong>Quinua cocida:</strong> 100 g.<br>
+                • <strong>Pepino en rodajas:</strong> 150 g.<br>
+                • <strong>Aceite de oliva extra virgen:</strong> 5 g (con abundante jugo de limón y sal).
+            </p>
+        </div>
+    </div>
+
+    <!-- ==================== SÁBADO ==================== -->
+    <div id="sabado" class="day-content">
+        <div class="meal-card">
+            <p style="text-align:center; margin: 20px 0;"><em>Día libre o repetir el menú de un día anterior.</em></p>
+        </div>
+    </div>
+
+    <!-- ==================== DOMINGO ==================== -->
+    <div id="domingo" class="day-content">
+        <div class="meal-card">
+            <p style="text-align:center; margin: 20px 0;"><em>Día libre o repetir el menú de un día anterior.</em></p>
+        </div>
+    </div>
+
+    <!-- ==================== ALTERNATIVAS (OPCIONES RÁPIDAS) ==================== -->
+    <div id="alternativas" class="day-content">
+        <div class="meal-card">
+            <h5>Sustituto de Almuerzo/Cena rápido</h5>
+            <p>Sándwich de pan integral con doble porción de jamón de pavo, queso fresco bajo en grasa, lechuga y tomate de bolsa listos para comer.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Sustituto de Merienda rápido</h5>
+            <p>1 vaso de leche descremada o vegetal + 1 barra de proteína de buena calidad (baja en azúcar, >15g de proteína).</p>
+        </div>
+        <div class="meal-card">
+            <h5>Snack saciante anti-ansiedad</h5>
+            <p>Bastones de apio o zanahoria listos para consumir (comprados en el supermercado) con queso cottage.</p>
+        </div>
+    </div>
+
+    <!-- REPORTE DE HÁBITOS CON EMAIL -->
+    <div class="report-section">
+        <div class="section-title" style="margin-bottom: 0;">▶ REPORTE DE HÁBITOS</div>
+        
+        <label>Agua consumida hoy (Litros):</label>
+        <input type="number" id="agua" placeholder="Ej. 2.5">
+        
+        <label>Horas de sueño anoche:</label>
+        <input type="number" id="sueno" placeholder="Ej. 7.5">
+
+        <label>Pasos diarios (Cantidad):</label>
+        <input type="number" id="pasos" placeholder="Ej. 10000">
+
+        <button class="btn-enviar" id="btnSubmit" onclick="enviarReporte()">Enviar Reporte Diario</button>
+    </div>
+</div>
+
+<script>
+    function iniciarSistema() {
+        const inputCodigo = document.getElementById('client-code').value.trim().toUpperCase();
+        if (inputCodigo === "") {
+            alert("Por favor, ingresa tu clave de acceso.");
+            return;
+        }
+        
+        // CÓDIGO DE ACCESO PARA TATIANA
+        if (inputCodigo === "TATIANA2026") {
+            document.body.style.backgroundColor = "#e8e8e8";
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('tracking-screen').style.display = 'block';
+            document.getElementById('bg-watermark').style.display = 'block';
+        } else {
+            alert("Código incorrecto. Intenta nuevamente...");
+        }
+    }
+
+    function cambiarDia(diaId, elementoPestana) {
+        const dias = document.querySelectorAll('.day-content');
+        dias.forEach(dia => dia.classList.remove('active'));
+
+        const pestanas = document.querySelectorAll('.tab');
+        pestanas.forEach(pestana => pestana.classList.remove('active'));
+
+        document.getElementById(diaId).classList.add('active');
+        elementoPestana.classList.add('active');
+    }
+
+    // ENVÍO DE REPORTE POR CORREO
+    function enviarReporte() {
+        const agua = document.getElementById('agua').value;
+        const sueno = document.getElementById('sueno').value;
+        const pasos = document.getElementById('pasos').value;
+        const btn = document.getElementById('btnSubmit');
+
+        if(agua === "" || sueno === "" || pasos === "") {
+            alert("Por favor, llena todos los campos antes de enviar.");
+            return;
+        }
+
+        btn.innerText = "Enviando...";
+        btn.disabled = true;
+
+        const urlDestino = "https://formsubmit.co/ajax/anthonymendez929@gmail.com";
+
+        fetch(urlDestino, {
+            method: "POST",
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                Paciente: "TATIANA YUNGA", // Nombre actualizado para el reporte
+                Agua_Litros: agua,
+                Horas_Sueno: sueno,
+                Pasos_Diarios: pasos,
+                Fecha: new Date().toLocaleDateString()
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert("¡Reporte enviado exitosamente!");
+            document.getElementById('agua').value = "";
+            document.getElementById('sueno').value = "";
+            document.getElementById('pasos').value = "";
+            btn.innerText = "Enviar Reporte Diario";
+            btn.disabled = false;
+        })
+        .catch(error => {
+            alert("Hubo un error de conexión. Inténtalo de nuevo.");
+            btn.innerText = "Enviar Reporte Diario";
+            btn.disabled = false;
+        });
+    }
+</script>
+
+</body>
+</html>
