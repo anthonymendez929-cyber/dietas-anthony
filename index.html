@@ -107,7 +107,7 @@
 <body>
 
 <!-- LOGO DE FONDO GIGANTE -->
-<img src="logo gym,jpeg" id="bg-watermark" class="watermark" alt="Fondo">
+<img src="logo gym.jpeg" id="bg-watermark" class="watermark" alt="Fondo">
 
 <!-- 1. PANTALLA DE LOGIN -->
 <div id="login-screen" class="login-container">
@@ -322,10 +322,17 @@
     <!-- REPORTE DE HÁBITOS CON EMAIL -->
     <div class="report-section">
         <div class="section-title" style="margin-bottom: 0;">▶ REPORTE DE HÁBITOS</div>
+        
         <label>Agua consumida hoy (Litros):</label>
         <input type="number" id="agua" placeholder="Ej. 2.5">
+        
         <label>Horas de sueño anoche:</label>
         <input type="number" id="sueno" placeholder="Ej. 7.5">
+
+        <!-- NUEVA CASILLA PARA PASOS DIARIOS -->
+        <label>Pasos diarios (Cantidad):</label>
+        <input type="number" id="pasos" placeholder="Ej. 10000">
+
         <button class="btn-enviar" id="btnSubmit" onclick="enviarReporte()">Enviar Reporte Diario</button>
     </div>
 </div>
@@ -367,17 +374,18 @@
     function enviarReporte() {
         const agua = document.getElementById('agua').value;
         const sueno = document.getElementById('sueno').value;
+        const pasos = document.getElementById('pasos').value; // Nueva variable de pasos
         const btn = document.getElementById('btnSubmit');
 
-        if(agua === "" || sueno === "") {
-            alert("Por favor, llena ambos campos antes de enviar.");
+        // Se agregó la validación para que tampoco dejen los pasos vacíos
+        if(agua === "" || sueno === "" || pasos === "") {
+            alert("Por favor, llena todos los campos antes de enviar.");
             return;
         }
 
         btn.innerText = "Enviando...";
         btn.disabled = true;
 
-        // REEMPLAZA AQUÍ TU CORREO
         const urlDestino = "https://formsubmit.co/ajax/anthonymendez929@gmail.com";
 
         fetch(urlDestino, {
@@ -387,9 +395,10 @@
                 'Accept': 'application/json'
             },
             body: JSON.stringify({
-                Paciente: "Ericka Yanzaguano",
+                Paciente: "LUISA MARIA", // Actualizado al nombre de este perfil
                 Agua_Litros: agua,
                 Horas_Sueno: sueno,
+                Pasos_Diarios: pasos, // Se envía la nueva información
                 Fecha: new Date().toLocaleDateString()
             })
         })
@@ -398,6 +407,7 @@
             alert("¡Reporte enviado exitosamente!");
             document.getElementById('agua').value = "";
             document.getElementById('sueno').value = "";
+            document.getElementById('pasos').value = ""; // Limpia la casilla de pasos
             btn.innerText = "Enviar Reporte Diario";
             btn.disabled = false;
         })
