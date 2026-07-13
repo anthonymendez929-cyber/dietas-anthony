@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguimiento Nutricional</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #f4f7f6; 
+            padding: 20px; 
+            color: #333;
+        }
+        .container { 
+            max-width: 500px; 
+            margin: auto; 
+            background: white; 
+            padding: 25px; 
+            border-radius: 12px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+        }
+        h2 { text-align: center; color: #2c3e50; }
+        .section { 
+            margin-bottom: 20px; 
+            padding: 15px; 
+            border: 1px solid #e0e0e0; 
+            border-radius: 8px; 
+            background-color: #fafafa;
+        }
+        label { display: block; margin-top: 10px; font-weight: 600; font-size: 14px;}
+        input[type="number"], input[type="password"], select { 
+            width: 100%; 
+            padding: 10px; 
+            margin-top: 5px; 
+            border-radius: 6px; 
+            border: 1px solid #ccc; 
+            box-sizing: border-box;
+        }
+        .checkbox-group { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            margin-top: 8px; 
+            background: white;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        .checkbox-group input { transform: scale(1.2); }
+        button { 
+            width: 100%; 
+            padding: 12px; 
+            background: #27ae60; 
+            color: white; 
+            border: none; 
+            border-radius: 6px; 
+            font-size: 16px; 
+            font-weight: bold;
+            cursor: pointer; 
+            margin-top: 10px; 
+            transition: background 0.3s;
+        }
+        button:hover { background: #219150; }
+        .alert {
+            display: none;
+            padding: 10px;
+            background-color: #d4edda;
+            color: #155724;
+            border-radius: 6px;
+            margin-top: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Registro Diario</h2>
+
+    <div class="section" id="login-section">
+        <label>Código de Cliente:</label>
+        <input type="password" id="client-code" placeholder="Ingresa el código que te dio tu nutricionista">
+    </div>
+
+    <div class="section">
+        <h3 style="margin-top: 0;">Medidas de Hoy</h3>
+        <label>Peso (kg):</label>
+        <input type="number" id="peso" placeholder="Ej. 75.5" step="0.1">
+
+        <label>Talla / Estatura (cm):</label>
+        <input type="number" id="estatura" placeholder="Ej. 175">
+    </div>
+
+    <div class="section">
+        <h3 style="margin-top: 0;">Adherencia a la Dieta</h3>
+
+        <label>Marca las comidas que completaste según tu plan:</label>
+        <div class="checkbox-group"><input type="checkbox" id="desayuno"> Desayuno estructurado</div>
+        <div class="checkbox-group"><input type="checkbox" id="almuerzo"> Almuerzo estructurado</div>
+        <div class="checkbox-group"><input type="checkbox" id="cena"> Cena estructurada</div>
+        <div class="checkbox-group"><input type="checkbox" id="snack"> Snacks / Colaciones</div>
+
+        <label>Agua consumida (Litros):</label>
+        <input type="number" id="agua" placeholder="Ej. 2.5" step="0.1">
+
+        <label>Horas de sueño anoche:</label>
+        <input type="number" id="sueno" placeholder="Ej. 7.5" step="0.5">
+    </div>
+
+    <button onclick="guardarDatos()">Enviar Reporte Diario</button>
+    
+    <div class="alert" id="success-message">
+        ¡Reporte enviado! Tu entrenador ya puede revisar tu progreso.
+    </div>
+</div>
+
+<script>
+    // Este script recoge la información, pero para que sea en "tiempo real"
+    // aquí deberás integrar Firebase Realtime Database.
+    
+    function guardarDatos() {
+        const codigo = document.getElementById('client-code').value;
+        const peso = document.getElementById('peso').value;
+        const agua = document.getElementById('agua').value;
+        const sueno = document.getElementById('sueno').value;
+
+        // Validar que haya puesto el código
+        if(codigo.trim() === "") {
+            alert("Es obligatorio ingresar tu código de cliente.");
+            return;
+        }
+
+        // Recopilar estado de las comidas
+        const comidas = {
+            desayuno: document.getElementById('desayuno').checked,
+            almuerzo: document.getElementById('almuerzo').checked,
+            cena: document.getElementById('cena').checked,
+            snack: document.getElementById('snack').checked
+        };
+
+        const reporteDiario = {
+            cliente: codigo,
+            fecha: new Date().toLocaleDateString(),
+            peso: peso,
+            agua: agua,
+            sueno: sueno,
+            comidasCompletadas: comidas
+        };
+
+        // Aquí es donde enviarías la variable "reporteDiario" a la base de datos.
+        console.log("Datos listos para enviar:", reporteDiario);
+        
+        // Mostrar mensaje de éxito simulado
+        document.getElementById('success-message').style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('success-message').style.display = 'none';
+        }, 4000);
+    }
+</script>
+
+</body>
+</html>
