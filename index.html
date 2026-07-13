@@ -3,37 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seguimiento Nutricional</title>
+    <title>Plataforma Nutricional - Anthony Méndez</title>
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #f4f7f6; 
+            background-color: #120e0d; /* Fondo oscuro */
             padding: 20px; 
-            color: #333;
+            color: #fff;
+            margin: 0;
         }
-        .container { 
+        /* ESTILOS DEL LOGIN */
+        .login-container {
+            max-width: 350px;
+            margin: 80px auto;
+            background-color: #271f1d;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+        .brand-title {
+            font-size: 24px;
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+        .brand-subtitle {
+            font-size: 13px;
+            color: #c7b28d; /* Dorado oscuro */
+            margin-top: 5px;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        #client-code {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+            margin-bottom: 20px;
+            font-size: 16px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .btn-ingresar {
+            width: 100%;
+            padding: 15px;
+            background-color: #b33928; /* Rojo oscuro */
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn-ingresar:hover { background-color: #922c1e; }
+
+        /* ESTILOS DEL FORMULARIO (Oculto al inicio) */
+        .tracking-container { 
+            display: none; /* Se oculta hasta que validen la clave */
             max-width: 500px; 
-            margin: auto; 
-            background: white; 
-            padding: 25px; 
-            border-radius: 12px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+            margin: 40px auto; 
+            background-color: #271f1d; 
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
         }
-        h2 { text-align: center; color: #2c3e50; }
+        h2 { text-align: center; color: #fff; margin-top: 0;}
         .section { 
             margin-bottom: 20px; 
             padding: 15px; 
-            border: 1px solid #e0e0e0; 
+            border: 1px solid #4a3b35; 
             border-radius: 8px; 
-            background-color: #fafafa;
+            background-color: #1a110e;
         }
         label { display: block; margin-top: 10px; font-weight: 600; font-size: 14px;}
-        input[type="number"], input[type="password"], select { 
+        input[type="number"] { 
             width: 100%; 
             padding: 10px; 
             margin-top: 5px; 
             border-radius: 6px; 
-            border: 1px solid #ccc; 
+            border: 1px solid #4a3b35; 
+            background-color: #271f1d;
+            color: white;
             box-sizing: border-box;
         }
         .checkbox-group { 
@@ -41,16 +101,29 @@
             align-items: center; 
             gap: 10px; 
             margin-top: 8px; 
-            background: white;
+            background: #271f1d;
             padding: 10px;
             border-radius: 6px;
-            border: 1px solid #ccc;
+            border: 1px solid #4a3b35;
         }
         .checkbox-group input { transform: scale(1.2); }
-        button { 
+        .btn-dieta {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .btn-dieta:hover { background-color: #2980b9; }
+        .btn-enviar { 
             width: 100%; 
             padding: 12px; 
-            background: #27ae60; 
+            background-color: #27ae60; 
             color: white; 
             border: none; 
             border-radius: 6px; 
@@ -58,9 +131,8 @@
             font-weight: bold;
             cursor: pointer; 
             margin-top: 10px; 
-            transition: background 0.3s;
         }
-        button:hover { background: #219150; }
+        .btn-enviar:hover { background-color: #219150; }
         .alert {
             display: none;
             padding: 10px;
@@ -74,19 +146,27 @@
 </head>
 <body>
 
-<div class="container">
-    <h2>Registro Diario</h2>
+<!-- 1. PANTALLA DE LOGIN -->
+<div id="login-screen" class="login-container">
+    <!-- REEMPLAZA "logo.png" POR EL NOMBRE EXACTO DE TU IMAGEN -->
+    <img src="logo gym.jpeg" alt="Logo" class="logo">
+    
+    <h1 class="brand-title">PERSONAL TRAINER</h1>
+    <p class="brand-subtitle">ANTHONY MÉNDEZ</p>
+    
+    <input type="text" id="client-code" placeholder="Clave de acceso">
+    <button class="btn-ingresar" onclick="iniciarSistema()">INGRESAR AL SISTEMA</button>
+</div>
 
-  <!-- Sección de Acceso -->
-    <div class="section" id="login-section">
-        <label>Código de Cliente:</label>
-        <input type="password" id="client-code" placeholder="Ingresa el código ">
-        <!-- Nuevo botón para ver la dieta -->
-        <button onclick="verDieta()" style="background-color: #3498db; margin-top: 15px;">Ver Mi Plan Nutricional</button>
-    </div>
+<!-- 2. PANTALLA DE SEGUIMIENTO (Oculta hasta entrar) -->
+<div id="tracking-screen" class="tracking-container">
+    <h2>Bienvenido a tu Plan</h2>
+    
+    <!-- Botón para abrir el link de Drive -->
+    <button class="btn-dieta" onclick="verDieta()">Ver Mi Plan Nutricional</button>
 
     <div class="section">
-        <h3 style="margin-top: 0;">Medidas de Hoy</h3>
+        <h3 style="margin-top: 0; border-bottom: 1px solid #4a3b35; padding-bottom: 5px;">Medidas de Hoy</h3>
         <label>Peso (kg):</label>
         <input type="number" id="peso" placeholder="Ej. 75.5" step="0.1">
 
@@ -95,12 +175,12 @@
     </div>
 
     <div class="section">
-        <h3 style="margin-top: 0;">Adherencia a la Dieta</h3>
+        <h3 style="margin-top: 0; border-bottom: 1px solid #4a3b35; padding-bottom: 5px;">Adherencia a la Dieta</h3>
 
-        <label>Marca las comidas que completaste según tu plan:</label>
-        <div class="checkbox-group"><input type="checkbox" id="desayuno"> Desayuno estructurado</div>
-        <div class="checkbox-group"><input type="checkbox" id="almuerzo"> Almuerzo estructurado</div>
-        <div class="checkbox-group"><input type="checkbox" id="cena"> Cena estructurada</div>
+        <label>Marca las comidas que completaste:</label>
+        <div class="checkbox-group"><input type="checkbox" id="desayuno"> Desayuno</div>
+        <div class="checkbox-group"><input type="checkbox" id="almuerzo"> Almuerzo</div>
+        <div class="checkbox-group"><input type="checkbox" id="cena"> Cena</div>
         <div class="checkbox-group"><input type="checkbox" id="snack"> Snacks / Colaciones</div>
 
         <label>Agua consumida (Litros):</label>
@@ -110,13 +190,7 @@
         <input type="number" id="sueno" placeholder="Ej. 7.5" step="0.5">
     </div>
 
-    <button onclick="guardarDatos()">Enviar Reporte Diario</button>
-    
-    <div class="alert" id="success-message">
-        ¡Reporte enviado! Tu entrenador ya puede revisar tu progreso.
-    </div>
-</div>
-<button onclick="guardarDatos()">Enviar Reporte Diario</button>
+    <button class="btn-enviar" onclick="guardarDatos()">Enviar Reporte Diario</button>
     
     <div class="alert" id="success-message">
         ¡Reporte enviado! Tu entrenador ya puede revisar tu progreso.
@@ -124,46 +198,46 @@
 </div>
 
 <script>
-    // ==========================================
-    // PASO 3: FUNCIÓN PARA VER LA DIETA
-    // ==========================================
-    function verDieta() {
-        // Obtenemos el código y lo pasamos a mayúsculas para evitar errores
-        const codigo = document.getElementById('client-code').value.trim().toUpperCase();
+    // Variable para recordar quién entró
+    let codigoIngresado = "";
 
-        // Aquí configuras los códigos de acceso y los enlaces a las dietas en Drive
-        const baseDeDatosDietas = {
-            "ANTHONY2026": "https://docs.google.com/spreadsheets/d/12n0BLbf9-G6DKA4Jf2GeFBnf3gAdK9gwJ08smTEMr98/edit?usp=sharing"
-        };
+    // AQUÍ PONES TUS CÓDIGOS Y LINKS
+    const baseDeDatosDietas = {
+        "ANTHONY2026": "https://docs.google.com/spreadsheets/d/12nOBLbf9-G6DKA4Jf2GeFBnf3gAdK9gv...",
+        "SQUAT230": "https://enlace-a-tu-drive-ejemplo.com", // Puedes agregar más clientes así
+        "CARLOS2026": "https://enlace-a-tu-drive-ejemplo2.com"
+    };
 
-        if (codigo === "") {
-            alert("Por favor, ingresa tu código de cliente para ver tu dieta.");
+    function iniciarSistema() {
+        const inputCodigo = document.getElementById('client-code').value.trim().toUpperCase();
+        
+        if (inputCodigo === "") {
+            alert("Por favor, ingresa tu clave de acceso.");
             return;
         }
 
-        // Buscamos si el código ingresado existe en nuestra lista
-        if (baseDeDatosDietas[codigo]) {
-            // Si el código existe, se abre el enlace asociado en una pestaña nueva
-            window.open(baseDeDatosDietas[codigo], "_blank");
+        // Si el código existe en tu base de datos
+        if (baseDeDatosDietas[inputCodigo]) {
+            codigoIngresado = inputCodigo; 
+            
+            // Magia visual: Esconde el login y muestra el formulario
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('tracking-screen').style.display = 'block';
         } else {
-            // Si escriben mal el código
             alert("Código incorrecto o no encontrado. Por favor verifica.");
         }
     }
 
-    // ==========================================
-    // FUNCIÓN QUE YA TENÍAS (GUARDAR REPORTE)
-    // ==========================================
+    function verDieta() {
+        if (baseDeDatosDietas[codigoIngresado]) {
+            window.open(baseDeDatosDietas[codigoIngresado], "_blank");
+        }
+    }
+
     function guardarDatos() {
-        const codigo = document.getElementById('client-code').value;
         const peso = document.getElementById('peso').value;
         const agua = document.getElementById('agua').value;
         const sueno = document.getElementById('sueno').value;
-
-        if(codigo.trim() === "") {
-            alert("Es obligatorio ingresar tu código de cliente.");
-            return;
-        }
 
         const comidas = {
             desayuno: document.getElementById('desayuno').checked,
@@ -173,7 +247,7 @@
         };
 
         const reporteDiario = {
-            cliente: codigo,
+            cliente: codigoIngresado,
             fecha: new Date().toLocaleDateString(),
             peso: peso,
             agua: agua,
@@ -190,7 +264,5 @@
     }
 </script>
 
-</body>
-</html>
 </body>
 </html>
