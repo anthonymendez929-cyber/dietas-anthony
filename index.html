@@ -7,12 +7,14 @@
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #120e0d; /* Fondo oscuro */
-            padding: 20px; 
-            color: #fff;
+            background-color: #120e0d; /* Fondo oscuro inicial */
             margin: 0;
+            padding: 0;
         }
-        /* ESTILOS DEL LOGIN */
+
+        /* =========================================
+           1. ESTILOS DEL LOGIN (TEMA OSCURO)
+           ========================================= */
         .login-container {
             max-width: 350px;
             margin: 80px auto;
@@ -21,136 +23,85 @@
             border-radius: 20px;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            color: #fff;
         }
-        .logo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin-bottom: 15px;
-            object-fit: cover;
-        }
-        .brand-title {
-            font-size: 24px;
-            margin: 0;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-        .brand-subtitle {
-            font-size: 13px;
-            color: #c7b28d; /* Dorado oscuro */
-            margin-top: 5px;
-            margin-bottom: 30px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
+        .logo { width: 120px; height: 120px; border-radius: 50%; margin-bottom: 15px; object-fit: cover; }
+        .brand-title { font-size: 24px; margin: 0; font-weight: 800; letter-spacing: 1px; }
+        .brand-subtitle { font-size: 13px; color: #c7b28d; margin-top: 5px; margin-bottom: 30px; letter-spacing: 2px; }
         #client-code {
-            width: 100%;
-            padding: 15px;
-            border-radius: 10px;
-            border: none;
-            margin-bottom: 20px;
-            font-size: 16px;
-            text-align: center;
-            box-sizing: border-box;
+            width: 100%; padding: 15px; border-radius: 10px; border: none; 
+            margin-bottom: 20px; font-size: 16px; text-align: center; box-sizing: border-box;
         }
         .btn-ingresar {
-            width: 100%;
-            padding: 15px;
-            background-color: #b33928; /* Rojo oscuro */
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
+            width: 100%; padding: 15px; background-color: #b33928; color: white; border: none;
+            border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s;
         }
         .btn-ingresar:hover { background-color: #922c1e; }
 
-        /* ESTILOS DEL FORMULARIO (Oculto al inicio) */
+        /* =========================================
+           2. ESTILOS DE LA DIETA (TEMA CLARO COMO LA FOTO)
+           ========================================= */
         .tracking-container { 
-            display: none; /* Se oculta hasta que validen la clave */
+            display: none; /* Oculto al inicio */
             max-width: 500px; 
-            margin: 40px auto; 
-            background-color: #271f1d; 
-            padding: 30px; 
-            border-radius: 15px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+            margin: 0 auto; 
+            background-color: #fafafa; 
+            min-height: 100vh;
+            padding: 20px; 
+            position: relative;
+            color: #333;
         }
-        h2 { text-align: center; color: #fff; margin-top: 0;}
-        .section { 
-            margin-bottom: 20px; 
-            padding: 15px; 
-            border: 1px solid #4a3b35; 
-            border-radius: 8px; 
-            background-color: #1a110e;
+        
+        /* Marca de agua de fondo */
+        .watermark {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 90%; max-width: 400px; opacity: 0.06; pointer-events: none; z-index: 0;
         }
-        label { display: block; margin-top: 10px; font-weight: 600; font-size: 14px;}
-        input[type="number"] { 
-            width: 100%; 
-            padding: 10px; 
-            margin-top: 5px; 
-            border-radius: 6px; 
-            border: 1px solid #4a3b35; 
-            background-color: #271f1d;
-            color: white;
-            box-sizing: border-box;
+
+        /* Tarjeta del encabezado (Nombre y datos) */
+        .header-card {
+            background: white; border-top: 5px solid #b33928; border-radius: 15px;
+            padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative; z-index: 1; margin-bottom: 20px;
         }
-        .checkbox-group { 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            margin-top: 8px; 
-            background: #271f1d;
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid #4a3b35;
+        .header-card h2 { margin: 0; font-size: 22px; font-weight: 900; }
+        .header-card h4 { color: #b33928; margin: 5px 0 15px 0; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+        .stats-row { display: flex; justify-content: space-between; border-top: 1px solid #eee; padding-top: 15px; }
+        .stat-box { flex: 1; text-align: center; }
+        .stat-box span { display: block; font-size: 9px; color: #888; text-transform: uppercase; margin-bottom: 3px;}
+        .stat-box strong { display: block; font-size: 14px; color: #b33928; font-weight: 900; }
+
+        /* Pestañas de los días */
+        .section-title { color: #b33928; font-weight: bold; font-size: 13px; margin-bottom: 12px; position: relative; z-index: 1; letter-spacing: 1px;}
+        .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px; position: relative; z-index: 1;}
+        .tab { 
+            background: white; color: #b33928; padding: 6px 16px; border-radius: 20px; 
+            font-weight: bold; font-size: 11px; white-space: nowrap; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
-        .checkbox-group input { transform: scale(1.2); }
-        .btn-dieta {
-            width: 100%;
-            padding: 12px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 20px;
+        .tab.active { background: #b33928; color: white; }
+        .tabs::-webkit-scrollbar { display: none; } /* Ocultar barra de scroll en móviles */
+
+        /* Tarjetas de comidas */
+        .meal-card {
+            background: white; border-left: 5px solid #b33928; border-radius: 12px;
+            padding: 15px 20px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            position: relative; z-index: 1;
         }
-        .btn-dieta:hover { background-color: #2980b9; }
-        .btn-enviar { 
-            width: 100%; 
-            padding: 12px; 
-            background-color: #27ae60; 
-            color: white; 
-            border: none; 
-            border-radius: 6px; 
-            font-size: 16px; 
-            font-weight: bold;
-            cursor: pointer; 
-            margin-top: 10px; 
-        }
-        .btn-enviar:hover { background-color: #219150; }
-        .alert {
-            display: none;
-            padding: 10px;
-            background-color: #d4edda;
-            color: #155724;
-            border-radius: 6px;
-            margin-top: 15px;
-            text-align: center;
-        }
+        .meal-card h5 { color: #b33928; margin: 0 0 8px 0; font-size: 12px; font-weight: 900;}
+        .meal-card ul { margin: 0; padding-left: 15px; color: #222; font-size: 13px; font-weight: 500;}
+        .meal-card ul li { margin-bottom: 5px; }
+
+        /* Formulario de reporte (Al final) */
+        .report-section { background: white; padding: 15px; border-radius: 12px; margin-top: 30px; position: relative; z-index: 1; box-shadow: 0 4px 10px rgba(0,0,0,0.05);}
+        .report-section label { display: block; margin-top: 10px; font-weight: 600; font-size: 13px;}
+        .report-section input[type="number"] { width: 100%; padding: 10px; margin-top: 5px; border-radius: 6px; border: 1px solid #ccc; box-sizing: border-box; }
+        .btn-enviar { width: 100%; padding: 12px; background-color: #27ae60; color: white; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 15px; }
     </style>
 </head>
 <body>
 
-<!-- 1. PANTALLA DE LOGIN -->
 <div id="login-screen" class="login-container">
-    <!-- REEMPLAZA "logo.png" POR EL NOMBRE EXACTO DE TU IMAGEN -->
-    <img src="logo gym.jpeg" alt="Logo" class="logo">
-    
+    <img src="logo.png" alt="Logo" class="logo">
     <h1 class="brand-title">PERSONAL TRAINER</h1>
     <p class="brand-subtitle">ANTHONY MÉNDEZ</p>
     
@@ -158,55 +109,71 @@
     <button class="btn-ingresar" onclick="iniciarSistema()">INGRESAR AL SISTEMA</button>
 </div>
 
-<!-- 2. PANTALLA DE SEGUIMIENTO (Oculta hasta entrar) -->
 <div id="tracking-screen" class="tracking-container">
-    <h2>Bienvenido a tu Plan</h2>
     
-    <!-- Botón para abrir el link de Drive -->
-    <button class="btn-dieta" onclick="verDieta()">Ver Mi Plan Nutricional</button>
+    <img src="logo.png" class="watermark" alt="Fondo">
 
-    <div class="section">
-        <h3 style="margin-top: 0; border-bottom: 1px solid #4a3b35; padding-bottom: 5px;">Medidas de Hoy</h3>
-        <label>Peso (kg):</label>
-        <input type="number" id="peso" placeholder="Ej. 75.5" step="0.1">
-
-        <label>Talla / Estatura (cm):</label>
-        <input type="number" id="estatura" placeholder="Ej. 175">
+    <div class="header-card">
+        <h2>Ericka Yanzaguano</h2>
+        <h4>Objetivo: Déficit Calórico</h4>
+        <div class="stats-row">
+            <div class="stat-box"><span>Peso Act.</span><strong>54.4 kg</strong></div>
+            <div class="stat-box"><span>Meta</span><strong>42.0 kg</strong></div>
+            <div class="stat-box"><span>Grasa</span><strong>23.2%</strong></div>
+            <div class="stat-box"><span>Calorías</span><strong>1150 kcal</strong></div>
+        </div>
     </div>
 
-    <div class="section">
-        <h3 style="margin-top: 0; border-bottom: 1px solid #4a3b35; padding-bottom: 5px;">Adherencia a la Dieta</h3>
+    <div class="section-title">▶ TU PLAN NUTRICIONAL</div>
 
-        <label>Marca las comidas que completaste:</label>
-        <div class="checkbox-group"><input type="checkbox" id="desayuno"> Desayuno</div>
-        <div class="checkbox-group"><input type="checkbox" id="almuerzo"> Almuerzo</div>
-        <div class="checkbox-group"><input type="checkbox" id="cena"> Cena</div>
-        <div class="checkbox-group"><input type="checkbox" id="snack"> Snacks / Colaciones</div>
+    <div class="tabs">
+        <div class="tab active">LUNES</div>
+        <div class="tab">MARTES</div>
+        <div class="tab">MIÉRCOLES</div>
+        <div class="tab">JUEVES</div>
+        <div class="tab">VIERNES</div>
+    </div>
 
-        <label>Agua consumida (Litros):</label>
-        <input type="number" id="agua" placeholder="Ej. 2.5" step="0.1">
+    <div class="meal-card">
+        <h5>COMIDA 1</h5>
+        <ul>
+            <li>2 Huevos enteros revueltos</li>
+            <li>50g de Jamón de pavo</li>
+            <li>25g de Avena en hojuelas (con agua y estevia).</li>
+        </ul>
+    </div>
 
+    <div class="meal-card">
+        <h5>COMIDA 2</h5>
+        <ul>
+            <li>1 Huevo entero duro</li>
+            <li>2 claras de huevo duro</li>
+            <li>80g de Manzana verde.</li>
+        </ul>
+    </div>
+
+    <div class="meal-card">
+        <h5>COMIDA 3</h5>
+        <ul>
+            <li>100g de Pechuga de pollo a la plancha</li>
+            <li>100g de Arroz blanco</li>
+            <li>Ensalada de pepino y lechuga</li>
+            <li>5g de Aceite de oliva.</li>
+        </ul>
+    </div>
+
+    <div class="report-section">
+        <div class="section-title" style="margin-bottom: 0;">▶ REPORTE DE HÁBITOS</div>
+        <label>Agua consumida hoy (Litros):</label>
+        <input type="number" id="agua" placeholder="Ej. 2.5">
         <label>Horas de sueño anoche:</label>
-        <input type="number" id="sueno" placeholder="Ej. 7.5" step="0.5">
+        <input type="number" id="sueno" placeholder="Ej. 7.5">
+        <button class="btn-enviar" onclick="alert('¡Reporte enviado exitosamente!')">Enviar Reporte Diario</button>
     </div>
 
-    <button class="btn-enviar" onclick="guardarDatos()">Enviar Reporte Diario</button>
-    
-    <div class="alert" id="success-message">
-        ¡Reporte enviado! Tu entrenador ya puede revisar tu progreso.
-    </div>
 </div>
 
 <script>
-    // Variable para recordar quién entró
-    let codigoIngresado = "";
-
-    // AQUÍ PONES TUS CÓDIGOS Y LINKS
-    const baseDeDatosDietas = {
-        "ANTHONY2026": "https://docs.google.com/spreadsheets/d/12nOBLbf9-G6DKA4Jf2GeFBnf3gAdK9gv..."
-       
-    };
-
     function iniciarSistema() {
         const inputCodigo = document.getElementById('client-code').value.trim().toUpperCase();
         
@@ -215,51 +182,17 @@
             return;
         }
 
-        // Si el código existe en tu base de datos
-        if (baseDeDatosDietas[inputCodigo]) {
-            codigoIngresado = inputCodigo; 
+        // Para este ejemplo, si ponen la clave "ERICKA2026", ingresan.
+        if (inputCodigo === "ERICKA2026") {
+            // Cambiamos el color de fondo general de negro a clarito
+            document.body.style.backgroundColor = "#e8e8e8";
             
-            // Magia visual: Esconde el login y muestra el formulario
+            // Ocultamos el login y mostramos la dieta
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('tracking-screen').style.display = 'block';
         } else {
-            alert("Código incorrecto o no encontrado. Por favor verifica.");
+            alert("Código incorrecto. Intenta con: ERICKA2026");
         }
-    }
-
-    function verDieta() {
-        if (baseDeDatosDietas[codigoIngresado]) {
-            window.open(baseDeDatosDietas[codigoIngresado], "_blank");
-        }
-    }
-
-    function guardarDatos() {
-        const peso = document.getElementById('peso').value;
-        const agua = document.getElementById('agua').value;
-        const sueno = document.getElementById('sueno').value;
-
-        const comidas = {
-            desayuno: document.getElementById('desayuno').checked,
-            almuerzo: document.getElementById('almuerzo').checked,
-            cena: document.getElementById('cena').checked,
-            snack: document.getElementById('snack').checked
-        };
-
-        const reporteDiario = {
-            cliente: codigoIngresado,
-            fecha: new Date().toLocaleDateString(),
-            peso: peso,
-            agua: agua,
-            sueno: sueno,
-            comidasCompletadas: comidas
-        };
-
-        console.log("Datos listos para enviar:", reporteDiario);
-        
-        document.getElementById('success-message').style.display = 'block';
-        setTimeout(() => {
-            document.getElementById('success-message').style.display = 'none';
-        }, 4000);
     }
 </script>
 
