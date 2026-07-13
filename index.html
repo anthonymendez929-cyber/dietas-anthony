@@ -106,10 +106,308 @@
 </head>
 <body>
 
-<img src="logo gym.jpeg" id="bg-watermark" class="watermark" alt="Fondo">
+<!-- LOGO DE FONDO GIGANTE -->
+<img src="logo gym,jpeg" id="bg-watermark" class="watermark" alt="Fondo">
 
+<!-- 1. PANTALLA DE LOGIN -->
 <div id="login-screen" class="login-container">
     <img src="logo gym.jpeg" alt="Logo" class="logo">
     <h1 class="brand-title">PERSONAL TRAINER</h1>
     <p class="brand-subtitle">ANTHONY MÉNDEZ</p>
-    <input
+    <input type="text" id="client-code" placeholder="Clave de acceso">
+    <button class="btn-ingresar" onclick="iniciarSistema()">INGRESAR AL SISTEMA</button>
+</div>
+
+<!-- 2. PANTALLA DE LA DIETA -->
+<div id="tracking-screen" class="tracking-container">
+
+    <!-- DATOS DEL CLIENTE -->
+    <div class="header-card">
+        <h2>LUISA MARIA</h2>
+        <h4>Objetivo: Déficit Calórico</h4>
+        <div class="stats-row">
+            <div class="stat-box"><span>Peso Act.</span><strong>80 kg</strong></div>
+            <div class="stat-box"><span>Meta</span><strong>72 kg</strong></div>
+            <div class="stat-box"><span>Grasa</span><strong>40%</strong></div>
+            <div class="stat-box"><span>Calorías</span><strong>1600 kcal</strong></div>
+        </div>
+    </div>
+
+    <div class="section-title">▶ TU PLAN NUTRICIONAL</div>
+
+    <!-- PESTAÑAS DE NAVEGACIÓN -->
+    <div class="tabs">
+        <div class="tab active" onclick="cambiarDia('lunes', this)">LUNES</div>
+        <div class="tab" onclick="cambiarDia('martes', this)">MARTES</div>
+        <div class="tab" onclick="cambiarDia('miercoles', this)">MIÉRCOLES</div>
+        <div class="tab" onclick="cambiarDia('jueves', this)">JUEVES</div>
+        <div class="tab" onclick="cambiarDia('viernes', this)">VIERNES</div>
+        <div class="tab" onclick="cambiarDia('sabado', this)">SÁBADO</div>
+        <div class="tab" onclick="cambiarDia('domingo', this)">DOMINGO</div>
+        <!-- NUEVA PESTAÑA DE ALTERNATIVAS -->
+        <div class="tab especial" onclick="cambiarDia('alternativas', this)">★ OPCIONES RÁPIDAS</div>
+    </div>
+
+    <!-- ==================== LUNES ==================== -->
+    <div id="lunes" class="day-content active">
+        <div class="meal-card">
+            <h5>Desayuno </h5>
+            <p><strong>Overnight Oats:</strong>  taza de avena(80 gr) , 1 cda de chía, leche de almendras, y 1 scoop de proteína o yogur griego natural.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Almuerzo </h5>
+            <p><strong>Ensalada de quinoa:</strong>  taza con pechuga de pollo desmechada (120 gr), tomates cherry, pepino y 1/4 de aguacate. Aderezo de aceite de oliva.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Colación de Tarde </h5>
+            <p>1 manzana verde picada con 1 cucharada de mantequilla de maní o almendras(30 gr).</p>
+        </div>
+        <div class="meal-card">
+            <h5>Merienda </h5>
+            <p>Filete de pescado (tilapia o corvina) a la plancha (120 gr) con abundantes vegetales salteados (calabacín, brócoli).</p>
+        </div>
+    </div>
+
+    <!-- ==================== MARTES ==================== -->
+    <div id="martes" class="day-content">
+        <div class="meal-card">
+            <h5>Desayuno </h5>
+            <p>2 rebanadas de pan integral (100% integral) con medio aguacate triturado y 2 huevos revueltos.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Almuerzo </h5>
+            <p><strong>Wrap integral:</strong> Relleno de atún en agua (peq) (mezclado con yogur griego en lugar de mayonesa) , lechuga y tomate.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Colación de Tarde</h5>
+            <p>Almendras o nueces (30 gr) y una infusión de manzanilla/menta.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Merienda </h5>
+            <p>Tacos de lechuga con carne molida magra (120 gr )y pico de gallo.</p>
+        </div>
+    </div>
+
+    <!-- ==================== MIÉRCOLES ==================== -->
+    <div id="miercoles" class="day-content">
+        <div class="meal-card">
+            <h5>Desayuno </h5>
+            <p><strong>Batido verde :</strong> Espinaca, un puñado de frutos rojos (fresas/arándanos), leche descremada o vegetal, y 1 cda de semillas de linaza.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Almuerzo </h5>
+            <p>Guiso de lentejas (120 gr) con una porción de pollo a la plancha (120 gr) y ensalada verde.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Colación de Tarde</h5>
+            <p>Palitos de zanahoria (120 gr)y apio con 2 cucharadas de hummus de garbanzo.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Merienda </h5>
+            <p>Fajitas de pollo(120 gr) con pimientos de colores (rojo, verde, amarillo) y cebolla, sin tortilla.</p>
+        </div>
+    </div>
+
+    <!-- ==================== JUEVES ==================== -->
+    <div id="jueves" class="day-content">
+        <div class="meal-card">
+            <h5>Desayuno </h5>
+            <p><strong>Budín de chía:</strong> Preparado la noche anterior con leche vegetal, esencia de vainilla y almendras.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Almuerzo </h5>
+            <p>Tazón de arroz integral (80 gr) 1/2 taza con frijoles negros (60 gr), carne desmechada magra (120 gr) y 1/2 aguacate.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Colación de Tarde</h5>
+            <p>1 yogur griego natural (120 gr) (sin azúcar) con un cuadrito de chocolate negro (>75% cacao) rallado. <em>(Excelente para los antojos dulces por estrés).</em></p>
+        </div>
+        <div class="meal-card">
+            <h5>Merienda </h5>
+            <p>Crema de zapallo o verduras, acompañada de una tortilla de 2 huevos.</p>
+        </div>
+    </div>
+
+    <!-- ==================== VIERNES ==================== -->
+    <div id="viernes" class="day-content">
+        <div class="meal-card">
+            <h5>Desayuno </h5>
+            <p>3 Muffins de huevo al horno (hechos previamente con espinaca y pimiento y 3 claras de huevo) y una mandarina.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Almuerzo </h5>
+            <p><strong>Ensalada fría:</strong> Fideos integrales (100 gr) con atún lata peq en agua, choclo  desgranado (60gr) y vegetales mixtos.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Colación de Tarde</h5>
+            <p>60gr semillas de calabaza tostadas.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Merienda </h5>
+            <p><strong>Pizza fitness:</strong> Base de coliflor o pan pita integral, con salsa de tomate natural, queso mozzarella bajo en grasa y champiñones.</p>
+        </div>
+    </div>
+
+    <!-- ==================== SÁBADO ==================== -->
+    <div id="sabado" class="day-content">
+        <div class="meal-card">
+            <h5>Desayuno </h5>
+            <p><strong>Pancakes de avena y plátano:</strong> 1/2 plátano, 1 huevo, 3 cdas de avena. Acompañados de frutos rojos.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Almuerzo </h5>
+            <p>Pechuga de pollo al horno (150 gr), acompañado de medio camote  asado (100 gr) y ensalada fresca de lechuga y tomate.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Merienda </h5>
+            <p><strong>Hamburguesa casera:</strong> Pan integral, torta de carne magra(150 gr), lechuga, tomate, sin salsas .</p>
+        </div>
+    </div>
+
+    <!-- ==================== DOMINGO ==================== -->
+    <div id="domingo" class="day-content">
+        <div class="meal-card">
+            <h5>Desayuno </h5>
+            <p>Omelette de 2 huevos con champiñones(60 gr) y espinacas, acompañado de una arepa pequeña de maíz asada (80 gr)o una tostada integral.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Almuerzo </h5>
+            <p>Lomo de cerdo magro a la plancha (120 gr) con ensalada de garbanzos(80 gr), cebolla morada y cilantro.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Merienda </h5>
+            <p><strong>Ensalada Caprese:</strong> Tomate, queso fresco, albahaca. Con trozos de pechuga de pollo (120gr).</p>
+        </div>
+    </div>
+
+    <!-- ==================== ALTERNATIVAS (NUEVO) ==================== -->
+    <div id="alternativas" class="day-content">
+        <div class="meal-card">
+            <h5>Desayunos</h5>
+            <h6>En lugar de budines o avena reposada</h6>
+            <ul>
+                <li><strong>Yogur con frutos secos:</strong> 1 vaso de yogur griego natural +  nueces/almendras (30 gr) + 1 fruta entera (manzana/mandarina).</li>
+                <li><strong>Tostada exprés:</strong> 2 rebanadas de pan 100% integral + 2 rebanadas de queso mozzarella bajo en grasa y jamón de pavo.</li>
+                <li><strong>BatidO:</strong> 1 vaso de leche + 1 scoop de proteína en polvo + 1 plátano. Licuar y tomar en el camino.</li>
+            </ul>
+        </div>
+        <div class="meal-card">
+            <h5>Almuerzos </h5>
+            <h6>En lugar de guisos o wraps</h6>
+            <ul>
+                <li><strong>Tazón de atún rápido:</strong> 1 lata de atún + cocido(80 gr)+ tomates cherry cortados por la mitad(80 gr). Aceite de oliva.</li>
+                <li><strong>Sándwich reforzado:</strong> 2 panes integrales + 1 filete de pollo (a la plancha) (120 gr)+ lechuga en bolsa y mostaza.</li>
+                <li><strong>Plato frío rápido:</strong> 3 Huevos duros + papas pequeñas hervidas(80 gr) + ensalada de bolsa pre-lavada.</li>
+            </ul>
+        </div>
+        <div class="meal-card">
+            <h5>Colaciones</h5>
+            <h6>En lugar de hummus o vegetales picados</h6>
+            <ul>
+                <li><strong>Queso y aceitunas:</strong> 2 palitos de queso mozzarella (string cheese) +aceitunas(60 gr).</li>
+                <li><strong>Rollitos fríos:</strong> 3 rebanadas de jamón de pavo enrolladas con queso ricotta o crema esparcido.</li>
+                <li><strong>Chocolate negro:</strong> 2 cuadritos de chocolate negro (>75%) +  maní tostado sin sal. (30 gr)</li>
+            </ul>
+        </div>
+        <div class="meal-card">
+            <h5>Meriendas Simplificadas</h5>
+            <h6>En lugar de cremas de verduras, hamburguesas o pizzas fit</h6>
+            <ul>
+                <li><strong>Huevos revueltos salvadores:</strong> 3 huevos revueltos con espinaca de bolsa (al sartén 3 min) + 1 tostada.</li>
+                <li><strong>Pollo al microondas/airfryer:</strong> Filetes de pollo (120 gr)a la freidora de aire por 15 min. Acompañar con pepino rodajado con limón y sal.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- REPORTE DE HÁBITOS CON EMAIL -->
+    <div class="report-section">
+        <div class="section-title" style="margin-bottom: 0;">▶ REPORTE DE HÁBITOS</div>
+        <label>Agua consumida hoy (Litros):</label>
+        <input type="number" id="agua" placeholder="Ej. 2.5">
+        <label>Horas de sueño anoche:</label>
+        <input type="number" id="sueno" placeholder="Ej. 7.5">
+        <button class="btn-enviar" id="btnSubmit" onclick="enviarReporte()">Enviar Reporte Diario</button>
+    </div>
+</div>
+
+<script>
+    function iniciarSistema() {
+        const inputCodigo = document.getElementById('client-code').value.trim().toUpperCase();
+        if (inputCodigo === "") {
+            alert("Por favor, ingresa tu clave de acceso.");
+            return;
+        }
+        if (inputCodigo === "LUISA2026") {
+            // Cambia el fondo a un color claro
+            document.body.style.backgroundColor = "#e8e8e8";
+            
+            // Oculta el login y muestra la dieta
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('tracking-screen').style.display = 'block';
+            
+            // MUESTRA EL LOGO GIGANTE DE FONDO
+            document.getElementById('bg-watermark').style.display = 'block';
+        } else {
+            alert("Código incorrecto. Intenta nuevamente...");
+        }
+    }
+
+    function cambiarDia(diaId, elementoPestana) {
+        const dias = document.querySelectorAll('.day-content');
+        dias.forEach(dia => dia.classList.remove('active'));
+
+        const pestanas = document.querySelectorAll('.tab');
+        pestanas.forEach(pestana => pestana.classList.remove('active'));
+
+        document.getElementById(diaId).classList.add('active');
+        elementoPestana.classList.add('active');
+    }
+
+    // ENVÍO DE REPORTE POR CORREO
+    function enviarReporte() {
+        const agua = document.getElementById('agua').value;
+        const sueno = document.getElementById('sueno').value;
+        const btn = document.getElementById('btnSubmit');
+
+        if(agua === "" || sueno === "") {
+            alert("Por favor, llena ambos campos antes de enviar.");
+            return;
+        }
+
+        btn.innerText = "Enviando...";
+        btn.disabled = true;
+
+        // REEMPLAZA AQUÍ TU CORREO
+        const urlDestino = "https://formsubmit.co/ajax/anthonymendez929@gmail.com";
+
+        fetch(urlDestino, {
+            method: "POST",
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                Paciente: "Ericka Yanzaguano",
+                Agua_Litros: agua,
+                Horas_Sueno: sueno,
+                Fecha: new Date().toLocaleDateString()
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert("¡Reporte enviado exitosamente!");
+            document.getElementById('agua').value = "";
+            document.getElementById('sueno').value = "";
+            btn.innerText = "Enviar Reporte Diario";
+            btn.disabled = false;
+        })
+        .catch(error => {
+            alert("Hubo un error de conexión. Inténtalo de nuevo.");
+            btn.innerText = "Enviar Reporte Diario";
+            btn.disabled = false;
+        });
+    }
+</script>
+
+</body>
+</html>
