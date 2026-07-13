@@ -77,9 +77,12 @@
 <div class="container">
     <h2>Registro Diario</h2>
 
+  <!-- Sección de Acceso -->
     <div class="section" id="login-section">
         <label>Código de Cliente:</label>
-        <input type="password" id="client-code" placeholder="Ingresa el código que te dio tu nutricionista">
+        <input type="password" id="client-code" placeholder="Ingresa el código ">
+        <!-- Nuevo botón para ver la dieta -->
+        <button onclick="verDieta()" style="background-color: #3498db; margin-top: 15px;">Ver Mi Plan Nutricional</button>
     </div>
 
     <div class="section">
@@ -113,24 +116,57 @@
         ¡Reporte enviado! Tu entrenador ya puede revisar tu progreso.
     </div>
 </div>
+<button onclick="guardarDatos()">Enviar Reporte Diario</button>
+    
+    <div class="alert" id="success-message">
+        ¡Reporte enviado! Tu entrenador ya puede revisar tu progreso.
+    </div>
+</div>
 
 <script>
-    // Este script recoge la información, pero para que sea en "tiempo real"
-    // aquí deberás integrar Firebase Realtime Database.
-    
+    // ==========================================
+    // PASO 3: FUNCIÓN PARA VER LA DIETA
+    // ==========================================
+    function verDieta() {
+        // Obtenemos el código y lo pasamos a mayúsculas para evitar errores
+        const codigo = document.getElementById('client-code').value.trim().toUpperCase();
+
+        // Aquí configuras los códigos de acceso y los enlaces a las dietas en Drive
+        const baseDeDatosDietas = {
+            "JUAN2026": "https://link-de-google-drive.com/dieta-juan",
+            "POWERLIFTING-FASE1": "https://link-de-google-drive.com/dieta-fuerza",
+            "MARIA-DEF": "https://link-de-google-drive.com/dieta-maria"
+        };
+
+        if (codigo === "") {
+            alert("Por favor, ingresa tu código de cliente para ver tu dieta.");
+            return;
+        }
+
+        // Buscamos si el código ingresado existe en nuestra lista
+        if (baseDeDatosDietas[codigo]) {
+            // Si el código existe, se abre el enlace asociado en una pestaña nueva
+            window.open(baseDeDatosDietas[codigo], "_blank");
+        } else {
+            // Si escriben mal el código
+            alert("Código incorrecto o no encontrado. Por favor verifica.");
+        }
+    }
+
+    // ==========================================
+    // FUNCIÓN QUE YA TENÍAS (GUARDAR REPORTE)
+    // ==========================================
     function guardarDatos() {
         const codigo = document.getElementById('client-code').value;
         const peso = document.getElementById('peso').value;
         const agua = document.getElementById('agua').value;
         const sueno = document.getElementById('sueno').value;
 
-        // Validar que haya puesto el código
         if(codigo.trim() === "") {
             alert("Es obligatorio ingresar tu código de cliente.");
             return;
         }
 
-        // Recopilar estado de las comidas
         const comidas = {
             desayuno: document.getElementById('desayuno').checked,
             almuerzo: document.getElementById('almuerzo').checked,
@@ -147,10 +183,8 @@
             comidasCompletadas: comidas
         };
 
-        // Aquí es donde enviarías la variable "reporteDiario" a la base de datos.
         console.log("Datos listos para enviar:", reporteDiario);
         
-        // Mostrar mensaje de éxito simulado
         document.getElementById('success-message').style.display = 'block';
         setTimeout(() => {
             document.getElementById('success-message').style.display = 'none';
@@ -158,5 +192,7 @@
     }
 </script>
 
+</body>
+</html>
 </body>
 </html>
