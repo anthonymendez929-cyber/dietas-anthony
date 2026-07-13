@@ -10,6 +10,22 @@
             background-color: #120e0d; 
             margin: 0;
             padding: 0;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* LOGO DE FONDO (MARCA DE AGUA GLOBAL) */
+        .watermark {
+            display: none; /* Se oculta en el login */
+            position: fixed; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            width: 120%; 
+            max-width: 700px; 
+            opacity: 0.08; /* Transparencia para que no estorbe la lectura */
+            pointer-events: none; 
+            z-index: 0;
         }
 
         /* 1. ESTILOS DEL LOGIN */
@@ -17,6 +33,7 @@
             max-width: 350px; margin: 80px auto; background-color: #271f1d;
             padding: 40px 30px; border-radius: 20px; text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8); color: #fff;
+            position: relative; z-index: 2;
         }
         .logo { width: 120px; height: 120px; border-radius: 50%; margin-bottom: 15px; object-fit: cover; }
         .brand-title { font-size: 24px; margin: 0; font-weight: 800; letter-spacing: 1px; }
@@ -34,17 +51,14 @@
         /* 2. ESTILOS DE LA DIETA */
         .tracking-container { 
             display: none; max-width: 500px; margin: 0 auto; 
-            background-color: #fafafa; min-height: 100vh; padding: 20px; 
-            position: relative; color: #333;
+            background: transparent; /* Transparente para ver el logo de fondo */
+            padding: 20px; position: relative; color: #333; z-index: 2;
         }
-        .watermark {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 90%; max-width: 400px; opacity: 0.06; pointer-events: none; z-index: 0;
-        }
+        
         .header-card {
             background: white; border-top: 5px solid #b33928; border-radius: 15px;
             padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            position: relative; z-index: 1; margin-bottom: 20px;
+            margin-bottom: 20px;
         }
         .header-card h2 { margin: 0; font-size: 22px; font-weight: 900; }
         .header-card h4 { color: #b33928; margin: 5px 0 15px 0; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
@@ -53,15 +67,18 @@
         .stat-box span { display: block; font-size: 9px; color: #888; text-transform: uppercase; margin-bottom: 3px;}
         .stat-box strong { display: block; font-size: 14px; color: #b33928; font-weight: 900; }
 
-        .section-title { color: #b33928; font-weight: bold; font-size: 13px; margin-bottom: 12px; position: relative; z-index: 1; letter-spacing: 1px;}
+        .section-title { color: #b33928; font-weight: bold; font-size: 13px; margin-bottom: 12px; letter-spacing: 1px;}
         
         /* Sistema de Pestañas */
-        .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px; position: relative; z-index: 1;}
+        .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px;}
         .tab { 
             background: white; color: #b33928; padding: 6px 16px; border-radius: 20px; cursor: pointer;
             font-weight: bold; font-size: 11px; white-space: nowrap; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: 0.2s;
         }
         .tab.active { background: #b33928; color: white; }
+        /* Pestaña especial para alternativas */
+        .tab.especial { background: #2c3e50; color: white; }
+        .tab.especial.active { background: #1a252f; border: 2px solid #b33928; }
         .tabs::-webkit-scrollbar { display: none; }
         
         /* Contenedores de Días */
@@ -71,39 +88,48 @@
         .meal-card {
             background: white; border-left: 5px solid #b33928; border-radius: 12px;
             padding: 15px 20px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-            position: relative; z-index: 1;
         }
-        .meal-card h5 { color: #b33928; margin: 0 0 8px 0; font-size: 12px; font-weight: 900; text-transform: uppercase;}
+        .meal-card h5 { color: #b33928; margin: 0 0 5px 0; font-size: 13px; font-weight: 900; text-transform: uppercase;}
+        .meal-card h6 { color: #666; margin: 0 0 10px 0; font-size: 11px; font-style: italic; font-weight: normal;}
         .meal-card p { margin: 0; color: #222; font-size: 13.5px; font-weight: 500; line-height: 1.5;}
+        
+        /* Estilos para listas en la sección de alternativas */
+        .meal-card ul { margin: 0; padding-left: 15px; color: #222; font-size: 13.5px; line-height: 1.6; }
+        .meal-card ul li { margin-bottom: 8px; }
 
-        .report-section { background: white; padding: 15px; border-radius: 12px; margin-top: 30px; position: relative; z-index: 1; box-shadow: 0 4px 10px rgba(0,0,0,0.05);}
+        .report-section { background: white; padding: 15px; border-radius: 12px; margin-top: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);}
         .report-section label { display: block; margin-top: 10px; font-weight: 600; font-size: 13px;}
         .report-section input[type="number"] { width: 100%; padding: 10px; margin-top: 5px; border-radius: 6px; border: 1px solid #ccc; box-sizing: border-box; }
         .btn-enviar { width: 100%; padding: 12px; background-color: #27ae60; color: white; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        .btn-enviar:disabled { background-color: #7f8c8d; cursor: not-allowed; }
     </style>
 </head>
 <body>
 
+<!-- LOGO DE FONDO GIGANTE -->
+<img src="logo.png" id="bg-watermark" class="watermark" alt="Fondo">
+
+<!-- 1. PANTALLA DE LOGIN -->
 <div id="login-screen" class="login-container">
-    <img src="logo gym.jpeg" alt="Logo" class="logo">
+    <img src="logo.png" alt="Logo" class="logo">
     <h1 class="brand-title">PERSONAL TRAINER</h1>
     <p class="brand-subtitle">ANTHONY MÉNDEZ</p>
     <input type="text" id="client-code" placeholder="Clave de acceso">
     <button class="btn-ingresar" onclick="iniciarSistema()">INGRESAR AL SISTEMA</button>
 </div>
 
+<!-- 2. PANTALLA DE LA DIETA -->
 <div id="tracking-screen" class="tracking-container">
-    <img src="logo.png" class="watermark" alt="Fondo">
 
     <!-- DATOS DEL CLIENTE -->
     <div class="header-card">
-        <h2>Luisa Meria Burneo</h2>
+        <h2>Ericka Yanzaguano</h2>
         <h4>Objetivo: Déficit Calórico</h4>
         <div class="stats-row">
-            <div class="stat-box"><span>Peso Act.</span><strong>80 kg</strong></div>
-            <div class="stat-box"><span>Meta</span><strong> 73 kg</strong></div>
-            <div class="stat-box"><span>Grasa</span><strong>40%</strong></div>
-            <div class="stat-box"><span>Calorías</span><strong>1600 kcal</strong></div>
+            <div class="stat-box"><span>Peso Act.</span><strong>54.4 kg</strong></div>
+            <div class="stat-box"><span>Meta</span><strong>42.0 kg</strong></div>
+            <div class="stat-box"><span>Grasa</span><strong>23.2%</strong></div>
+            <div class="stat-box"><span>Calorías</span><strong>1150 kcal</strong></div>
         </div>
     </div>
 
@@ -118,41 +144,43 @@
         <div class="tab" onclick="cambiarDia('viernes', this)">VIERNES</div>
         <div class="tab" onclick="cambiarDia('sabado', this)">SÁBADO</div>
         <div class="tab" onclick="cambiarDia('domingo', this)">DOMINGO</div>
+        <!-- NUEVA PESTAÑA DE ALTERNATIVAS -->
+        <div class="tab especial" onclick="cambiarDia('alternativas', this)">★ OPCIONES RÁPIDAS</div>
     </div>
 
     <!-- ==================== LUNES ==================== -->
     <div id="lunes" class="day-content active">
         <div class="meal-card">
-            <h5>Desayuno </h5>
-            <p><strong>Overnight Oats:</strong> 1/3 taza de avena, 1 cda de chía, leche de almendras, y 1 scoop de proteína o yogur griego natural.<br><em>().</em></p>
+            <h5>Desayuno (8:30 - En el carro)</h5>
+            <p><strong>Overnight Oats:</strong> 1/3 taza de avena, 1 cda de chía, leche de almendras, y 1 scoop de proteína o yogur griego natural.<br><em>(Tomar Myo-inositol).</em></p>
         </div>
         <div class="meal-card">
-            <h5>Almuerzo </h5>
+            <h5>Almuerzo (13:00 - En la U)</h5>
             <p><strong>Ensalada de quinoa:</strong> 1/2 taza con pechuga de pollo desmechada, tomates cherry, pepino y 1/4 de aguacate. Aderezo de aceite de oliva.</p>
         </div>
         <div class="meal-card">
-            <h5>Colación de Tarde </h5>
+            <h5>Colación de Tarde (Para la ansiedad)</h5>
             <p>1 manzana verde picada con 1 cucharada de mantequilla de maní o almendras.</p>
         </div>
         <div class="meal-card">
             <h5>Merienda (21:00)</h5>
-            <p>Filete de pescado (tilapia o corvina) a la plancha con abundantes vegetales salteados (calabacín, brócoli).<br><em>().</em></p>
+            <p>Filete de pescado (tilapia o corvina) a la plancha con abundantes vegetales salteados (calabacín, brócoli).<br><em>(Tomar Metformina).</em></p>
         </div>
     </div>
 
     <!-- ==================== MARTES ==================== -->
     <div id="martes" class="day-content">
         <div class="meal-card">
-            <h5>Desayuno </h5>
+            <h5>Desayuno (8:30)</h5>
             <p>2 rebanadas de pan integral (100% integral) con medio aguacate triturado y 2 huevos revueltos.</p>
         </div>
         <div class="meal-card">
-            <h5>Almuerzo </h5>
+            <h5>Almuerzo (13:00 - En la U)</h5>
             <p><strong>Wrap integral:</strong> Relleno de atún en agua (mezclado con yogur griego en lugar de mayonesa), lechuga y tomate.</p>
         </div>
         <div class="meal-card">
             <h5>Colación de Tarde</h5>
-            <p>Un puñado de almendras o nueces  y una infusión de manzanilla/menta.</p>
+            <p>Un puñado de almendras o nueces (grasas saludables antiinflamatorias para el SOP) y una infusión de manzanilla/menta.</p>
         </div>
         <div class="meal-card">
             <h5>Merienda (21:00)</h5>
@@ -163,11 +191,11 @@
     <!-- ==================== MIÉRCOLES ==================== -->
     <div id="miercoles" class="day-content">
         <div class="meal-card">
-            <h5>Desayuno </h5>
-            <p><strong>Batido verde :</strong> Espinaca, un puñado de frutos rojos (fresas/arándanos), leche descremada o vegetal, y 1 cda de semillas de linaza.</p>
+            <h5>Desayuno (8:30 - En el carro)</h5>
+            <p><strong>Batido verde saciante:</strong> Espinaca, un puñado de frutos rojos (fresas/arándanos), leche descremada o vegetal, y 1 cda de semillas de linaza.</p>
         </div>
         <div class="meal-card">
-            <h5>Almuerzo </h5>
+            <h5>Almuerzo (13:00 - En la U)</h5>
             <p>Guiso de lentejas (1 taza) con una porción de pollo a la plancha y ensalada verde.</p>
         </div>
         <div class="meal-card">
@@ -187,12 +215,12 @@
             <p><strong>Budín de chía:</strong> Preparado la noche anterior con leche vegetal, esencia de vainilla y almendras fileteadas.</p>
         </div>
         <div class="meal-card">
-            <h5>Almuerzo (13:00 )</h5>
+            <h5>Almuerzo (13:00 - En la U)</h5>
             <p><strong>Tazón de arroz integral:</strong> 1/2 taza con frijoles negros, carne desmechada magra y aguacate.</p>
         </div>
         <div class="meal-card">
             <h5>Colación de Tarde</h5>
-            <p>1 yogur griego natural (sin azúcar) con un cuadrito de chocolate negro (>75% cacao) rallado. <em>().</em></p>
+            <p>1 yogur griego natural (sin azúcar) con un cuadrito de chocolate negro (>75% cacao) rallado. <em>(Excelente para los antojos dulces por estrés).</em></p>
         </div>
         <div class="meal-card">
             <h5>Merienda (21:00)</h5>
@@ -203,11 +231,11 @@
     <!-- ==================== VIERNES ==================== -->
     <div id="viernes" class="day-content">
         <div class="meal-card">
-            <h5>Desayuno (8:30 )</h5>
+            <h5>Desayuno (8:30 - En el carro)</h5>
             <p>3 Muffins de huevo al horno (hechos previamente con espinaca y pimiento) y una mandarina.</p>
         </div>
         <div class="meal-card">
-            <h5>Almuerzo (13:00 )</h5>
+            <h5>Almuerzo (13:00 - En la U)</h5>
             <p><strong>Ensalada fría:</strong> Fideos integrales (1/2 taza) con atún, choclo (maíz) desgranado y vegetales mixtos.</p>
         </div>
         <div class="meal-card">
@@ -228,7 +256,7 @@
         </div>
         <div class="meal-card">
             <h5>Almuerzo (14:30)</h5>
-            <p>Pechuga de pollo al horno, acompañado de medio camote  asado y ensalada fresca de lechuga y tomate.</p>
+            <p>Pechuga de pollo al horno, acompañado de medio camote (batata) asado y ensalada fresca de lechuga y tomate.</p>
         </div>
         <div class="meal-card">
             <h5>Merienda (21:00)</h5>
@@ -248,12 +276,50 @@
         </div>
         <div class="meal-card">
             <h5>Merienda (21:00)</h5>
-            <p><strong>Ensalada Caprese:</strong> Tomate, queso fresco, albahaca. Con trozos de pechuga de pollo.</p>
+            <p><strong>Ensalada Caprese:</strong> Tomate, queso fresco, albahaca. Con trozos de pechuga de pollo sobrante del almuerzo.</p>
         </div>
     </div>
 
-   
-   <!-- REPORTE DE HÁBITOS -->
+    <!-- ==================== ALTERNATIVAS (NUEVO) ==================== -->
+    <div id="alternativas" class="day-content">
+        <div class="meal-card">
+            <h5>Desayunos</h5>
+            <h6>En lugar de budines o avena reposada</h6>
+            <ul>
+                <li><strong>Yogur con frutos secos:</strong> 1 vaso de yogur griego natural + 1 puñado de nueces/almendras + 1 fruta entera (manzana/mandarina).</li>
+                <li><strong>Tostada exprés:</strong> 2 rebanadas de pan 100% integral + 2 rebanadas de queso mozzarella bajo en grasa y jamón de pavo.</li>
+                <li><strong>BatidO:</strong> 1 vaso de leche + 1 scoop de proteína en polvo + 1 plátano. Licuar y tomar en el camino.</li>
+            </ul>
+        </div>
+        <div class="meal-card">
+            <h5>Almuerzos </h5>
+            <h6>En lugar de guisos o wraps</h6>
+            <ul>
+                <li><strong>Tazón de atún rápido:</strong> 1 lata de atún + 1 taza de arroz cocido + 1 taza de tomates cherry cortados por la mitad. Aceite de oliva.</li>
+                <li><strong>Sándwich reforzado:</strong> 2 panes integrales + 1 filete de pollo (a la plancha) + lechuga en bolsa y mostaza.</li>
+                <li><strong>Plato frío rápido:</strong> Huevos duros + papas pequeñas hervidas + ensalada de bolsa pre-lavada.</li>
+            </ul>
+        </div>
+        <div class="meal-card">
+            <h5>Colaciones</h5>
+            <h6>En lugar de hummus o vegetales picados</h6>
+            <ul>
+                <li><strong>Queso y aceitunas:</strong> 2 palitos de queso mozzarella (string cheese) + un puñado de aceitunas.</li>
+                <li><strong>Rollitos fríos:</strong> 3 rebanadas de jamón de pavo enrolladas con queso ricotta o crema esparcido.</li>
+                <li><strong>Chocolate negro:</strong> 2 cuadritos de chocolate negro (>75%) + un puñado de maní tostado sin sal.</li>
+            </ul>
+        </div>
+        <div class="meal-card">
+            <h5>Meriendas Simplificadas</h5>
+            <h6>En lugar de cremas de verduras, hamburguesas o pizzas fit</h6>
+            <ul>
+                <li><strong>Huevos revueltos salvadores:</strong> 3 huevos revueltos con espinaca de bolsa (al sartén 3 min) + 1 tostada.</li>
+                <li><strong>Pollo al microondas/airfryer:</strong> Filetes de pollo a la freidora de aire por 15 min. Acompañar con pepino rodajado con limón y sal.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- REPORTE DE HÁBITOS CON EMAIL -->
     <div class="report-section">
         <div class="section-title" style="margin-bottom: 0;">▶ REPORTE DE HÁBITOS</div>
         <label>Agua consumida hoy (Litros):</label>
@@ -265,7 +331,6 @@
 </div>
 
 <script>
-    // Iniciar el sistema con la clave de Ericka
     function iniciarSistema() {
         const inputCodigo = document.getElementById('client-code').value.trim().toUpperCase();
         if (inputCodigo === "") {
@@ -273,45 +338,46 @@
             return;
         }
         if (inputCodigo === "LUISA2026") {
+            // Cambia el fondo a un color claro
             document.body.style.backgroundColor = "#e8e8e8";
+            
+            // Oculta el login y muestra la dieta
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('tracking-screen').style.display = 'block';
+            
+            // MUESTRA EL LOGO GIGANTE DE FONDO
+            document.getElementById('bg-watermark').style.display = 'block';
         } else {
-            alert("Código incorrecto. Intenta con: ERICKA2026");
+            alert("Código incorrecto. Intenta nuevamente...");
         }
     }
 
-    // Función para que las pestañas cambien de día
     function cambiarDia(diaId, elementoPestana) {
-        // 1. Ocultar todos los días
         const dias = document.querySelectorAll('.day-content');
         dias.forEach(dia => dia.classList.remove('active'));
 
-        // 2. Quitar el color rojo de todas las pestañas
         const pestanas = document.querySelectorAll('.tab');
         pestanas.forEach(pestana => pestana.classList.remove('active'));
 
-        // 3. Mostrar solo el día seleccionado y pintar su pestaña
         document.getElementById(diaId).classList.add('active');
         elementoPestana.classList.add('active');
     }
-    // Función para enviar el reporte a tu correo
+
+    // ENVÍO DE REPORTE POR CORREO
     function enviarReporte() {
         const agua = document.getElementById('agua').value;
         const sueno = document.getElementById('sueno').value;
         const btn = document.getElementById('btnSubmit');
 
-        // Validar que el cliente no deje los campos vacíos
         if(agua === "" || sueno === "") {
             alert("Por favor, llena ambos campos antes de enviar.");
             return;
         }
 
-        // Cambiar el botón para que el cliente sepa que está cargando
         btn.innerText = "Enviando...";
         btn.disabled = true;
 
-        // Pega aquí TU CORREO REAL
+        // REEMPLAZA AQUÍ TU CORREO
         const urlDestino = "https://formsubmit.co/ajax/anthonymendez929@gmail.com";
 
         fetch(urlDestino, {
@@ -330,10 +396,8 @@
         .then(response => response.json())
         .then(data => {
             alert("¡Reporte enviado exitosamente!");
-            // Limpiamos los cuadros de texto
             document.getElementById('agua').value = "";
             document.getElementById('sueno').value = "";
-            // Restauramos el botón
             btn.innerText = "Enviar Reporte Diario";
             btn.disabled = false;
         })
