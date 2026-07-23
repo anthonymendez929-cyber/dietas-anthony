@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma Nutricional - Anthony Méndez</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #120e0d; 
+            margin: 0;
+            padding: 0;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* LOGO DE FONDO (MARCA DE AGUA GLOBAL) */
+        .watermark {
+            display: none; 
+            position: fixed; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            width: 120%; 
+            max-width: 700px; 
+            opacity: 0.08; 
+            pointer-events: none; 
+            z-index: 0;
+        }
+
+        /* 1. ESTILOS DEL LOGIN */
+        .login-container {
+            max-width: 350px; margin: 80px auto; background-color: #271f1d;
+            padding: 40px 30px; border-radius: 20px; text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8); color: #fff;
+            position: relative; z-index: 2;
+        }
+        .logo { width: 120px; height: 120px; border-radius: 50%; margin-bottom: 15px; object-fit: cover; }
+        .brand-title { font-size: 24px; margin: 0; font-weight: 800; letter-spacing: 1px; }
+        .brand-subtitle { font-size: 13px; color: #c7b28d; margin-top: 5px; margin-bottom: 30px; letter-spacing: 2px; }
+        #client-code {
+            width: 100%; padding: 15px; border-radius: 10px; border: none; 
+            margin-bottom: 20px; font-size: 16px; text-align: center; box-sizing: border-box;
+        }
+        .btn-ingresar {
+            width: 100%; padding: 15px; background-color: #b33928; color: white; border: none;
+            border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s;
+        }
+        .btn-ingresar:hover { background-color: #922c1e; }
+
+        /* 2. ESTILOS DE LA DIETA */
+        .tracking-container { 
+            display: none; max-width: 500px; margin: 0 auto; 
+            background: transparent; 
+            padding: 20px; position: relative; color: #333; z-index: 2;
+        }
+        
+        .header-card {
+            background: white; border-top: 5px solid #b33928; border-radius: 15px;
+            padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .header-card h2 { margin: 0; font-size: 22px; font-weight: 900; text-transform: uppercase; }
+        .header-card h4 { color: #b33928; margin: 5px 0 15px 0; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+        .stats-row { display: flex; justify-content: space-between; border-top: 1px solid #eee; padding-top: 15px; }
+        .stat-box { flex: 1; text-align: center; }
+        .stat-box span { display: block; font-size: 9px; color: #888; text-transform: uppercase; margin-bottom: 3px;}
+        .stat-box strong { display: block; font-size: 14px; color: #b33928; font-weight: 900; }
+
+        .section-title { color: #b33928; font-weight: bold; font-size: 13px; margin-bottom: 12px; letter-spacing: 1px;}
+        
+        /* Sistema de Pestañas */
+        .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px;}
+        .tab { 
+            background: white; color: #b33928; padding: 6px 16px; border-radius: 20px; cursor: pointer;
+            font-weight: bold; font-size: 11px; white-space: nowrap; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: 0.2s;
+        }
+        .tab.active { background: #b33928; color: white; }
+        .tabs::-webkit-scrollbar { display: none; }
+        
+        /* Contenedores de Días */
+        .day-content { display: none; }
+        .day-content.active { display: block; }
+
+        .meal-card {
+            background: white; border-left: 5px solid #b33928; border-radius: 12px;
+            padding: 15px 20px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+        }
+        .meal-card h5 { color: #b33928; margin: 0 0 8px 0; font-size: 13px; font-weight: 900; text-transform: uppercase;}
+        .meal-card p { margin: 0; color: #222; font-size: 13.5px; font-weight: 500; line-height: 1.5;}
+
+        .report-section { background: white; padding: 15px; border-radius: 12px; margin-top: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);}
+        .report-section label { display: block; margin-top: 10px; font-weight: 600; font-size: 13px;}
+        .report-section input[type="number"] { width: 100%; padding: 10px; margin-top: 5px; border-radius: 6px; border: 1px solid #ccc; box-sizing: border-box; }
+        .btn-enviar { width: 100%; padding: 12px; background-color: #27ae60; color: white; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        .btn-enviar:disabled { background-color: #7f8c8d; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+
+<!-- LOGO DE FONDO GIGANTE -->
+<img src="logo gym.jpeg" id="bg-watermark" class="watermark" alt="Fondo">
+
+<!-- 1. PANTALLA DE LOGIN -->
+<div id="login-screen" class="login-container">
+    <img src="logo gym.jpeg" alt="Logo" class="logo">
+    <h1 class="brand-title">PERSONAL TRAINER</h1>
+    <p class="brand-subtitle">ANTHONY MÉNDEZ</p>
+    <input type="text" id="client-code" placeholder="Clave de acceso">
+    <button class="btn-ingresar" onclick="iniciarSistema()">INGRESAR AL SISTEMA</button>
+</div>
+
+<!-- 2. PANTALLA DE LA DIETA -->
+<div id="tracking-screen" class="tracking-container">
+
+    <!-- DATOS DEL CLIENTE -->
+    <div class="header-card">
+        <h2>ERICKA YUNGA</h2>
+        <h4>Objetivo: Control de Ansiedad y Hábitos</h4>
+        <div class="stats-row">
+            <div class="stat-box"><span>Peso Act.</span><strong>154 lb</strong></div>
+            <div class="stat-box"><span>Edad</span><strong>30 años</strong></div>
+            <div class="stat-box"><span>Meta</span><strong>Por definir</strong></div>
+        </div>
+    </div>
+
+    <div class="section-title">▶ TU PLAN NUTRICIONAL</div>
+
+    <!-- PESTAÑAS DE NAVEGACIÓN -->
+    <div class="tabs">
+        <div class="tab active" onclick="cambiarDia('lunes', this)">LUNES</div>
+        <div class="tab" onclick="cambiarDia('martes', this)">MARTES</div>
+        <div class="tab" onclick="cambiarDia('miercoles', this)">MIÉRCOLES</div>
+        <div class="tab" onclick="cambiarDia('jueves', this)">JUEVES</div>
+        <div class="tab" onclick="cambiarDia('viernes', this)">VIERNES</div>
+        <div class="tab" onclick="cambiarDia('sabado', this)">SÁBADO</div>
+        <div class="tab" onclick="cambiarDia('domingo', this)">DOMINGO</div>
+    </div>
+
+    <!-- ==================== LUNES ==================== -->
+    <div id="lunes" class="day-content active">
+        <div class="meal-card">
+            <h5>Desayuno</h5>
+            <p>150g de yogur griego natural, 50g de avena en hojuelas, 100g de papaya.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Almuerzo (En ruta)</h5>
+            <p><strong>Wrap integral:</strong> 1 tortilla grande con 120g de pollo desmechado, 30g de aguacate y espinaca fresca.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Snack (En ruta)</h5>
+            <p>100g de manzana picada + 15g de almendras.<br><em>(Aporta una textura crujiente que ayuda con la ansiedad).</em></p>
+        </div>
+        <div class="meal-card">
+            <h5>Cena</h5>
+            <p>120g de lomo de res a la plancha, 150g de papa cocida, 100g de zanahoria al vapor.</p>
+        </div>
+    </div>
+
+    <!-- ==================== MARTES ==================== -->
+    <div id="martes" class="day-content">
+        <div class="meal-card">
+            <h5>Desayuno</h5>
+            <p>2 huevos revueltos (aprox. 100g), 2 rebanadas de pan de molde integral, 50g de aguacate.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Almuerzo (En ruta)</h5>
+            <p><strong>Ensalada de pasta fría:</strong> 100g de pasta integral cocida, 120g de pavo en cubos, tomates cherry y 10g de aceite de oliva.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Snack (En ruta)</h5>
+            <p>20g de chocolate oscuro (mínimo 70% cacao) + 15g de nueces.<br><em>(Ideal para calmar el antojo de dulce).</em></p>
+        </div>
+        <div class="meal-card">
+            <h5>Cena</h5>
+            <p>120g de pechuga de pollo al horno, 100g de quinua cocida, 100g de calabacín asado.</p>
+        </div>
+    </div>
+
+    <!-- ==================== MIÉRCOLES ==================== -->
+    <div id="miercoles" class="day-content">
+        <div class="meal-card">
+            <h5>Desayuno</h5>
+            <p><strong>Batido:</strong> 200ml de leche de almendras, 150g de yogur griego, 100g de plátano, 15g de semillas de chía hidratadas.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Almuerzo (En ruta)</h5>
+            <p><strong>Sándwich:</strong> 2 rebanadas de pan integral, 120g de carne molida magra, lechuga y tomate.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Snack (En ruta)</h5>
+            <p>150g de gelatina sin azúcar + 30g de queso panela o mozzarella bajo en grasa en cubitos.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Cena</h5>
+            <p>120g de lomo de cerdo magro, 150g de camote (batata) asado, 100g de vainitas cocidas.</p>
+        </div>
+    </div>
+
+    <!-- ==================== JUEVES ==================== -->
+    <div id="jueves" class="day-content">
+        <div class="meal-card">
+            <h5>Desayuno</h5>
+            <p>50g de avena cocida con 100g de frutos rojos y 15g de linaza molida.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Almuerzo (En ruta)</h5>
+            <p><strong>Bowl frío:</strong> 150g de arroz integral cocido, 120g de pollo a la plancha picado, 50g de aguacate.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Snack (En ruta)</h5>
+            <p>2 galletas de arroz inflado (aprox. 15g en total) untadas con 30g de mantequilla de maní (15g en cada galleta).</p>
+        </div>
+        <div class="meal-card">
+            <h5>Cena</h5>
+            <p>120g de pavo molido guisado con tomate natural, 100g de fideos de arroz, 100g de zanahoria cocida.</p>
+        </div>
+    </div>
+
+    <!-- ==================== VIERNES ==================== -->
+    <div id="viernes" class="day-content">
+        <div class="meal-card">
+            <h5>Desayuno</h5>
+            <p>2 huevos fritos con mínima cantidad de aceite (o en spray), 1 arepa pequeña (60g), rebanadas de tomate.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Almuerzo (En ruta)</h5>
+            <p><strong>Wrap integral:</strong> 1 tortilla con 120g de cerdo desmechado magro, 30g de aguacate, zanahoria rallada cruda.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Snack (En ruta)</h5>
+            <p>150g de yogur griego natural mezclado con 10g de cacao puro en polvo y un sobre de stevia.<br><em>(Simula un postre de chocolate).</em></p>
+        </div>
+        <div class="meal-card">
+            <h5>Cena</h5>
+            <p>120g de bistec de res, 150g de puré de papa natural, 100g de espárragos al horno.</p>
+        </div>
+    </div>
+
+    <!-- ==================== SÁBADO ==================== -->
+    <div id="sabado" class="day-content">
+        <div class="meal-card">
+            <h5>Desayuno</h5>
+            <p><strong>Panqueques de avena:</strong> Mezclar 50g de avena, 1 huevo entero, 50ml de leche. Acompañados de 100g de kiwi.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Almuerzo</h5>
+            <p>150g de pollo asado, 150g de arroz integral, 100g de ensalada verde fresca.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Snack</h5>
+            <p>30g de palomitas de maíz (medidas en crudo).<br><em>(Hechas en casa con aire caliente o mínimo aceite para tener mucho volumen crujiente).</em></p>
+        </div>
+        <div class="meal-card">
+            <h5>Cena</h5>
+            <p>120g de pechuga de pavo, 150g de plátano verde o maduro asado, 100g de calabaza cocida.</p>
+        </div>
+    </div>
+
+    <!-- ==================== DOMINGO ==================== -->
+    <div id="domingo" class="day-content">
+        <div class="meal-card">
+            <h5>Desayuno</h5>
+            <p>150g de yogur griego, 30g de almendras trituradas, 100g de manzana picada sin cáscara.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Almuerzo</h5>
+            <p>120g de carne de res magra al jugo, 150g de quinua, 100g de vegetales mixtos cocidos.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Snack</h5>
+            <p>50g de jamón de pavo en rollitos junto a 30g de queso mozzarella bajo en grasa.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Cena</h5>
+            <p>120g de pollo desmechado, 2 tostadas integrales, ensalada de pepino sin semillas.</p>
+        </div>
+    </div>
+
+    <!-- REPORTE DE HÁBITOS CON EMAIL -->
+    <div class="report-section">
+        <div class="section-title" style="margin-bottom: 0;">▶ REPORTE DE HÁBITOS</div>
+        
+        <label>Agua consumida hoy (Litros):</label>
+        <input type="number" id="agua" placeholder="Ej. 2.5">
+        
+        <label>Horas de sueño anoche:</label>
+        <input type="number" id="sueno" placeholder="Ej. 7.5">
+
+        <label>Pasos diarios (Cantidad):</label>
+        <input type="number" id="pasos" placeholder="Ej. 10000">
+
+        <button class="btn-enviar" id="btnSubmit" onclick="enviarReporte()">Enviar Reporte Diario</button>
+    </div>
+</div>
+
+<script>
+    function iniciarSistema() {
+        const inputCodigo = document.getElementById('client-code').value.trim().toUpperCase();
+        if (inputCodigo === "") {
+            alert("Por favor, ingresa tu clave de acceso.");
+            return;
+        }
+        
+        // CÓDIGO DE ACCESO PARA ERICKA
+        if (inputCodigo === "ERICKAY2026") {
+            document.body.style.backgroundColor = "#e8e8e8";
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('tracking-screen').style.display = 'block';
+            document.getElementById('bg-watermark').style.display = 'block';
+        } else {
+            alert("Código incorrecto. Intenta nuevamente...");
+        }
+    }
+
+    function cambiarDia(diaId, elementoPestana) {
+        const dias = document.querySelectorAll('.day-content');
+        dias.forEach(dia => dia.classList.remove('active'));
+
+        const pestanas = document.querySelectorAll('.tab');
+        pestanas.forEach(pestana => pestana.classList.remove('active'));
+
+        document.getElementById(diaId).classList.add('active');
+        elementoPestana.classList.add('active');
+    }
+
+    // ENVÍO DE REPORTE POR CORREO
+    function enviarReporte() {
+        const agua = document.getElementById('agua').value;
+        const sueno = document.getElementById('sueno').value;
+        const pasos = document.getElementById('pasos').value;
+        const btn = document.getElementById('btnSubmit');
+
+        if(agua === "" || sueno === "" || pasos === "") {
+            alert("Por favor, llena todos los campos antes de enviar.");
+            return;
+        }
+
+        btn.innerText = "Enviando...";
+        btn.disabled = true;
+
+        const urlDestino = "https://formsubmit.co/ajax/anthonymendez929@gmail.com";
+
+        fetch(urlDestino, {
+            method: "POST",
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                Paciente: "ERICKA YUNGA", 
+                Agua_Litros: agua,
+                Horas_Sueno: sueno,
+                Pasos_Diarios: pasos,
+                Fecha: new Date().toLocaleDateString()
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert("¡Reporte enviado exitosamente!");
+            document.getElementById('agua').value = "";
+            document.getElementById('sueno').value = "";
+            document.getElementById('pasos').value = "";
+            btn.innerText = "Enviar Reporte Diario";
+            btn.disabled = false;
+        })
+        .catch(error => {
+            alert("Hubo un error de conexión. Inténtalo de nuevo.");
+            btn.innerText = "Enviar Reporte Diario";
+            btn.disabled = false;
+        });
+    }
+</script>
+
+</body>
+</html>
