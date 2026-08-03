@@ -76,6 +76,8 @@
             font-weight: bold; font-size: 11px; white-space: nowrap; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: 0.2s;
         }
         .tab.active { background: #b33928; color: white; }
+        .tab.especial { background: #2c3e50; color: white; }
+        .tab.especial.active { background: #1a252f; border: 2px solid #b33928; }
         .tabs::-webkit-scrollbar { display: none; }
         
         /* Contenedores de Días */
@@ -86,8 +88,16 @@
             background: white; border-left: 5px solid #b33928; border-radius: 12px;
             padding: 15px 20px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);
         }
+        
+        /* Estilo especial para tarjetas de notas */
+        .note-card { border-left-color: #27ae60; }
+        .note-card h5 { color: #27ae60; }
+        
         .meal-card h5 { color: #b33928; margin: 0 0 8px 0; font-size: 13px; font-weight: 900; text-transform: uppercase;}
         .meal-card p { margin: 0; color: #222; font-size: 13.5px; font-weight: 500; line-height: 1.5;}
+        
+        .custom-list { margin-top: 10px; margin-bottom: 10px; padding-left: 20px; font-size: 13px; color: #222; font-weight: 500; line-height: 1.5; }
+        .custom-list li { margin-bottom: 8px; }
 
         .report-section { background: white; padding: 15px; border-radius: 12px; margin-top: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);}
         .report-section label { display: block; margin-top: 10px; font-weight: 600; font-size: 13px;}
@@ -115,13 +125,28 @@
 
     <!-- DATOS DEL CLIENTE -->
     <div class="header-card">
-        <h2>ERICKA YUNGA</h2>
-        <h4>Objetivo: Control de Ansiedad y Hábitos</h4>
+        <h2>ERICKA YANZAGUANO</h2>
+        <h4>Plan Nutricional Personalizado</h4>
         <div class="stats-row">
-            <div class="stat-box"><span>Peso Act.</span><strong>154 lb</strong></div>
-            <div class="stat-box"><span>Edad</span><strong>30 años</strong></div>
+            <div class="stat-box"><span>Peso Act.</span><strong>Por definir</strong></div>
             <div class="stat-box"><span>Meta</span><strong>Por definir</strong></div>
+            <div class="stat-box"><span>Grasa</span><strong>Por definir</strong></div>
         </div>
+    </div>
+
+    <!-- NOTAS IMPORTANTES SOBRE PORCIONES -->
+    <div class="section-title">▶ GUÍA DE PORCIONES (VEGETALES Y GRASAS)</div>
+    <div class="meal-card note-card">
+        <p>Para mantener un control calórico exacto y estandarizar las porciones en el plan, aquí tienes los gramajes recomendados para los vegetales. Dado que aportan fibra y volumen con pocas calorías, deben ser abundantes:</p>
+        
+        <ul class="custom-list">
+            <li><strong>Hojas verdes (lechuga, espinaca, rúcula):</strong> Al ser ligeras, la porción ideal es de <strong>150g a 200g</strong> por comida (equivale a un bowl lleno).</li>
+            <li><strong>Ensaladas mixtas densas (pepino, tomate, cebolla, rábano, zanahoria):</strong> Por su retención de agua y peso físico, la porción es de <strong>150g a 180g</strong> en total de la mezcla.</li>
+            <li><strong>Vegetales cocidos (brócoli, coliflor, vainitas):</strong> En las comidas donde dice "1 taza", el peso equivalente exacto es de <strong>120g a 150g</strong>.</li>
+        </ul>
+        
+        <h5 style="color:#b33928; margin-top: 15px; font-size: 12px;">⚠️ Nota sobre los acompañamientos:</h5>
+        <p>Estos gramajes corresponden <strong>únicamente</strong> a los vegetales. Los aderezos pautados, como el aceite de oliva (1 cucharada = aprox. 15g) o el aguacate (1/2 mediano = aprox. 50g a 60g), deben pesarse de forma independiente ya que corresponden a las grasas.</p>
     </div>
 
     <div class="section-title">▶ TU PLAN NUTRICIONAL</div>
@@ -135,25 +160,26 @@
         <div class="tab" onclick="cambiarDia('viernes', this)">VIERNES</div>
         <div class="tab" onclick="cambiarDia('sabado', this)">SÁBADO</div>
         <div class="tab" onclick="cambiarDia('domingo', this)">DOMINGO</div>
+        <div class="tab especial" onclick="cambiarDia('alternativas', this)">★ OPCIONES RÁPIDAS</div>
     </div>
 
     <!-- ==================== LUNES ==================== -->
     <div id="lunes" class="day-content active">
         <div class="meal-card">
             <h5>Desayuno</h5>
-            <p>150g de yogur griego natural, 50g de avena en hojuelas, 100g de papaya.</p>
+            <p>Tazón de avena (preparada con leche de almendras o agua), mezclada con 1 scoop de proteína en polvo (sabor vainilla o chocolate) y 1 taza de fresas.</p>
         </div>
         <div class="meal-card">
-            <h5>Almuerzo (En ruta)</h5>
-            <p><strong>Wrap integral:</strong> 1 tortilla grande con 120g de pollo desmechado, 30g de aguacate y espinaca fresca.</p>
+            <h5>Almuerzo</h5>
+            <p>150g de pechuga de pollo a la plancha (condimentada con finas hierbas, sin salsas fuertes), 120g de arroz integral y 1 taza de brócoli al vapor.</p>
         </div>
         <div class="meal-card">
-            <h5>Snack (En ruta)</h5>
-            <p>100g de manzana picada + 15g de almendras.<br><em>(Aporta una textura crujiente que ayuda con la ansiedad).</em></p>
+            <h5>Snack (En el trabajo)</h5>
+            <p>1 taza (200g) de yogur griego natural acompañado de 30g de almendras y 1 manzana picada. </p>
         </div>
         <div class="meal-card">
             <h5>Cena</h5>
-            <p>120g de lomo de res a la plancha, 150g de papa cocida, 100g de zanahoria al vapor.</p>
+            <p>150g de lomo de res magro a la parrilla, 1/2 aguacate mediano y una ensalada fresca de pepino y tomate.</p>
         </div>
     </div>
 
@@ -161,19 +187,19 @@
     <div id="martes" class="day-content">
         <div class="meal-card">
             <h5>Desayuno</h5>
-            <p>2 huevos revueltos (aprox. 100g), 2 rebanadas de pan de molde integral, 50g de aguacate.</p>
+            <p><strong>Pancakes de avena:</strong> Licuar 60g de avena, 3 claras de huevo, 1 chorrito de leche vegetal y canela. Servir con 1 cucharada de mantequilla de maní.</p>
         </div>
         <div class="meal-card">
-            <h5>Almuerzo (En ruta)</h5>
-            <p><strong>Ensalada de pasta fría:</strong> 100g de pasta integral cocida, 120g de pavo en cubos, tomates cherry y 10g de aceite de oliva.</p>
+            <h5>Almuerzo</h5>
+            <p>150g de carne molida de res (magra, 90/10), 150g de papa cocida en cubos y 1 taza de vainitas salteadas.</p>
         </div>
         <div class="meal-card">
-            <h5>Snack (En ruta)</h5>
-            <p>20g de chocolate oscuro (mínimo 70% cacao) + 15g de nueces.<br><em>(Ideal para calmar el antojo de dulce).</em></p>
+            <h5>Snack (En el trabajo)</h5>
+            <p><strong>Rollitos de pavo:</strong> 80g de jamón de pechuga de pavo enrollando 40g de queso fresco, más un puñado (20g) de nueces.</p>
         </div>
         <div class="meal-card">
             <h5>Cena</h5>
-            <p>120g de pechuga de pollo al horno, 100g de quinua cocida, 100g de calabacín asado.</p>
+            <p>150g de pechuga de pollo desmechada, acompañada de 150g de puré de camote  y ensalada verde.</p>
         </div>
     </div>
 
@@ -181,19 +207,19 @@
     <div id="miercoles" class="day-content">
         <div class="meal-card">
             <h5>Desayuno</h5>
-            <p><strong>Batido:</strong> 200ml de leche de almendras, 150g de yogur griego, 100g de plátano, 15g de semillas de chía hidratadas.</p>
+            <p><strong>Batido proteico y energético:</strong> 1 scoop de proteína, 1 plátano mediano, 1 puñado de espinacas frescas y leche de almendras.</p>
         </div>
         <div class="meal-card">
-            <h5>Almuerzo (En ruta)</h5>
-            <p><strong>Sándwich:</strong> 2 rebanadas de pan integral, 120g de carne molida magra, lechuga y tomate.</p>
+            <h5>Almuerzo</h5>
+            <p>150g de pechuga de pavo o pollo al horno, 120g de fideos integrales con salsa de tomate natural (casera) y ensalada de zanahoria rallada.</p>
         </div>
         <div class="meal-card">
-            <h5>Snack (En ruta)</h5>
-            <p>150g de gelatina sin azúcar + 30g de queso panela o mozzarella bajo en grasa en cubitos.</p>
+            <h5>Snack (En el trabajo)</h5>
+            <p>2 tostadas de arroz inflado untadas con 1/2 aguacate machacado y tomates cherry.</p>
         </div>
         <div class="meal-card">
             <h5>Cena</h5>
-            <p>120g de lomo de cerdo magro, 150g de camote (batata) asado, 100g de vainitas cocidas.</p>
+            <p><strong>Hamburguesa casera de res:</strong> 150g de carne magra (sin pan), servida sobre una cama de lechuga con rodajas de tomate y 1 cucharada de aceite de oliva.</p>
         </div>
     </div>
 
@@ -201,19 +227,19 @@
     <div id="jueves" class="day-content">
         <div class="meal-card">
             <h5>Desayuno</h5>
-            <p>50g de avena cocida con 100g de frutos rojos y 15g de linaza molida.</p>
+            <p>Omelette de 3 claras y 1 huevo entero con espinacas y champiñones <em>(preparado en casa, no genera el olor del huevo duro)</em>. 1 rebanada de pan integral.</p>
         </div>
         <div class="meal-card">
-            <h5>Almuerzo (En ruta)</h5>
-            <p><strong>Bowl frío:</strong> 150g de arroz integral cocido, 120g de pollo a la plancha picado, 50g de aguacate.</p>
+            <h5>Almuerzo</h5>
+            <p>150g de pollo salteado con pimientos de colores y cebolla, acompañado de 150g de quinua cocida.</p>
         </div>
         <div class="meal-card">
-            <h5>Snack (En ruta)</h5>
-            <p>2 galletas de arroz inflado (aprox. 15g en total) untadas con 30g de mantequilla de maní (15g en cada galleta).</p>
+            <h5>Snack </h5>
+            <p>1 taza de yogur griego natural con 1 cucharada de semillas de chía y 1/2 taza de arándanos.</p>
         </div>
         <div class="meal-card">
             <h5>Cena</h5>
-            <p>120g de pavo molido guisado con tomate natural, 100g de fideos de arroz, 100g de zanahoria cocida.</p>
+            <p>150g de carne de res magra en tiras, 150g de plátano verde o maduro asado y ensalada de pepino.</p>
         </div>
     </div>
 
@@ -221,19 +247,19 @@
     <div id="viernes" class="day-content">
         <div class="meal-card">
             <h5>Desayuno</h5>
-            <p>2 huevos fritos con mínima cantidad de aceite (o en spray), 1 arepa pequeña (60g), rebanadas de tomate.</p>
+            <p>2 rebanadas de pan integral tostado, 1/2 aguacate machacado y 60g de queso panela o fresco asado.</p>
         </div>
         <div class="meal-card">
-            <h5>Almuerzo (En ruta)</h5>
-            <p><strong>Wrap integral:</strong> 1 tortilla con 120g de cerdo desmechado magro, 30g de aguacate, zanahoria rallada cruda.</p>
+            <h5>Almuerzo</h5>
+            <p>150g de pechuga de pollo en cubos, 120g de arroz integral y 120gr taza de choclo.</p>
         </div>
         <div class="meal-card">
-            <h5>Snack (En ruta)</h5>
-            <p>150g de yogur griego natural mezclado con 10g de cacao puro en polvo y un sobre de stevia.<br><em>(Simula un postre de chocolate).</em></p>
+            <h5>Snack (En el trabajo)</h5>
+            <p>Batido de 1 scoop de proteína en agua o leche de almendras, acompañado de 30g de almendras.</p>
         </div>
         <div class="meal-card">
             <h5>Cena</h5>
-            <p>120g de bistec de res, 150g de puré de papa natural, 100g de espárragos al horno.</p>
+            <p>150g de lomo de res a la plancha, 1 taza de coliflor y zanahorias asadas al horno con un chorrito de aceite de oliva.</p>
         </div>
     </div>
 
@@ -241,19 +267,19 @@
     <div id="sabado" class="day-content">
         <div class="meal-card">
             <h5>Desayuno</h5>
-            <p><strong>Panqueques de avena:</strong> Mezclar 50g de avena, 1 huevo entero, 50ml de leche. Acompañados de 100g de kiwi.</p>
+            <p>Avena horneada o cocida (60g) mezclada con 1 manzana en cubos, canela y 1 scoop de proteína.</p>
         </div>
         <div class="meal-card">
             <h5>Almuerzo</h5>
-            <p>150g de pollo asado, 150g de arroz integral, 100g de ensalada verde fresca.</p>
+            <p>150g de pechuga de pavo asada, 150g de yuca cocida y ensalada gigante de lechuga, pepino y rabanitos.</p>
         </div>
         <div class="meal-card">
-            <h5>Snack</h5>
-            <p>30g de palomitas de maíz (medidas en crudo).<br><em>(Hechas en casa con aire caliente o mínimo aceite para tener mucho volumen crujiente).</em></p>
+            <h5>Snack de media tarde</h5>
+            <p>1 taza de yogur griego con 1 cucharada de crema de almendras o maní.</p>
         </div>
         <div class="meal-card">
             <h5>Cena</h5>
-            <p>120g de pechuga de pavo, 150g de plátano verde o maduro asado, 100g de calabaza cocida.</p>
+            <p><strong>Fajitas de pollo:</strong> 150g de pollo (sin tortilla), salteadas con vegetales a elección y guacamole casero (1/2 aguacate).</p>
         </div>
     </div>
 
@@ -261,19 +287,35 @@
     <div id="domingo" class="day-content">
         <div class="meal-card">
             <h5>Desayuno</h5>
-            <p>150g de yogur griego, 30g de almendras trituradas, 100g de manzana picada sin cáscara.</p>
+            <p>3 huevos revueltos con tomate y cebolla , acompañados de 1 arepa pequeña (60g) o 2 tostadas integrales.</p>
         </div>
         <div class="meal-card">
             <h5>Almuerzo</h5>
-            <p>120g de carne de res magra al jugo, 150g de quinua, 100g de vegetales mixtos cocidos.</p>
+            <p>150g de carne de res magra al jugo, 120g de arroz integral y 1 taza de vegetales mixtos cocidos.</p>
         </div>
         <div class="meal-card">
-            <h5>Snack</h5>
-            <p>50g de jamón de pavo en rollitos junto a 30g de queso mozzarella bajo en grasa.</p>
+            <h5>Snack de media tarde</h5>
+            <p>Gelatina sin azúcar (porción libre) acompañada de 40g de queso fresco en cubos.</p>
         </div>
         <div class="meal-card">
             <h5>Cena</h5>
-            <p>120g de pollo desmechado, 2 tostadas integrales, ensalada de pepino sin semillas.</p>
+            <p>150g de pechuga de pollo a la plancha, crema de vegetales (calabacín y zanahoria) sin lácteos pesados.</p>
+        </div>
+    </div>
+
+    <!-- ==================== ALTERNATIVAS (OPCIONES RÁPIDAS) ==================== -->
+    <div id="alternativas" class="day-content">
+        <div class="meal-card">
+            <h5>Sustituto de Almuerzo/Cena rápido</h5>
+            <p>Sándwich de pan integral con doble porción de pechuga de pollo o jamón de pavo, queso fresco bajo en grasa, lechuga y tomate de bolsa listos para comer.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Sustituto de Merienda rápido</h5>
+            <p>1 vaso de leche descremada o vegetal + 1 barra de proteína de buena calidad (baja en azúcar, >15g de proteína).</p>
+        </div>
+        <div class="meal-card">
+            <h5>Snack saciante anti-ansiedad</h5>
+            <p>Bastones de apio o zanahoria listos para consumir (comprados en el supermercado) con queso cottage.</p>
         </div>
     </div>
 
@@ -302,8 +344,8 @@
             return;
         }
         
-        // CÓDIGO DE ACCESO PARA ERICKA
-        if (inputCodigo === "ERICKA2026") {
+        // CÓDIGO DE ACCESO PARA ERICKA YANZAGUANO
+        if (inputCodigo === "ERICKAY0826") {
             document.body.style.backgroundColor = "#e8e8e8";
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('tracking-screen').style.display = 'block';
@@ -348,7 +390,7 @@
                 'Accept': 'application/json'
             },
             body: JSON.stringify({
-                Paciente: "ERICKA YUNGA", 
+                Paciente: "ERICKA YANZAGUANO", 
                 Agua_Litros: agua,
                 Horas_Sueno: sueno,
                 Pasos_Diarios: pasos,
