@@ -100,8 +100,10 @@
 </head>
 <body>
 
+<!-- LOGO DE FONDO GIGANTE -->
 <img src="logo gym.jpeg" id="bg-watermark" class="watermark" alt="Fondo">
 
+<!-- 1. PANTALLA DE LOGIN -->
 <div id="login-screen" class="login-container">
     <img src="logo gym.jpeg" alt="Logo" class="logo">
     <h1 class="brand-title">PERSONAL TRAINER</h1>
@@ -110,8 +112,10 @@
     <button class="btn-ingresar" onclick="iniciarSistema()">INGRESAR AL SISTEMA</button>
 </div>
 
+<!-- 2. PANTALLA DE LA DIETA -->
 <div id="tracking-screen" class="tracking-container">
 
+    <!-- DATOS DEL CLIENTE -->
     <div class="header-card">
         <h2>LUISA MARIA</h2>
         <h4>Nuevo Plan Nutricional</h4>
@@ -124,137 +128,146 @@
 
     <div class="section-title">▶ TU PLAN NUTRICIONAL</div>
 
+    <!-- PESTAÑAS DE NAVEGACIÓN -->
     <div class="tabs">
-        <div class="tab active" onclick="cambiarDia('lunes', this)">DÍA 1</div>
-        <div class="tab" onclick="cambiarDia('martes', this)">DÍA 2</div>
-        <div class="tab" onclick="cambiarDia('miercoles', this)">DÍA 3</div>
-        <div class="tab" onclick="cambiarDia('jueves', this)">DÍA 4</div>
-        <div class="tab" onclick="cambiarDia('viernes', this)">DÍA 5</div>
-        <div class="tab" onclick="cambiarDia('sabado', this)">DÍA 6</div>
+        <div class="tab active" onclick="cambiarDia('lunes', this)">LUNES</div>
+        <div class="tab" onclick="cambiarDia('martes', this)">MARTES</div>
+        <div class="tab" onclick="cambiarDia('miercoles', this)">MIÉRCOLES</div>
+        <div class="tab" onclick="cambiarDia('jueves', this)">JUEVES</div>
+        <div class="tab" onclick="cambiarDia('viernes', this)">VIERNES</div>
+        <div class="tab" onclick="cambiarDia('sabado', this)">SÁBADO</div>
         <div class="tab" onclick="cambiarDia('domingo', this)">DOMINGO</div>
         <div class="tab especial" onclick="cambiarDia('alternativas', this)">★ OPCIONES RÁPIDAS</div>
     </div>
 
+    <!-- ==================== LUNES ==================== -->
     <div id="lunes" class="day-content active">
         <div class="meal-card">
             <h5>Desayuno</h5>
-            <p>3 huevos revueltos enteros con espinaca, acompañados de 2 rebanadas de pan integral tostado y 100g de fruta fresca.</p>
+            <p>Arepa pequeña (60g) asada, rellena con 80g de carne desmechada magra y rodajas de tomate fresco. 1 taza de café o té.</p>
         </div>
         <div class="meal-card">
             <h5>Almuerzo</h5>
-            <p>150g de pechuga de pollo a la plancha, 120g de arroz integral y 150g de ensalada verde (lechuga, pepino, tomate) con 1 cucharada de aceite de oliva.</p>
+            <p>150g de pechuga de pavo o pollo al horno, puré de coliflor (preparado sin mantequilla) y espárragos asados.</p>
         </div>
         <div class="meal-card">
             <h5>Snack</h5>
-            <p>1 taza (200g) de yogur griego natural, mezclado con 30g de almendras.</p>
+            <p>150g de queso cottage o requesón bajo en grasa, acompañado de media taza de piña en cubos y 10g de semillas de girasol.</p>
         </div>
         <div class="meal-card">
             <h5>Cena</h5>
-            <p>150g de lomo de res magro a la parrilla, 150g de papa cocida o al horno y 100g de vainitas salteadas.</p>
+            <p><strong>Brochetas (pinchos) a la parrilla:</strong> 150g de pechuga de pollo intercalada con trozos gruesos de pimiento y cebolla. Ensalada de pepino como acompañamiento.</p>
         </div>
     </div>
 
+    <!-- ==================== MARTES ==================== -->
     <div id="martes" class="day-content">
         <div class="meal-card">
             <h5>Desayuno</h5>
-            <p>Tazón de avena (60g) cocida en leche, mezclada con 2 claras de huevo durante la cocción, cubierta con canela y 1 plátano picado.</p>
+            <p><strong>Tostadas francesas saladas:</strong> 2 rebanadas de pan integral bañadas en una mezcla de 1 huevo entero y 2 claras, doradas a la plancha. Acompañar con 30g de aguacate.</p>
         </div>
         <div class="meal-card">
             <h5>Almuerzo</h5>
-            <p>150g de carne molida de res magra (90/10), 150g de fideos integrales y salsa de tomate natural.</p>
+            <p>150g de lomo de cerdo magro a la plancha. Ensalada fresca de col morada y zanahoria rallada con aderezo de limón, y 1/2 taza de yuca cocida.</p>
         </div>
         <div class="meal-card">
             <h5>Snack</h5>
-            <p>2 huevos cocidos (duros) y 1 manzana.</p>
+            <p><strong>Rollitos de jamón:</strong> Rollitos de jamón de pavo (80g) envolviendo 40g de queso fresco o panela en el centro.</p>
         </div>
         <div class="meal-card">
             <h5>Cena</h5>
-            <p>150g de pechuga de pavo o pollo al horno, 150g de puré de camote  y brócoli al vapor.</p>
+            <p>120g de pollo desmechado servido sobre una cama abundante de rúcula y rodajas de tomate, aderezado con 1 cucharadita de aceite de oliva y vinagre balsámico.</p>
         </div>
     </div>
 
+    <!-- ==================== MIÉRCOLES ==================== -->
     <div id="miercoles" class="day-content">
         <div class="meal-card">
             <h5>Desayuno</h5>
-            <p>Arepa pequeña (60g) o 2 tostadas, rellenas con pollo desmechado (80g) y 1/4 de aguacate. 1 taza de café o té.</p>
+            <p>Omelette de 2 huevos enteros y 2 claras, relleno con espinacas y champiñones. 1 rebanada de pan de centeno o integral tostado.</p>
         </div>
         <div class="meal-card">
             <h5>Almuerzo</h5>
-            <p>150g de lomo de cerdo magro a la plancha, 120g de quinua cocida y ensalada de col y zanahoria rallada.</p>
+            <p>Albóndigas de res magra (150g, horneadas o en freidora de aire) bañadas en salsa de tomate natural casera, servidas sobre fideos de calabacín (zoodles).</p>
         </div>
         <div class="meal-card">
             <h5>Snack</h5>
-            <p>150g de queso cottage o requesón  con 1/2 taza de arándanos o fresas.</p>
+            <p>1 taza (150g) de yogur griego natural espeso con 10 mitades de nueces.</p>
         </div>
         <div class="meal-card">
             <h5>Cena</h5>
-            <p>150g de bistec de res, ensalada fresca gigante y 1 cucharada de aceite de oliva.</p>
+            <p>150g de filete de pechuga de pollo a la plancha, acompañado de una porción abundante de vainitas (judías verdes) y zanahoria al vapor.</p>
         </div>
     </div>
 
+    <!-- ==================== JUEVES ==================== -->
     <div id="jueves" class="day-content">
         <div class="meal-card">
             <h5>Desayuno</h5>
-            <p>Omelette de 3 huevos enteros y champiñones, 1 rebanada de pan integral y 1 rodaja de piña o papaya.</p>
+            <p>3 huevos revueltos (1 entero, 2 claras) con tomate y cebolla picados finamente. Acompañado de 1/2 plátano verde cocido o asado.</p>
         </div>
         <div class="meal-card">
             <h5>Almuerzo</h5>
-            <p>150g de pechuga de pollo en cubos, 1 taza de lentejas guisadas  y ensalada de pepino.</p>
+            <p>Bistec de res magro encebollado (150g), ensalada fresca de lechuga, rábano y pepino, y 1/2 taza de arroz integral.</p>
         </div>
         <div class="meal-card">
             <h5>Snack</h5>
-            <p><strong>Rollitos de proteína:</strong> 100g de jamón de pechuga de pavo enrollando 40g de queso mozzarella bajo en grasa.</p>
+            <p>2 galletas de arroz inflado untadas con 1 cucharada generosa de mantequilla de almendras o maní.</p>
         </div>
         <div class="meal-card">
             <h5>Cena</h5>
-            <p>150g de fajitas de res salteadas con pimientos y cebolla, acompañadas de guacamole casero (1/2 aguacate).</p>
+            <p>120g de pollo horneado desmenuzado acompañado de una crema ligera de vegetales (calabacín y espinaca licuados con caldo natural, sin lácteos).</p>
         </div>
     </div>
 
+    <!-- ==================== VIERNES ==================== -->
     <div id="viernes" class="day-content">
         <div class="meal-card">
             <h5>Desayuno</h5>
-            <p><strong>Panqueques caseros:</strong> Licuar 60g de avena, 1 huevo entero, 3 claras y 1 plátano. Cocinar a la plancha y servir con 1 cucharada de mantequilla de maní.</p>
+            <p><strong>Tazón crujiente:</strong> 150g de yogur griego natural, 40g de avena ligeramente tostada en sartén (para darle textura de granola sin azúcar) y un puñado de arándanos.</p>
         </div>
         <div class="meal-card">
             <h5>Almuerzo</h5>
-            <p>150g de pollo desmechado al jugo, 150g de plátano verde o maduro asado y 1 taza de vegetales mixtos.</p>
+            <p>150g de pechuga de pollo al curry (preparada con especias y un chorrito de leche de coco ligera), 1 taza de brócoli al vapor y 1/2 taza de quinua cocida.</p>
         </div>
         <div class="meal-card">
             <h5>Snack</h5>
-            <p>1 taza de yogur griego natural con 1 cucharada de semillas de chía.</p>
+            <p>2 huevos duros (cocidos) enteros, condimentados con sal, pimienta y paprika.</p>
         </div>
         <div class="meal-card">
             <h5>Cena</h5>
-            <p><strong>Hamburguesa casera al plato:</strong> 150g de carne de res magra (sin pan), base de lechuga, rodajas de tomate y 150g de calabacín asado.</p>
+            <p><strong>Ensalada César alternativa:</strong> Abundante lechuga romana, 150g de lomo de res magro en tiras a la plancha, aderezado con yogur griego mezclado con mostaza y un toque de ajo.</p>
         </div>
     </div>
 
+    <!-- ==================== SÁBADO ==================== -->
     <div id="sabado" class="day-content">
         <div class="meal-card">
             <h5>Desayuno</h5>
-            <p>3 huevos fritos (con spray antiadherente o mínimo aceite), 2 rebanadas de pan integral y tomate rebanado.</p>
+            <p><strong>Burrito mañanero:</strong> 1 tortilla integral pequeña (tipo wrap), rellena con 2 huevos revueltos, hojas de espinaca y 1 cucharada de guacamole casero.</p>
         </div>
         <div class="meal-card">
             <h5>Almuerzo</h5>
-            <p>150g de cerdo magro horneado, 150g de arroz integral y 1/2 taza de choclo (maíz dulce) en ensalada.</p>
+            <p>150g de carne de res magra al jugo, ensalada de palmitos, tomate y aguacate (40g), acompañada de 1 papa mediana al horno.</p>
         </div>
         <div class="meal-card">
             <h5>Snack</h5>
-            <p>1 puñado generoso (30g) de nueces  y 1 mandarina o naranja.</p>
+            <p>Gelatina sin azúcar (porción libre para hidratar) acompañada de 30g de queso mozzarella bajo en grasa en cubos.</p>
         </div>
         <div class="meal-card">
             <h5>Cena</h5>
-            <p><strong>Ensalada César casera:</strong> 150g de pechuga de pollo asada sobre abundante lechuga romana, aderezada con 2 cucharadas de yogur griego, limón y mostaza.</p>
+            <p>Medallones de lomo de cerdo magro (120g) a la plancha, acompañados de espárragos y champiñones salteados con un chorrito de aceite de oliva.</p>
         </div>
     </div>
 
+    <!-- ==================== DOMINGO ==================== -->
     <div id="domingo" class="day-content">
         <div class="meal-card">
             <p style="text-align:center; margin: 20px 0;"><em>Día libre o repetir el menú de un día anterior.</em></p>
         </div>
     </div>
 
+    <!-- ==================== ALTERNATIVAS (OPCIONES RÁPIDAS) ==================== -->
     <div id="alternativas" class="day-content">
         <div class="meal-card">
             <h5>Sustituto de Almuerzo/Cena rápido</h5>
@@ -266,10 +279,11 @@
         </div>
         <div class="meal-card">
             <h5>Snack saciante anti-ansiedad</h5>
-            <p>Bastones de apio o zanahoria listos para consumir  con queso cottage.</p>
+            <p>Bastones de apio o zanahoria listos para consumir (comprados en el supermercado) con queso cottage.</p>
         </div>
     </div>
 
+    <!-- REPORTE DE HÁBITOS CON EMAIL -->
     <div class="report-section">
         <div class="section-title" style="margin-bottom: 0;">▶ REPORTE DE HÁBITOS</div>
         
