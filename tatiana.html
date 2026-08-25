@@ -60,7 +60,7 @@
             padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             margin-bottom: 20px;
         }
-        .header-card h2 { margin: 0; font-size: 22px; font-weight: 900; }
+        .header-card h2 { margin: 0; font-size: 22px; font-weight: 900; text-transform: uppercase; }
         .header-card h4 { color: #b33928; margin: 5px 0 15px 0; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
         .stats-row { display: flex; justify-content: space-between; border-top: 1px solid #eee; padding-top: 15px; }
         .stat-box { flex: 1; text-align: center; }
@@ -88,13 +88,8 @@
             background: white; border-left: 5px solid #b33928; border-radius: 12px;
             padding: 15px 20px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);
         }
-        .meal-card h5 { color: #b33928; margin: 0 0 5px 0; font-size: 13px; font-weight: 900; text-transform: uppercase;}
-        .meal-card h6 { color: #666; margin: 0 0 10px 0; font-size: 11px; font-style: italic; font-weight: normal;}
+        .meal-card h5 { color: #b33928; margin: 0 0 8px 0; font-size: 13px; font-weight: 900; text-transform: uppercase;}
         .meal-card p { margin: 0; color: #222; font-size: 13.5px; font-weight: 500; line-height: 1.5;}
-        
-        /* Estilos para listas en la sección de alternativas */
-        .meal-card ul { margin: 0; padding-left: 15px; color: #222; font-size: 13.5px; line-height: 1.6; }
-        .meal-card ul li { margin-bottom: 8px; }
 
         .report-section { background: white; padding: 15px; border-radius: 12px; margin-top: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);}
         .report-section label { display: block; margin-top: 10px; font-weight: 600; font-size: 13px;}
@@ -122,13 +117,12 @@
 
     <!-- DATOS DEL CLIENTE -->
     <div class="header-card">
-        <h2>TATIANA YUNGA</h2>
-        <h4>Objetivo: Déficit Calórico</h4>
+        <h2>TATY YUNGA</h2>
+        <h4>Plan Nutricional Personalizado</h4>
         <div class="stats-row">
-            <div class="stat-box"><span>Peso Act.</span><strong>60 kg</strong></div>
-            <div class="stat-box"><span>Meta</span><strong>55 kg</strong></div>
-            <div class="stat-box"><span>Grasa</span><strong>35%</strong></div>
-            <div class="stat-box"><span>Calorías</span><strong>Por definir</strong></div>
+            <div class="stat-box"><span>Peso Act.</span><strong>Por definir</strong></div>
+            <div class="stat-box"><span>Meta</span><strong>Por definir</strong></div>
+            <div class="stat-box"><span>Grasa</span><strong>Por definir</strong></div>
         </div>
     </div>
 
@@ -146,204 +140,123 @@
         <div class="tab especial" onclick="cambiarDia('alternativas', this)">★ OPCIONES RÁPIDAS</div>
     </div>
 
-    <!-- ==================== LUNES ==================== -->
+    <!-- ==================== LUNES (Día 1) ==================== -->
     <div id="lunes" class="day-content active">
         <div class="meal-card">
-            <h5>Comida 1: Desayuno (7:30 AM)</h5>
-            <p>
-                • <strong>Huevo entero:</strong> 50 g (1 unidad).<br>
-                • <strong>Claras de huevo:</strong> 100 g.<br>
-                • <strong>Espinaca fresca:</strong> 50 g (revuelta con los huevos, sin aceite).<br>
-                • <strong>Pan 100% integral:</strong> 30 g (1 rebanada).<br>
-                • <strong>Aguacate:</strong> 40 g (untado en el pan).
-            </p>
+            <h5>Comida 1 (Desayuno)</h5>
+            <p>2 huevos enteros, 30g de avena cocida con 1 cucharada de semillas de chía hidratadas y 1 taza de papaya picada.</p>
         </div>
         <div class="meal-card">
-            <h5>Comida 2: Almuerzo de Oficina (13:30 PM)</h5>
-            <p>
-                • <strong>Pechuga de pollo a la plancha:</strong> 180 g.<br>
-                • <strong>Arroz integral cocido:</strong> 100 g.<br>
-                • <strong>Tomates cherry y pepino:</strong> 200 g (mixto).<br>
-                • <strong>Aceite de oliva extra virgen:</strong> 10 g (1 cda sopera rasa como aderezo).
-            </p>
+            <h5>Comida 2 (Almuerzo)</h5>
+            <p>120g de pechuga de pollo a la plancha, 80g de quinua cocida y ensalada abundante de espinaca y pepino con 1 cucharadita de aceite de oliva.</p>
         </div>
         <div class="meal-card">
-            <h5>Comida 3: Merienda / Pre-Entreno (17:30 PM)</h5>
-            <p>
-                • <strong>Yogur griego natural:</strong> 150 g (0% grasa, sin azúcar).<br>
-                • <strong>Manzana verde (picada):</strong> 150 g.<br>
-                • <strong>Almendras naturales:</strong> 15 g (sin sal).
-            </p>
+            <h5>Comida 3 (Snack)</h5>
+            <p>150g de yogur griego natural, 1 kiwi picado y 10 almendras.</p>
         </div>
         <div class="meal-card">
-            <h5>Comida 4: Cena Post-Entreno (21:00 PM)</h5>
-            <p>
-                • <strong>Atún en agua (escurrido):</strong> 120 g.<br>
-                • <strong>Papa blanca cocida:</strong> 150 g.<br>
-                • <strong>Brócoli al vapor:</strong> 100 g.<br>
-                • <strong>Aceite de oliva extra virgen:</strong> 5 g (1 cucharadita).
-            </p>
+            <h5>Comida 4 (Cena)</h5>
+            <p>120g de filete de pescado blanco, brócoli al vapor y 40g de aguacate.</p>
         </div>
     </div>
 
-    <!-- ==================== MARTES ==================== -->
+    <!-- ==================== MARTES (Día 2) ==================== -->
     <div id="martes" class="day-content">
         <div class="meal-card">
-            <h5>Comida 1: Desayuno (7:30 AM)</h5>
-            <p>
-                • <strong>Yogur griego natural:</strong> 150 g (0% grasa).<br>
-                • <strong>Avena en hojuelas:</strong> 30 g (mezclada con el yogur).<br>
-                • <strong>Fresas o arándanos:</strong> 100 g.<br>
-                • <strong>Nueces picadas:</strong> 15 g.
-            </p>
+            <h5>Comida 1 (Desayuno)</h5>
+            <p>2 huevos revueltos con champiñones, 1 rebanada de pan integral tostado y 4 ciruelas pasas.</p>
         </div>
         <div class="meal-card">
-            <h5>Comida 2: Almuerzo de Oficina (13:30 PM)</h5>
-            <p>
-                • <strong>Carne molida magra:</strong> 180 g (90% magra, cocida).<br>
-                • <strong>Fideos integrales cocidos:</strong> 100 g.<br>
-                • <strong>Calabacín (zucchini) salteado:</strong> 150 g.<br>
-                • <strong>Aceite de oliva extra virgen:</strong> 10 g.
-            </p>
+            <h5>Comida 2 (Almuerzo)</h5>
+            <p>120g de carne molida magra (res o pollo), 100g de camote asado y una porción generosa de vainitas.</p>
         </div>
         <div class="meal-card">
-            <h5>Comida 3: Merienda / Pre-Entreno (17:30 PM)</h5>
-            <p>
-                • <strong>Proteína de suero de leche (Whey Protein):</strong> 30 g (1 scoop en agua).<br>
-                • <strong>Plátano (guineo):</strong> 100 g.
-            </p>
+            <h5>Comida 3 (Snack)</h5>
+            <p>1 scoop de proteína (o 150g de yogur griego), 1 cucharada de linaza molida y 1 taza de fresas.</p>
         </div>
         <div class="meal-card">
-            <h5>Comida 4: Cena Post-Entreno (21:00 PM)</h5>
-            <p>
-                • <strong>Pechuga de pollo al horno o plancha:</strong> 150 g.<br>
-                • <strong>Camote (batata) cocido:</strong> 100 g.<br>
-                • <strong>Vainitas (ejotes) al vapor:</strong> 100 g.<br>
-                • <strong>Aguacate:</strong> 30 g.
-            </p>
+            <h5>Comida 4 (Cena)</h5>
+            <p>120g de pechuga de pollo, espárragos a la plancha y 1 cucharadita de aceite de oliva.</p>
         </div>
     </div>
 
-    <!-- ==================== MIÉRCOLES ==================== -->
+    <!-- ==================== MIÉRCOLES (Día 3) ==================== -->
     <div id="miercoles" class="day-content">
         <div class="meal-card">
-            <h5>Comida 1: Desayuno (7:30 AM)</h5>
-            <p>
-                • <strong>Huevos enteros:</strong> 100 g (2 unidades).<br>
-                • <strong>Arepa de maíz pequeña o tortilla de maíz:</strong> 30 g.<br>
-                • <strong>Aguacate:</strong> 40 g.
-            </p>
+            <h5>Comida 1 (Desayuno)</h5>
+            <p>2 huevos enteros, 1 arepa pequeña (mezclada con salvado de avena o linaza) y 1 taza de pitahaya.</p>
         </div>
         <div class="meal-card">
-            <h5>Comida 2: Almuerzo de Oficina (13:30 PM)</h5>
-            <p>
-                • <strong>Lomo de cerdo magro (cocido):</strong> 180 g.<br>
-                • <strong>Lentejas cocidas:</strong> 100 g (sin embutidos).<br>
-                • <strong>Ensalada de cebolla y tomate:</strong> 150 g.<br>
-                • <strong>Aceite de oliva extra virgen:</strong> 10 g.
-            </p>
+            <h5>Comida 2 (Almuerzo)</h5>
+            <p>120g de atún al agua o pescado fresco, 80g de arroz integral y ensalada fresca de tomate con pepino (con piel).</p>
         </div>
         <div class="meal-card">
-            <h5>Comida 3: Merienda / Pre-Entreno (17:30 PM)</h5>
-            <p>
-                • <strong>Queso cottage bajo en grasa:</strong> 150 g.<br>
-                • <strong>Piña picada:</strong> 150 g.<br>
-                • <strong>Almendras naturales:</strong> 15 g.
-            </p>
+            <h5>Comida 3 (Snack)</h5>
+            <p>150g de yogur griego, 1 manzana verde (con cáscara) y 5 mitades de nueces.</p>
         </div>
         <div class="meal-card">
-            <h5>Comida 4: Cena Post-Entreno (21:00 PM)</h5>
-            <p>
-                • <strong>Pescado blanco:</strong> 180 g (tilapia o corvina, a la plancha).<br>
-                • <strong>Arroz blanco cocido:</strong> 100 g.<br>
-                • <strong>Espárragos o champiñones salteados:</strong> 100 g.<br>
-                • <strong>Aceite de oliva extra virgen:</strong> 5 g.
-            </p>
+            <h5>Comida 4 (Cena)</h5>
+            <p>120g de lomo de cerdo magro, calabacín salteado y 40g de aguacate.</p>
         </div>
     </div>
 
-    <!-- ==================== JUEVES ==================== -->
+    <!-- ==================== JUEVES (Día 4) ==================== -->
     <div id="jueves" class="day-content">
         <div class="meal-card">
-            <h5>Comida 1: Desayuno Rápido (7:30 AM)</h5>
-            <p>
-                • <strong>Jamón de pavo:</strong> 50 g.<br>
-                • <strong>Queso fresco o mozzarella descremado:</strong> 40 g.<br>
-                • <strong>Pan 100% integral:</strong> 60 g (2 rebanadas, tipo sándwich).<br>
-                <em>Nota: Acompañar con café o té sin azúcar.</em>
-            </p>
+            <h5>Comida 1 (Desayuno)</h5>
+            <p>Omelet de 2 huevos con espinaca, 30g de avena cocida con 1 cucharada de semillas de calabaza y 1 rodaja de piña.</p>
         </div>
         <div class="meal-card">
-            <h5>Comida 2: Almuerzo de Oficina (13:30 PM)</h5>
-            <p>
-                • <strong>Pechuga de pollo desmechada:</strong> 180 g.<br>
-                • <strong>Frijoles negros cocidos:</strong> 100 g.<br>
-                • <strong>Lechuga y zanahoria rallada:</strong> 150 g.<br>
-                • <strong>Aceite de oliva extra virgen:</strong> 10 g.
-            </p>
+            <h5>Comida 2 (Almuerzo)</h5>
+            <p>120g de pechuga de pavo o pollo, 80g de pasta integral y ensalada de lechuga con rábano.</p>
         </div>
         <div class="meal-card">
-            <h5>Comida 3: Merienda / Pre-Entreno (17:30 PM)</h5>
-            <p>
-                • <strong>Proteína de suero de leche (Whey Protein):</strong> 30 g (en agua).<br>
-                • <strong>Manzana verde:</strong> 150 g.<br>
-                • <strong>Mantequilla de maní (100% natural):</strong> 15 g.
-            </p>
+            <h5>Comida 3 (Snack)</h5>
+            <p>150g de yogur griego, 1/2 taza de arándanos y 1 cucharada de mantequilla de maní o almendras.</p>
         </div>
         <div class="meal-card">
-            <h5>Comida 4: Cena Post-Entreno (21:00 PM)</h5>
-            <p>
-                • <strong>Atún en agua (escurrido):</strong> 120 g.<br>
-                • <strong>Choclo (maíz) desgranado cocido:</strong> 80 g.<br>
-                • <strong>Lechuga mixta:</strong> 100 g.<br>
-                • <strong>Aguacate:</strong> 30 g (usar como aderezo cremoso para el atún).
-            </p>
+            <h5>Comida 4 (Cena)</h5>
+            <p>120g de salmón o trucha y coliflor al vapor.</p>
         </div>
     </div>
 
-    <!-- ==================== VIERNES ==================== -->
+    <!-- ==================== VIERNES (Día 5) ==================== -->
     <div id="viernes" class="day-content">
         <div class="meal-card">
-            <h5>Comida 1: Desayuno (7:30 AM)</h5>
-            <p>
-                • <strong>Huevo entero:</strong> 50 g (1 unidad).<br>
-                • <strong>Claras de huevo:</strong> 100 g.<br>
-                • <strong>Avena en hojuelas:</strong> 30 g (mezclada con los huevos tipo pancake o tortilla).<br>
-                • <strong>Mandarina o moras:</strong> 100 g.
-            </p>
+            <h5>Comida 1 (Desayuno)</h5>
+            <p>2 huevos cocidos, 1 tostada integral y 1/2 pera.</p>
         </div>
         <div class="meal-card">
-            <h5>Comida 2: Almuerzo de Oficina (13:30 PM)</h5>
-            <p>
-                • <strong>Bife de res magro (cocido):</strong> 180 g.<br>
-                • <strong>Papa cocida (fría, en ensalada):</strong> 100 g.<br>
-                • <strong>Vegetales mixtos:</strong> 150 g (zanahoria, coliflor, brócoli).<br>
-                • <strong>Aceite de oliva extra virgen:</strong> 10 g.
-            </p>
+            <h5>Comida 2 (Almuerzo)</h5>
+            <p>120g de lomo de res magro, 80g de lentejas cocidas y ensalada de col morada con zanahoria rallada.</p>
         </div>
         <div class="meal-card">
-            <h5>Comida 3: Merienda / Pre-Entreno (17:30 PM)</h5>
-            <p>
-                • <strong>Yogur griego natural (0% grasa):</strong> 150 g.<br>
-                • <strong>Pera o durazno picado:</strong> 150 g.<br>
-                • <strong>Nueces picadas:</strong> 15 g.
-            </p>
+            <h5>Comida 3 (Snack)</h5>
+            <p><strong>Batido digestivo:</strong> 1 scoop de proteína, 1 cucharada de chía, 1 taza de papaya y agua.</p>
         </div>
         <div class="meal-card">
-            <h5>Comida 4: Cena Post-Entreno (21:00 PM)</h5>
-            <p>
-                • <strong>Pechuga de pollo (cocida):</strong> 150 g.<br>
-                • <strong>Quinua cocida:</strong> 100 g.<br>
-                • <strong>Pepino en rodajas:</strong> 150 g.<br>
-                • <strong>Aceite de oliva extra virgen:</strong> 5 g (con abundante jugo de limón y sal).
-            </p>
+            <h5>Comida 4 (Cena)</h5>
+            <p>120g de pescado blanco, vegetales mixtos al vapor (brócoli, zanahoria) y 1 cucharadita de aceite de oliva.</p>
         </div>
     </div>
 
-    <!-- ==================== SÁBADO ==================== -->
+    <!-- ==================== SÁBADO (Día 6) ==================== -->
     <div id="sabado" class="day-content">
         <div class="meal-card">
-            <p style="text-align:center; margin: 20px 0;"><em>Día libre o repetir el menú de un día anterior.</em></p>
+            <h5>Comida 1 (Desayuno)</h5>
+            <p><strong>Panqueques de avena:</strong> 30g de avena licuada con 2 huevos y canela, superpuestos con 1 kiwi picado.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Comida 2 (Almuerzo)</h5>
+            <p>120g de pollo desmechado, 80g de garbanzos cocidos y ensalada fresca de pepino con pimiento.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Comida 3 (Snack)</h5>
+            <p>150g de yogur griego, 1 taza de melón picado y 10 almendras.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Comida 4 (Cena)</h5>
+            <p>120g de carne magra a la plancha, espinacas salteadas y 40g de aguacate.</p>
         </div>
     </div>
 
@@ -358,7 +271,7 @@
     <div id="alternativas" class="day-content">
         <div class="meal-card">
             <h5>Sustituto de Almuerzo/Cena rápido</h5>
-            <p>Sándwich de pan integral con doble porción de jamón de pavo, queso fresco bajo en grasa, lechuga y tomate de bolsa listos para comer.</p>
+            <p>Sándwich de pan integral con doble porción de pechuga de pollo o jamón de pavo, queso fresco bajo en grasa, lechuga y tomate de bolsa listos para comer.</p>
         </div>
         <div class="meal-card">
             <h5>Sustituto de Merienda rápido</h5>
@@ -395,8 +308,8 @@
             return;
         }
         
-        // CÓDIGO DE ACCESO PARA TATIANA
-        if (inputCodigo === "TATIANA2026") {
+        // CÓDIGO DE ACCESO PARA TATY
+        if (inputCodigo === "TATY2026") {
             document.body.style.backgroundColor = "#e8e8e8";
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('tracking-screen').style.display = 'block';
@@ -441,7 +354,7 @@
                 'Accept': 'application/json'
             },
             body: JSON.stringify({
-                Paciente: "TATIANA YUNGA", // Nombre actualizado para el reporte
+                Paciente: "TATY YUNGA", 
                 Agua_Litros: agua,
                 Horas_Sueno: sueno,
                 Pasos_Diarios: pasos,
