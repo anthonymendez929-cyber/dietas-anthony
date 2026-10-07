@@ -1,3 +1,12 @@
+¡Perfecto! Ya le puse su nombre al encabezado y le asigné su propia clave de acceso.
+Pasos para crear su perfil en tu GitHub:
+ * Dale a "Add file" > "Create new file".
+ * Escribe el nombre del archivo, te sugiero: mariaalbarracin.html
+ * Pega todo el código que te dejo aquí abajo.
+ * Dale a "Commit changes..." para guardar.
+Una vez guardado, su enlace será: 👉 https://anthonymendez929-cyber.github.io/dietas-anthony/mariaalbarracin.html
+Su clave de acceso será: MARIA2026
+Aquí tienes el código listo para copiar y pegar:
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -50,4 +59,332 @@
 
         /* ESTILOS DEL CONTENEDOR PRINCIPAL */
         .tracking-container { 
-            display:
+            display: none; max-width: 500px; margin: 0 auto; 
+            background: transparent; 
+            padding: 20px; position: relative; color: #333; z-index: 2;
+        }
+        
+        .header-card {
+            background: white; border-top: 5px solid #f39c12; border-radius: 15px;
+            padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .header-card h2 { margin: 0; font-size: 22px; font-weight: 900; text-transform: uppercase; }
+        .header-card h4 { color: #f39c12; margin: 5px 0 15px 0; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+        
+        .section-title { color: #f39c12; font-weight: bold; font-size: 13px; margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase;}
+        
+        /* PESTAÑAS */
+        .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px;}
+        .tab { 
+            background: white; color: #555; padding: 8px 16px; border-radius: 20px; cursor: pointer;
+            font-weight: bold; font-size: 11px; white-space: nowrap; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: 0.2s;
+        }
+        .tab.active { background: #f39c12; color: #120e0d; }
+        .tab.info { background: #2c3e50; color: white; }
+        .tab.info.active { background: #1a252f; border: 2px solid #f39c12; }
+        .tabs::-webkit-scrollbar { display: none; }
+        
+        .day-content { display: none; }
+        .day-content.active { display: block; }
+
+        /* TARJETAS DE ENTRENAMIENTO */
+        .workout-card {
+            background: white; border-left: 5px solid #f39c12; border-radius: 12px;
+            padding: 15px 20px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+        }
+        .workout-card h5 { color: #f39c12; margin: 0 0 10px 0; font-size: 14px; font-weight: 900; text-transform: uppercase;}
+        
+        .exercise-stats { 
+            display: flex; justify-content: space-between; 
+            background: #f8f9fa; border-radius: 8px; padding: 10px; margin-bottom: 10px;
+        }
+        .stat-box { flex: 1; text-align: center; border-right: 1px solid #ddd; }
+        .stat-box:last-child { border-right: none; }
+        .stat-box span { display: block; font-size: 9px; color: #888; text-transform: uppercase; margin-bottom: 3px;}
+        .stat-box strong { display: block; font-size: 13px; color: #222; font-weight: 900; }
+
+        .workout-card p { margin: 0; color: #444; font-size: 13px; font-weight: 500; line-height: 1.5;}
+        
+        /* TARJETAS DE NOTAS/INFO */
+        .note-card { border-left: 5px solid #3498db; background: white; border-radius: 12px; padding: 15px 20px; margin-bottom: 12px; }
+        .note-card h5 { color: #3498db; margin: 0 0 8px 0; font-size: 13px; font-weight: 900; text-transform: uppercase;}
+        .note-card p { margin: 0 0 10px 0; color: #222; font-size: 13.5px; font-weight: 500; line-height: 1.5;}
+        .note-card p:last-child { margin: 0; }
+        .note-card ul { margin: 0; padding-left: 20px; font-size: 13.5px; color: #222; font-weight: 500; line-height: 1.6;}
+    </style>
+</head>
+<body>
+
+<img src="logo gym.jpeg" id="bg-watermark" class="watermark" alt="Fondo">
+
+<div id="login-screen" class="login-container">
+    <img src="logo gym.jpeg" alt="Logo" class="logo">
+    <h1 class="brand-title">COACHING ONLINE</h1>
+    <p class="brand-subtitle">ANTHONY MÉNDEZ</p>
+    <input type="text" id="client-code" placeholder="Clave de acceso">
+    <button class="btn-ingresar" onclick="iniciarSistema()">INGRESAR AL PROGRAMA</button>
+</div>
+
+<div id="tracking-screen" class="tracking-container">
+
+    <div class="header-card">
+        <h2>MARÍA ALBARRACIN</h2>
+        <h4>Hipertrofia y Rehabilitación Activa</h4>
+    </div>
+
+    <div class="tabs">
+        <div class="tab info active" onclick="cambiarDia('perfil', this)">📋 PERFIL & GUÍA</div>
+        <div class="tab" onclick="cambiarDia('dia1', this)">DÍA 1</div>
+        <div class="tab" onclick="cambiarDia('dia2', this)">DÍA 2</div>
+        <div class="tab" onclick="cambiarDia('dia3', this)">DÍA 3</div>
+    </div>
+
+    <!-- ==================== PERFIL & DIRECTRICES ==================== -->
+    <div id="perfil" class="day-content active">
+        
+        <div class="section-title">▶ ENFOQUE BIOMECÁNICO</div>
+        <div class="note-card">
+            <h5>1. Cero Carga Axial</h5>
+            <p>Uso exclusivo de máquinas con respaldo para tren inferior y ejercicios con apoyo torácico para tren superior para proteger la zona lumbar.</p>
+            <h5>2. Rehabilitación Rotuliana</h5>
+            <p>Control excéntrico riguroso (fase de bajada lenta de 3 a 4 segundos) para engrosar y fortalecer el tendón rotuliano.</p>
+            <h5>3. Corrección Postural</h5>
+            <p>Énfasis en retracción escapular y deltoides para contrarrestar la postura laboral de estilista (brazos en elevación).</p>
+        </div>
+
+        <div class="section-title">▶ CALENTAMIENTO DIARIO (10 MIN)</div>
+        <div class="note-card" style="border-left-color: #e74c3c;">
+            <ul>
+                <li><strong>Bicicleta estática:</strong> 5-7 minutos. Resistencia muy baja, objetivo: lubricación sin impacto.</li>
+                <li><strong>Movilidad Articular (Suelo):</strong> Rotaciones de tobillo, extensiones de cadera sin peso, y rotaciones torácicas apoyada en cuadrupedia.</li>
+            </ul>
+        </div>
+
+        <div class="section-title">▶ DIRECTRICES FINALES</div>
+        <div class="note-card" style="border-left-color: #9b59b6;">
+            <ul>
+                <li><strong>Intensidad (RIR):</strong> Mantener un RIR de 2 a 3. Esfuerzo alto pero seguro, sin llegar al fallo muscular técnico.</li>
+                <li><strong>Escala de Dolor:</strong> El dolor muscular es aceptable. Si hay dolor punzante (>3/10) en el polo inferior de la rótula al extender, reducir rango de movimiento inmediatamente.</li>
+                <li><strong>Nutrición:</strong> Indispensable un ligero superávit calórico y proteína optimizada (1.6g - 1.8g/kg) para crear masa muscular a los 60 años.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ==================== DÍA 1 ==================== -->
+    <div id="dia1" class="day-content">
+        <div class="section-title">▶ ÉNFASIS CUÁDRICEPS Y ESTABILIDAD ESCAPULAR</div>
+        
+        <div class="workout-card">
+            <h5>1. Prensa de Piernas (Horizontal)</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>10 - 12</strong></div>
+                <div class="stat-box"><span>Tempo</span><strong>3:0:1:0</strong></div>
+                <div class="stat-box"><span>Desc.</span><strong>90s</strong></div>
+            </div>
+            <p><strong>Técnica:</strong> Pies a altura media. NO bloquear las rodillas al extender. Pelvis estrictamente pegada al respaldo.</p>
+        </div>
+
+        <div class="workout-card">
+            <h5>2. Curl Femoral (Sentado)</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>12 - 15</strong></div>
+                <div class="stat-box"><span>Tempo</span><strong>2:0:1:1</strong></div>
+                <div class="stat-box"><span>Desc.</span><strong>90s</strong></div>
+            </div>
+            <p><strong>Técnica:</strong> Soporte vital para la cara posterior de la rodilla bien ajustado.</p>
+        </div>
+
+        <div class="workout-card">
+            <h5>3. Remo en Máquina (Apoyo al pecho)</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>12 - 15</strong></div>
+                <div class="stat-box"><span>Tempo</span><strong>2:1:1:0</strong></div>
+                <div class="stat-box"><span>Desc.</span><strong>60s</strong></div>
+            </div>
+            <p><strong>Técnica:</strong> Pecho firmemente apoyado contra el cojín; esto anula por completo la tensión lumbar.</p>
+        </div>
+
+        <div class="workout-card">
+            <h5>4. Press de Pecho en Máquina</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>10 - 12</strong></div>
+                <div class="stat-box"><span>Tempo</span><strong>2:0:1:0</strong></div>
+                <div class="stat-box"><span>Desc.</span><strong>60s</strong></div>
+            </div>
+            <p><strong>Técnica:</strong> Mantener hombros siempre abajo y atrás (retracción escapular activa).</p>
+        </div>
+
+        <div class="workout-card">
+            <h5>5. Plancha Inclinada (Core)</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Tiempo</span><strong>20 - 30s</strong></div>
+                <div class="stat-box"><span>Tipo</span><strong>Isométrico</strong></div>
+                <div class="stat-box"><span>Desc.</span><strong>45s</strong></div>
+            </div>
+            <p><strong>Técnica:</strong> Apoyar antebrazos en un banco o mesa estable. Prohibida la flexión lumbar (hundir la cadera).</p>
+        </div>
+    </div>
+
+    <!-- ==================== DÍA 2 ==================== -->
+    <div id="dia2" class="day-content">
+        <div class="section-title">▶ ÉNFASIS CADERA, GLÚTEO Y TRACCIÓN VERTICAL</div>
+        
+        <div class="workout-card">
+            <h5>1. Hip Thrust en Máquina</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>4</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>10 - 12</strong></div>
+                <div class="stat-box"><span>Tempo</span><strong>2:0:1:2</strong></div>
+                <div class="stat-box"><span>Desc.</span><strong>90s</strong></div>
+            </div>
+            <p><strong>Técnica:</strong> Sostener la contracción 2 seg arriba. Asegurar que el soporte transfiera el peso directamente a los glúteos.</p>
+        </div>
+
+        <div class="workout-card">
+            <h5>2. Extensión de Cuádriceps</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>10 - 12</strong></div>
+                <div class="stat-box"><span>Tempo</span><strong>4:0:1:0</strong></div>
+                <div class="stat-box"><span>Desc.</span><strong>90s</strong></div>
+            </div>
+            <p><strong>Técnica:</strong> Fase excéntrica súper lenta (bajar en 4 segundos). Esto es CLAVE para la adaptación del ligamento rotuliano.</p>
+        </div>
+
+        <div class="workout-card">
+            <h5>3. Abducción de Cadera (Máquina)</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>15 - 20</strong></div>
+                <div class="stat-box"><span>Tempo</span><strong>2:0:1:1</strong></div>
+                <div class="stat-box"><span>Desc.</span><strong>60s</strong></div>
+            </div>
+            <p><strong>Técnica:</strong> Trabaja glúteo medio, evita a toda costa que las rodillas colapsen hacia adentro.</p>
+        </div>
+
+        <div class="workout-card">
+            <h5>4. Jalón al Pecho (Polea Alta)</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>12</strong></div>
+                <div class="stat-box"><span>Tempo</span><strong>2:0:1:1</strong></div>
+                <div class="stat-box"><span>Desc.</span><strong>60s</strong></div>
+            </div>
+            <p><strong>Técnica:</strong> Produce una descompresión espinal positiva y segura para su espalda lumbar.</p>
+        </div>
+
+        <div class="workout-card">
+            <h5>5. Elevaciones Laterales (Máquina)</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>12 - 15</strong></div>
+                <div class="stat-box"><span>Tempo</span><strong>2:0:1:0</strong></div>
+                <div class="stat-box"><span>Desc.</span><strong>60s</strong></div>
+            </div>
+            <p><strong>Técnica:</strong> Fundamental para fortalecer hombros y resistir la fatiga laboral por el uso de tijeras y secadora.</p>
+        </div>
+    </div>
+
+    <!-- ==================== DÍA 3 ==================== -->
+    <div id="dia3" class="day-content">
+        <div class="section-title">▶ ÉNFASIS ISQUIOSURALES Y CORE ANTI-ROTACIÓN</div>
+        
+        <div class="workout-card">
+            <h5>1. Prensa de Piernas (Pies altos y anchos)</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>10 - 12</strong></div>
+                <div class="stat-box"><span>Tempo</span><strong>3:0:1:0</strong></div>
+                <div class="stat-box"><span>Desc.</span><strong>90s</strong></div>
+            </div>
+            <p><strong>Técnica:</strong> Esta posición de pies traslada el enfoque a glúteos e isquios, restando presión frontal a la rótula.</p>
+        </div>
+
+        <div class="workout-card">
+            <h5>2. Curl Femoral (Acostado)</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>12</strong></div>
+                <div class="stat-box"><span>Tempo</span><strong>3:0:1:0</strong></div>
+                <div class="stat-box"><span>Desc.</span><strong>90s</strong></div>
+            </div>
+            <p><strong>Técnica:</strong> Bajar el peso de manera muy controlada (3 segundos de bajada).</p>
+        </div>
+
+        <div class="workout-card">
+            <h5>3. Remo Gironda (Polea baja)</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>12 - 15</strong></div>
+                <div class="stat-box"><span>Tempo</span><strong>2:1:1:0</strong></div>
+                <div class="stat-box"><span>Desc.</span><strong>60s</strong></div>
+            </div>
+            <p><strong>Técnica:</strong> Espalda completamente recta y firme; el torso NO se balancea hacia adelante y atrás.</p>
+        </div>
+
+        <div class="workout-card">
+            <h5>4. Press Pallof (Polea)</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>10 / lado</strong></div>
+                <div class="stat-box"><span>Tempo</span><strong>2:2:2:0</strong></div>
+                <div class="stat-box"><span>Desc.</span><strong>60s</strong></div>
+            </div>
+            <p><strong>Técnica:</strong> De pie o de rodillas. Trabajo de core anti-rotación: la fuerza empuja hacia un lado, la columna se mantiene rígida sin rotar.</p>
+        </div>
+
+        <div class="workout-card">
+            <h5>5. Curl de Pantorrilla en Prensa</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>15 - 20</strong></div>
+                <div class="stat-box"><span>Tempo</span><strong>2:1:1:1</strong></div>
+                <div class="stat-box"><span>Desc.</span><strong>45s</strong></div>
+            </div>
+            <p><strong>Técnica:</strong> Fortalecer los gemelos es clave porque actúan como amortiguadores para la rodilla.</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function iniciarSistema() {
+        const inputCodigo = document.getElementById('client-code').value.trim().toUpperCase();
+        if (inputCodigo === "") {
+            alert("Por favor, ingresa la clave de acceso.");
+            return;
+        }
+        
+        // CÓDIGO DE ACCESO (MARÍA ALBARRACIN)
+        if (inputCodigo === "MARIA2026") {
+            document.body.style.backgroundColor = "#e8e8e8";
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('tracking-screen').style.display = 'block';
+            document.getElementById('bg-watermark').style.display = 'block';
+        } else {
+            alert("Código incorrecto. Intenta nuevamente...");
+        }
+    }
+
+    function cambiarDia(diaId, elementoPestana) {
+        const dias = document.querySelectorAll('.day-content');
+        dias.forEach(dia => dia.classList.remove('active'));
+
+        const pestanas = document.querySelectorAll('.tab');
+        pestanas.forEach(pestana => pestana.classList.remove('active'));
+
+        document.getElementById(diaId).classList.add('active');
+        elementoPestana.classList.add('active');
+    }
+</script>
+
+</body>
+</html>
+
+
