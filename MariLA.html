@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Entrenamiento - Anthony Méndez</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #120e0d; 
+            margin: 0;
+            padding: 0;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* LOGO DE FONDO */
+        .watermark {
+            display: none; 
+            position: fixed; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            width: 120%; 
+            max-width: 700px; 
+            opacity: 0.08; 
+            pointer-events: none; 
+            z-index: 0;
+        }
+
+        /* ESTILOS DEL LOGIN */
+        .login-container {
+            max-width: 350px; margin: 80px auto; background-color: #271f1d;
+            padding: 40px 30px; border-radius: 20px; text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8); color: #fff;
+            position: relative; z-index: 2;
+        }
+        .logo { width: 120px; height: 120px; border-radius: 50%; margin-bottom: 15px; object-fit: cover; }
+        .brand-title { font-size: 24px; margin: 0; font-weight: 800; letter-spacing: 1px; }
+        .brand-subtitle { font-size: 13px; color: #f39c12; margin-top: 5px; margin-bottom: 30px; letter-spacing: 2px; }
+        #client-code {
+            width: 100%; padding: 15px; border-radius: 10px; border: none; 
+            margin-bottom: 20px; font-size: 16px; text-align: center; box-sizing: border-box;
+        }
+        .btn-ingresar {
+            width: 100%; padding: 15px; background-color: #f39c12; color: #120e0d; border: none;
+            border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s;
+        }
+        .btn-ingresar:hover { background-color: #d68910; }
+
+        /* ESTILOS DEL CONTENEDOR PRINCIPAL */
+        .tracking-container { 
+            display:
