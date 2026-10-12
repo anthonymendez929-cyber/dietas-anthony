@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Entrenamiento - Anthony Méndez</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #120e0d; 
+            margin: 0;
+            padding: 0;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .watermark {
+            display: none; 
+            position: fixed; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            width: 120%; 
+            max-width: 700px; 
+            opacity: 0.08; 
+            pointer-events: none; 
+            z-index: 0;
+        }
+
+        .login-container {
+            max-width: 350px; margin: 80px auto; background-color: #271f1d;
+            padding: 40px 30px; border-radius: 20px; text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8); color: #fff;
+            position: relative; z-index: 2;
+        }
+        .logo { width: 120px; height: 120px; border-radius: 50%; margin-bottom: 15px; object-fit: cover; }
+        .brand-title { font-size: 24px; margin: 0; font-weight: 800; letter-spacing: 1px; }
+        .brand-subtitle { font-size: 13px; color: #f39c12; margin-top: 5px; margin-bottom: 30px; letter-spacing: 2px; }
+        #client-code {
+            width: 100%; padding: 15px; border-radius: 10px; border: none; 
+            margin-bottom: 20px; font-size: 16px; text-align: center; box-sizing: border-box;
+        }
+        .btn-ingresar {
+            width: 100%; padding: 15px; background-color: #f39c12; color: #120e0d; border: none;
+            border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s;
+        }
+        .btn-ingresar:hover { background-color: #d68910; }
+
+        .tracking-container { 
+            display: none; max-width: 500px; margin: 0 auto; 
+            background: transparent; 
+            padding: 20px; position: relative; color: #333; z-index: 2;
+        }
+        
+        .header-card {
+            background: white; border-top: 5px solid #f39c12; border-radius: 15px;
+            padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .header-card h2 { margin: 0; font-size: 22px; font-weight: 900; text-transform: uppercase; }
+        .header-card h4 { color: #f39c12; margin: 5px 0 15px 0; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+        
+        .section-title { color: #f39c12; font-weight: bold; font-size: 13px; margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase;}
+        
+        .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px;}
+        .tab { 
+            background: white; color: #555; padding: 8px 16px; border-radius: 20px; cursor: pointer;
+            font-weight: bold; font-size: 11px; white-space: nowrap; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: 0.2s;
+        }
+        .tab.active { background: #f39c12; color: #120e0d; }
+        .tabs::-webkit-scrollbar { display: none; }
+        
+        .day-content { display: none; }
+        .day-content.active { display: block; }
+
+        .workout-card {
+            background: white; border-left: 5px solid #f39c12; border-radius: 12px;
+            padding: 15px 20px; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+        }
+        .workout-card h5 { color: #f39c12; margin: 0 0 10px 0; font-size: 14px; font-weight: 900; text-transform: uppercase;}
+        
+        .exercise-stats { 
+            display: flex; justify-content: space-between; 
+            background: #f8f9fa; border-radius: 8px; padding: 10px; margin-bottom: 0;
+        }
+        .stat-box { flex: 1; text-align: center; border-right: 1px solid #ddd; }
+        .stat-box:last-child { border-right: none; }
+        .stat-box span { display: block; font-size: 9px; color: #888; text-transform: uppercase; margin-bottom: 3px;}
+        .stat-box strong { display: block; font-size: 13px; color: #222; font-weight: 900; }
+    </style>
+</head>
+<body>
+
+<img src="logo gym.jpeg" id="bg-watermark" class="watermark" alt="Fondo">
+
+<div id="login-screen" class="login-container">
+    <img src="logo gym.jpeg" alt="Logo" class="logo">
+    <h1 class="brand-title">COACHING ONLINE</h1>
+    <p class="brand-subtitle">ANTHONY MÉNDEZ</p>
+    <input type="text" id="client-code" placeholder="Clave de acceso">
+    <button class="btn-ingresar" onclick="iniciarSistema()">INGRESAR AL PROGRAMA</button>
+</div>
+
+<div id="tracking-screen" class="tracking-container">
+
+    <div class="header-card">
+        <h2>DIANA</h2>
+        <h4>Programa de Entrenamiento - 5 Días</h4>
+    </div>
+
+    <div class="tabs">
+        <div class="tab active" onclick="cambiarDia('dia1', this)">DÍA 1</div>
+        <div class="tab" onclick="cambiarDia('dia2', this)">DÍA 2</div>
+        <div class="tab" onclick="cambiarDia('dia3', this)">DÍA 3</div>
+        <div class="tab" onclick="cambiarDia('dia4', this)">DÍA 4</div>
+        <div class="tab" onclick="cambiarDia('dia5', this)">DÍA 5</div>
+    </div>
+
+    <!-- ==================== DÍA 1 ==================== -->
+    <div id="dia1" class="day-content active">
+        <div class="section-title">▶ CUÁDRICEPS (ENFOQUE VASTOS)</div>
+        
+        <div class="workout-card">
+            <h5>1. Prensa de Piernas</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>4</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>12 - 15</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>90s</strong></div>
+            </div>
+        </div>
+
+        <div class="workout-card">
+            <h5>2. Sentadilla Goblet con Mancuerna</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>4</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>12</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>90s</strong></div>
+            </div>
+        </div>
+
+        <div class="workout-card">
+            <h5>3. Extensiones de Cuádriceps</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>4</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>15</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>60s</strong></div>
+            </div>
+        </div>
+
+        <div class="workout-card">
+            <h5>4. Zancadas (Lunges) Estáticas</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>10 / pierna</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>60s</strong></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== DÍA 2 ==================== -->
+    <div id="dia2" class="day-content">
+        <div class="section-title">▶ HOMBROS</div>
+        
+        <div class="workout-card">
+            <h5>1. Press de Hombros Sentada (Mancuernas)</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>4</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>10 - 12</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>90s</strong></div>
+            </div>
+        </div>
+
+        <div class="workout-card">
+            <h5>2. Elevaciones Laterales (Mancuernas)</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>4</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>15</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>60s</strong></div>
+            </div>
+        </div>
+
+        <div class="workout-card">
+            <h5>3. Vuelos Posteriores Sentada</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>4</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>15</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>60s</strong></div>
+            </div>
+        </div>
+
+        <div class="workout-card">
+            <h5>4. Elevaciones Frontales con Disco</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>12</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>60s</strong></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== DÍA 3 ==================== -->
+    <div id="dia3" class="day-content">
+        <div class="section-title">▶ GLÚTEOS Y FEMORALES</div>
+        
+        <div class="workout-card">
+            <h5>1. Hip Thrust (Máquina o Barra)</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>4</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>10 - 12</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>90s</strong></div>
+            </div>
+        </div>
+
+        <div class="workout-card">
+            <h5>2. Peso Muerto Rumano (Mancuernas)</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>4</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>12</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>90s</strong></div>
+            </div>
+        </div>
+
+        <div class="workout-card">
+            <h5>3. Patada de Glúteo (Polea Baja)</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>4</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>12 - 15 / pierna</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>60s</strong></div>
+            </div>
+        </div>
+
+        <div class="workout-card">
+            <h5>4. Curl Femoral</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>12</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>60s</strong></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== DÍA 4 ==================== -->
+    <div id="dia4" class="day-content">
+        <div class="section-title">▶ MANTENIMIENTO (ESPALDA, PECHO Y BRAZOS)</div>
+        
+        <div class="workout-card">
+            <h5>1. Jalón al Pecho en Polea</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>12</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>60s</strong></div>
+            </div>
+        </div>
+
+        <div class="workout-card">
+            <h5>2. Remo en Máquina</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>12</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>60s</strong></div>
+            </div>
+        </div>
+
+        <div class="workout-card">
+            <h5>3. Press de Pecho en Máquina</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>10 - 12</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>60s</strong></div>
+            </div>
+        </div>
+
+        <div class="workout-card">
+            <h5>4. Curl de Bíceps con Mancuernas</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>12</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>60s</strong></div>
+            </div>
+        </div>
+
+        <div class="workout-card">
+            <h5>5. Extensión de Tríceps (Polea/Cuerda)</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>15</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>60s</strong></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== DÍA 5 ==================== -->
+    <div id="dia5" class="day-content">
+        <div class="section-title">▶ RECORDATORIO (GLÚTEOS, VASTOS Y HOMBROS)</div>
+        
+        <div class="workout-card">
+            <h5>1. Máquina de Abducción de Cadera</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>4</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>15 - 20</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>60s</strong></div>
+            </div>
+        </div>
+
+        <div class="workout-card">
+            <h5>2. Sentadilla Búlgara (Máquina Smith)</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>10 - 12 / pierna</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>90s</strong></div>
+            </div>
+        </div>
+
+        <div class="workout-card">
+            <h5>3. Extensiones de Cuádriceps</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>3</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>15</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>60s</strong></div>
+            </div>
+        </div>
+
+        <div class="workout-card">
+            <h5>4. Elevaciones Laterales en Polea</h5>
+            <div class="exercise-stats">
+                <div class="stat-box"><span>Series</span><strong>4</strong></div>
+                <div class="stat-box"><span>Reps</span><strong>12 - 15 / brazo</strong></div>
+                <div class="stat-box"><span>Descanso</span><strong>60s</strong></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function iniciarSistema() {
+        const inputCodigo = document.getElementById('client-code').value.trim().toUpperCase();
+        if (inputCodigo === "") {
+            alert("Por favor, ingresa la clave de acceso.");
+            return;
+        }
+        
+        if (inputCodigo === "DIANA2026") {
+            document.body.style.backgroundColor = "#e8e8e8";
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('tracking-screen').style.display = 'block';
+            document.getElementById('bg-watermark').style.display = 'block';
+        } else {
+            alert("Código incorrecto. Intenta nuevamente...");
+        }
+    }
+
+    function cambiarDia(diaId, elementoPestana) {
+        const dias = document.querySelectorAll('.day-content');
+        dias.forEach(dia => dia.classList.remove('active'));
+
+        const pestanas = document.querySelectorAll('.tab');
+        pestanas.forEach(pestana => pestana.classList.remove('active'));
+
+        document.getElementById(diaId).classList.add('active');
+        elementoPestana.classList.add('active');
+    }
+</script>
+
+</body>
+</html>
+
