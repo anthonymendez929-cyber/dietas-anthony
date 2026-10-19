@@ -63,16 +63,25 @@
         
         .section-title { color: #f39c12; font-weight: bold; font-size: 13px; margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase;}
         
-        .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px;}
-        .tab { 
+        /* MENÚ PRINCIPAL */
+        .main-tabs { display: flex; gap: 8px; margin-bottom: 15px; }
+        .main-tab { 
+            flex: 1; text-align: center; background: #2c3e50; color: white; padding: 10px 5px; 
+            border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 11px; transition: 0.2s;
+        }
+        .main-tab.active { background: #f39c12; color: #120e0d; border: 2px solid #fff; }
+        
+        /* SUB-MENÚ */
+        .sub-tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px;}
+        .sub-tab { 
             background: white; color: #555; padding: 8px 16px; border-radius: 20px; cursor: pointer;
             font-weight: bold; font-size: 11px; white-space: nowrap; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: 0.2s;
         }
-        .tab.active { background: #f39c12; color: #120e0d; }
-        .tabs::-webkit-scrollbar { display: none; }
+        .sub-tab.active { background: #f39c12; color: #120e0d; }
+        .sub-tabs::-webkit-scrollbar { display: none; }
         
         .day-content { display: none; }
-        .day-content.active { display: block; }
+        .modo-content { display: none; }
 
         .workout-card {
             background: white; border-left: 5px solid #f39c12; border-radius: 12px;
@@ -90,9 +99,13 @@
         .stat-box strong { display: block; font-size: 13px; color: #222; font-weight: 900; }
         .ex-nota { font-size: 11px; color: #888; margin-top: 8px; margin-bottom: 0; font-style: italic; }
 
+        /* Estilos Progresión interactiva */
         .table-progression { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
         .table-progression th { background: #f39c12; color: white; padding: 8px; text-align: left; }
         .table-progression td { padding: 8px; border-bottom: 1px solid #eee; }
+        .input-peso { width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 12px; }
+        .btn-whatsapp { width: 100%; padding: 15px; background-color: #25D366; color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px;}
+        .btn-whatsapp:hover { background-color: #128C7E; }
     </style>
 </head>
 <body>
@@ -110,322 +123,174 @@
 <div id="tracking-screen" class="tracking-container">
 
     <div class="header-card">
-        <h2>diana elizabeth</h2>
-        <h4>Programa Dual (3 y 5 Días)</h4>
+        <h2>DIANA ELIZABETH</h2>
+        <h4>Elige tu frecuencia de entrenamiento</h4>
         <p>Enfoque: Vasto Interno, Glúteos y Hombros</p>
     </div>
 
-    <div class="tabs">
-        <div class="tab active" onclick="cambiarDia('r3d1', this)">R3 - DÍA 1</div>
-        <div class="tab" onclick="cambiarDia('r3d2', this)">R3 - DÍA 2</div>
-        <div class="tab" onclick="cambiarDia('r3d3', this)">R3 - DÍA 3</div>
-        <div class="tab" onclick="cambiarDia('r5d1', this)">R5 - DÍA 1</div>
-        <div class="tab" onclick="cambiarDia('r5d2', this)">R5 - DÍA 2</div>
-        <div class="tab" onclick="cambiarDia('r5d3', this)">R5 - DÍA 3</div>
-        <div class="tab" onclick="cambiarDia('r5d4', this)">R5 - DÍA 4</div>
-        <div class="tab" onclick="cambiarDia('r5d5', this)">R5 - DÍA 5</div>
-        <div class="tab" onclick="cambiarDia('prog', this)">PROGRESIÓN</div>
+    <!-- MENÚ PRINCIPAL -->
+    <div class="main-tabs">
+        <div class="main-tab active" onclick="cambiarModo('modo-3dias', this)">3 DÍAS (SÚPER)</div>
+        <div class="main-tab" onclick="cambiarModo('modo-5dias', this)">5 DÍAS (SOLA)</div>
+        <div class="main-tab" style="background:#e74c3c;" onclick="cambiarModo('modo-prog', this)">PROGRESIÓN</div>
     </div>
 
-    <!-- ==================== RUTINA 3 DÍAS (SUPERVISADA) ==================== -->
-    <div id="r3d1" class="day-content active">
-        <div class="section-title">▶ R3 DÍA 1: TREN INFERIOR (GLÚTEO Y VASTO)</div>
+    <!-- ==================== MODO 3 DÍAS (SUPERVISADA) ==================== -->
+    <div id="modo-3dias" class="modo-content" style="display: block;">
+        <div class="sub-tabs">
+            <div class="sub-tab active" onclick="cambiarDia('dia1-3d', this, 'modo-3dias')">DÍA 1</div>
+            <div class="sub-tab" onclick="cambiarDia('dia2-3d', this, 'modo-3dias')">DÍA 2</div>
+            <div class="sub-tab" onclick="cambiarDia('dia3-3d', this, 'modo-3dias')">DÍA 3</div>
+        </div>
+
+        <div id="dia1-3d" class="day-content" style="display: block;">
+            <div class="section-title">▶ TREN INFERIOR (GLÚTEO Y VASTO)</div>
+            <div class="workout-card">
+                <h5>1. Hip Thrust</h5>
+                <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>8 - 10</strong></div><div class="stat-box"><span>RPE</span><strong>6-7</strong></div><div class="stat-box"><span>RIR</span><strong>3-4</strong></div></div>
+                <p class="ex-nota">Nota: Pausa de 2 segundos en máxima contracción.</p>
+            </div>
+            <div class="workout-card">
+                <h5>2. Zancadas</h5>
+                <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>10 / p</strong></div><div class="stat-box"><span>RPE</span><strong>6-7</strong></div><div class="stat-box"><span>RIR</span><strong>3-4</strong></div></div>
+                <p class="ex-nota">Nota: Paso largo para mayor enfoque en glúteo.</p>
+            </div>
+            <div class="workout-card">
+                <h5>3. Prensa de Piernas</h5>
+                <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>12-15</strong></div><div class="stat-box"><span>RPE</span><strong>6-7</strong></div><div class="stat-box"><span>RIR</span><strong>3-4</strong></div></div>
+                <p class="ex-nota">Nota: Pies juntos en la parte baja (vasto externo).</p>
+            </div>
+            <div class="workout-card">
+                <h5>4. Curl Femoral</h5>
+                <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>12-15</strong></div><div class="stat-box"><span>RPE</span><strong>6-7</strong></div><div class="stat-box"><span>RIR</span><strong>3-4</strong></div></div>
+            </div>
+        </div>
+
+        <div id="dia2-3d" class="day-content">
+            <div class="section-title">▶ TREN SUPERIOR (MANTENIMIENTO)</div>
+            <div class="workout-card">
+                <h5>1. Jalón de Espalda Supino</h5>
+                <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>3</strong></div><div class="stat-box"><span>Reps</span><strong>12</strong></div><div class="stat-box"><span>Base</span><strong>30kg</strong></div></div>
+            </div>
+            <div class="workout-card">
+                <h5>2. Remo Unilateral Sentado</h5>
+                <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>3</strong></div><div class="stat-box"><span>Reps</span><strong>12 / b</strong></div><div class="stat-box"><span>Base</span><strong>25lb</strong></div></div>
+            </div>
+            <div class="workout-card">
+                <h5>3. Pull Over</h5>
+                <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>3</strong></div><div class="stat-box"><span>Reps</span><strong>12</strong></div><div class="stat-box"><span>Base</span><strong>20kg</strong></div></div>
+            </div>
+            <div class="workout-card">
+                <h5>4. Flys (Aperturas)</h5>
+                <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>3</strong></div><div class="stat-box"><span>Reps</span><strong>15</strong></div><div class="stat-box"><span>Base</span><strong>5kg</strong></div></div>
+            </div>
+            <div class="workout-card">
+                <h5>5. Elevaciones Laterales</h5>
+                <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>3</strong></div><div class="stat-box"><span>Reps</span><strong>15</strong></div><div class="stat-box"><span>RPE</span><strong>6-7</strong></div></div>
+            </div>
+        </div>
+
+        <div id="dia3-3d" class="day-content">
+            <div class="section-title">▶ TREN INFERIOR (VASTOS Y GLÚTEOS)</div>
+            <div class="workout-card">
+                <h5>1. Peso Muerto Rumano</h5>
+                <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>8-10</strong></div><div class="stat-box"><span>RPE</span><strong>6-7</strong></div><div class="stat-box"><span>RIR</span><strong>3-4</strong></div></div>
+            </div>
+            <div class="workout-card">
+                <h5>2. Sentadilla Sumo</h5>
+                <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>8-10</strong></div><div class="stat-box"><span>RPE</span><strong>6-7</strong></div><div class="stat-box"><span>RIR</span><strong>3-4</strong></div></div>
+                <p class="ex-nota">Nota: Puntas hacia afuera (Glúteos y aductores).</p>
+            </div>
+            <div class="workout-card">
+                <h5>3. Patada en Polea</h5>
+                <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>12 / p</strong></div><div class="stat-box"><span>RPE</span><strong>6-7</strong></div><div class="stat-box"><span>RIR</span><strong>3-4</strong></div></div>
+            </div>
+            <div class="workout-card">
+                <h5>4. Extensión de Cuádriceps</h5>
+                <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>15</strong></div><div class="stat-box"><span>RPE</span><strong>6-7</strong></div><div class="stat-box"><span>RIR</span><strong>3-4</strong></div></div>
+                <p class="ex-nota">Nota: Puntas hacia afuera (Enfoque vasto interno).</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODO 5 DÍAS (SOLA) ==================== -->
+    <div id="modo-5dias" class="modo-content">
+        <div class="sub-tabs">
+            <div class="sub-tab active" onclick="cambiarDia('dia1-5d', this, 'modo-5dias')">DÍA 1</div>
+            <div class="sub-tab" onclick="cambiarDia('dia2-5d', this, 'modo-5dias')">DÍA 2</div>
+            <div class="sub-tab" onclick="cambiarDia('dia3-5d', this, 'modo-5dias')">DÍA 3</div>
+            <div class="sub-tab" onclick="cambiarDia('dia4-5d', this, 'modo-5dias')">DÍA 4</div>
+            <div class="sub-tab" onclick="cambiarDia('dia5-5d', this, 'modo-5dias')">DÍA 5</div>
+        </div>
+
+        <div id="dia1-5d" class="day-content" style="display: block;">
+            <div class="section-title">▶ CUÁDRICEPS (VASTOS)</div>
+            <div class="workout-card"><h5>1. Sentadilla Búlgara</h5><div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>10 / p</strong></div><div class="stat-box"><span>RIR</span><strong>3-4</strong></div></div></div>
+            <div class="workout-card"><h5>2. Prensa Pies Juntos</h5><div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>12</strong></div><div class="stat-box"><span>RIR</span><strong>3-4</strong></div></div></div>
+            <div class="workout-card"><h5>3. Extensión de Cuádriceps</h5><div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>15</strong></div><div class="stat-box"><span>RIR</span><strong>3-4</strong></div></div></div>
+            <div class="workout-card"><h5>4. Zancadas Estáticas</h5><div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>12 / p</strong></div><div class="stat-box"><span>RIR</span><strong>3-4</strong></div></div></div>
+        </div>
+
+        <div id="dia2-5d" class="day-content">
+            <div class="section-title">▶ HOMBROS</div>
+            <div class="workout-card"><h5>1. Press Militar (Mancuernas)</h5><div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>10-12</strong></div></div></div>
+            <div class="workout-card"><h5>2. Elevaciones Laterales</h5><div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>15</strong></div></div></div>
+            <div class="workout-card"><h5>3. Elevaciones Frontales</h5><div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>12</strong></div></div></div>
+            <div class="workout-card"><h5>4. Pájaros Inclinado</h5><div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>15</strong></div></div></div>
+        </div>
+
+        <div id="dia3-5d" class="day-content">
+            <div class="section-title">▶ GLÚTEOS Y FEMORALES</div>
+            <div class="workout-card"><h5>1. Hip Thrust</h5><div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>10-12</strong></div><div class="stat-box"><span>RIR</span><strong>3-4</strong></div></div></div>
+            <div class="workout-card"><h5>2. Peso Muerto Rumano</h5><div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>10</strong></div><div class="stat-box"><span>RIR</span><strong>3-4</strong></div></div></div>
+            <div class="workout-card"><h5>3. Curl Femoral</h5><div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>12</strong></div><div class="stat-box"><span>RIR</span><strong>3-4</strong></div></div></div>
+            <div class="workout-card"><h5>4. Patada de Glúteo</h5><div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>15 / p</strong></div><div class="stat-box"><span>RIR</span><strong>3-4</strong></div></div></div>
+        </div>
+
+        <div id="dia4-5d" class="day-content">
+            <div class="section-title">▶ MANTENIMIENTO</div>
+            <div class="workout-card"><h5>1. Jalón de Espalda Supino</h5><div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>3</strong></div><div class="stat-box"><span>Reps</span><strong>12</strong></div></div></div>
+            <div class="workout-card"><h5>2. Remo en Polea</h5><div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>3</strong></div><div class="stat-box"><span>Reps</span><strong>12</strong></div></div></div>
+            <div class="workout-card"><h5>3. Pull Over</h5><div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>3</strong></div><div class="stat-box"><span>Reps</span><strong>15</strong></div></div></div>
+            <div class="workout-card"><h5>4. Flys (Aperturas)</h5><div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>3</strong></div><div class="stat-box"><span>Reps</span><strong>15</strong></div></div></div>
+        </div>
+
+        <div id="dia5-5d" class="day-content">
+            <div class="section-title">▶ MIXTO</div>
+            <div class="workout-card"><h5>1. Sentadilla Sumo</h5><div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>10-12</strong></div></div></div>
+            <div class="workout-card"><h5>2. Elevaciones Laterales</h5><div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>15</strong></div></div></div>
+            <div class="workout-card"><h5>3. Zancadas Caminando</h5><div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>12 / p</strong></div></div></div>
+            <div class="workout-card"><h5>4. Face Pull</h5><div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>15</strong></div></div></div>
+        </div>
+    </div>
+
+    <!-- ==================== PROGRESIÓN INTERACTIVA ==================== -->
+    <div id="modo-prog" class="modo-content">
+        <div class="section-title">▶ REGISTRO DE CARGAS Y REPETICIONES</div>
         
-        <div class="workout-card">
-            <h5>1. Hip Thrust</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>4</strong></div>
-                <div class="stat-box"><span>Reps</span><strong>8 - 10</strong></div>
-                <div class="stat-box"><span>RPE</span><strong>6-7</strong></div>
-                <div class="stat-box"><span>RIR</span><strong>3-4</strong></div>
-            </div>
-            <p class="ex-nota">Nota: Pausa de 2 segundos en máxima contracción.</p>
-        </div>
-
-        <div class="workout-card">
-            <h5>2. Zancadas</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>4</strong></div>
-                <div class="stat-box"><span>Reps</span><strong>10 / p</strong></div>
-                <div class="stat-box"><span>RPE</span><strong>6-7</strong></div>
-                <div class="stat-box"><span>RIR</span><strong>3-4</strong></div>
-            </div>
-            <p class="ex-nota">Nota: Paso largo para mayor enfoque en glúteo.</p>
-        </div>
-
-        <div class="workout-card">
-            <h5>3. Prensa de Piernas</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>4</strong></div>
-                <div class="stat-box"><span>Reps</span><strong>12-15</strong></div>
-                <div class="stat-box"><span>RPE</span><strong>6-7</strong></div>
-                <div class="stat-box"><span>RIR</span><strong>3-4</strong></div>
-            </div>
-            <p class="ex-nota">Nota: Pies juntos en la parte baja (vasto externo).</p>
-        </div>
-
-        <div class="workout-card">
-            <h5>4. Curl Femoral</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>4</strong></div>
-                <div class="stat-box"><span>Reps</span><strong>12-15</strong></div>
-                <div class="stat-box"><span>RPE</span><strong>6-7</strong></div>
-                <div class="stat-box"><span>RIR</span><strong>3-4</strong></div>
-            </div>
-        </div>
-    </div>
-
-    <div id="r3d2" class="day-content">
-        <div class="section-title">▶ R3 DÍA 2: TREN SUPERIOR (MANTENIMIENTO)</div>
-        
-        <div class="workout-card">
-            <h5>1. Jalón de Espalda Supino</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>3</strong></div>
-                <div class="stat-box"><span>Reps</span><strong>12</strong></div>
-                <div class="stat-box"><span>Base</span><strong>30kg</strong></div>
-            </div>
-        </div>
-
-        <div class="workout-card">
-            <h5>2. Remo Unilateral Sentado</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>3</strong></div>
-                <div class="stat-box"><span>Reps</span><strong>12 / b</strong></div>
-                <div class="stat-box"><span>Base</span><strong>25lb</strong></div>
-            </div>
-        </div>
-
-        <div class="workout-card">
-            <h5>3. Pull Over</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>3</strong></div>
-                <div class="stat-box"><span>Reps</span><strong>12</strong></div>
-                <div class="stat-box"><span>Base</span><strong>20kg</strong></div>
-            </div>
-        </div>
-
-        <div class="workout-card">
-            <h5>4. Flys (Aperturas)</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>3</strong></div>
-                <div class="stat-box"><span>Reps</span><strong>15</strong></div>
-                <div class="stat-box"><span>Base</span><strong>5kg</strong></div>
-            </div>
-        </div>
-        
-        <div class="workout-card">
-            <h5>5. Elevaciones Laterales</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>3</strong></div>
-                <div class="stat-box"><span>Reps</span><strong>15</strong></div>
-                <div class="stat-box"><span>RPE</span><strong>6-7</strong></div>
-            </div>
-        </div>
-    </div>
-
-    <div id="r3d3" class="day-content">
-        <div class="section-title">▶ R3 DÍA 3: TREN INFERIOR (VASTOS Y GLÚTEOS)</div>
-        
-        <div class="workout-card">
-            <h5>1. Peso Muerto Rumano</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>4</strong></div>
-                <div class="stat-box"><span>Reps</span><strong>8-10</strong></div>
-                <div class="stat-box"><span>RPE</span><strong>6-7</strong></div>
-                <div class="stat-box"><span>RIR</span><strong>3-4</strong></div>
-            </div>
-        </div>
-
-        <div class="workout-card">
-            <h5>2. Sentadilla Sumo</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>4</strong></div>
-                <div class="stat-box"><span>Reps</span><strong>8-10</strong></div>
-                <div class="stat-box"><span>RPE</span><strong>6-7</strong></div>
-                <div class="stat-box"><span>RIR</span><strong>3-4</strong></div>
-            </div>
-            <p class="ex-nota">Nota: Puntas hacia afuera (Glúteos y aductores).</p>
-        </div>
-
-        <div class="workout-card">
-            <h5>3. Patada en Polea</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>4</strong></div>
-                <div class="stat-box"><span>Reps</span><strong>12 / p</strong></div>
-                <div class="stat-box"><span>RPE</span><strong>6-7</strong></div>
-                <div class="stat-box"><span>RIR</span><strong>3-4</strong></div>
-            </div>
-        </div>
-
-        <div class="workout-card">
-            <h5>4. Extensión de Cuádriceps</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>4</strong></div>
-                <div class="stat-box"><span>Reps</span><strong>15</strong></div>
-                <div class="stat-box"><span>RPE</span><strong>6-7</strong></div>
-                <div class="stat-box"><span>RIR</span><strong>3-4</strong></div>
-            </div>
-            <p class="ex-nota">Nota: Puntas hacia afuera (Enfoque vasto interno).</p>
-        </div>
-    </div>
-
-    <!-- ==================== RUTINA 5 DÍAS (SOLA) ==================== -->
-    <div id="r5d1" class="day-content">
-        <div class="section-title">▶ R5 DÍA 1: CUÁDRICEPS (VASTOS)</div>
-        <div class="workout-card">
-            <h5>1. Sentadilla Búlgara</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>4</strong></div>
-                <div class="stat-box"><span>Reps</span><strong>10 / p</strong></div>
-                <div class="stat-box"><span>RIR</span><strong>3-4</strong></div>
-            </div>
-        </div>
-        <div class="workout-card">
-            <h5>2. Prensa Pies Juntos</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>4</strong></div>
-                <div class="stat-box"><span>Reps</span><strong>12</strong></div>
-                <div class="stat-box"><span>RIR</span><strong>3-4</strong></div>
-            </div>
-        </div>
-        <div class="workout-card">
-            <h5>3. Extensión de Cuádriceps</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>4</strong></div>
-                <div class="stat-box"><span>Reps</span><strong>15</strong></div>
-                <div class="stat-box"><span>RIR</span><strong>3-4</strong></div>
-            </div>
-        </div>
-        <div class="workout-card">
-            <h5>4. Zancadas Estáticas</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>4</strong></div>
-                <div class="stat-box"><span>Reps</span><strong>12 / p</strong></div>
-                <div class="stat-box"><span>RIR</span><strong>3-4</strong></div>
-            </div>
-        </div>
-    </div>
-
-    <div id="r5d2" class="day-content">
-        <div class="section-title">▶ R5 DÍA 2: HOMBROS</div>
-        <div class="workout-card">
-            <h5>1. Press Militar (Mancuernas)</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>10-12</strong></div>
-            </div>
-        </div>
-        <div class="workout-card">
-            <h5>2. Elevaciones Laterales</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>15</strong></div>
-            </div>
-        </div>
-        <div class="workout-card">
-            <h5>3. Elevaciones Frontales</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>12</strong></div>
-            </div>
-        </div>
-        <div class="workout-card">
-            <h5>4. Pájaros Inclinado</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>15</strong></div>
-            </div>
-        </div>
-    </div>
-
-    <div id="r5d3" class="day-content">
-        <div class="section-title">▶ R5 DÍA 3: GLÚTEOS Y FEMORALES</div>
-        <div class="workout-card">
-            <h5>1. Hip Thrust</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>10-12</strong></div><div class="stat-box"><span>RIR</span><strong>3-4</strong></div>
-            </div>
-        </div>
-        <div class="workout-card">
-            <h5>2. Peso Muerto Rumano</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>10</strong></div><div class="stat-box"><span>RIR</span><strong>3-4</strong></div>
-            </div>
-        </div>
-        <div class="workout-card">
-            <h5>3. Curl Femoral</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>12</strong></div><div class="stat-box"><span>RIR</span><strong>3-4</strong></div>
-            </div>
-        </div>
-        <div class="workout-card">
-            <h5>4. Patada de Glúteo</h5>
-            <div class="exercise-stats">
-                <div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>15 / p</strong></div><div class="stat-box"><span>RIR</span><strong>3-4</strong></div>
-            </div>
-        </div>
-    </div>
-
-    <div id="r5d4" class="day-content">
-        <div class="section-title">▶ R5 DÍA 4: MANTENIMIENTO</div>
-        <div class="workout-card">
-            <h5>1. Jalón de Espalda Supino</h5>
-            <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>3</strong></div><div class="stat-box"><span>Reps</span><strong>12</strong></div></div>
-        </div>
-        <div class="workout-card">
-            <h5>2. Remo en Polea</h5>
-            <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>3</strong></div><div class="stat-box"><span>Reps</span><strong>12</strong></div></div>
-        </div>
-        <div class="workout-card">
-            <h5>3. Pull Over</h5>
-            <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>3</strong></div><div class="stat-box"><span>Reps</span><strong>15</strong></div></div>
-        </div>
-        <div class="workout-card">
-            <h5>4. Flys (Aperturas)</h5>
-            <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>3</strong></div><div class="stat-box"><span>Reps</span><strong>15</strong></div></div>
-        </div>
-    </div>
-
-    <div id="r5d5" class="day-content">
-        <div class="section-title">▶ R5 DÍA 5: MIXTO</div>
-        <div class="workout-card">
-            <h5>1. Sentadilla Sumo</h5>
-            <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>10-12</strong></div></div>
-        </div>
-        <div class="workout-card">
-            <h5>2. Elevaciones Laterales</h5>
-            <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>15</strong></div></div>
-        </div>
-        <div class="workout-card">
-            <h5>3. Zancadas Caminando</h5>
-            <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>12 / p</strong></div></div>
-        </div>
-        <div class="workout-card">
-            <h5>4. Face Pull</h5>
-            <div class="exercise-stats"><div class="stat-box"><span>Series</span><strong>4</strong></div><div class="stat-box"><span>Reps</span><strong>15</strong></div></div>
-        </div>
-    </div>
-
-    <!-- ==================== PROGRESIÓN ==================== -->
-    <div id="prog" class="day-content">
-        <div class="section-title">▶ REGISTRO DE CARGAS</div>
         <div class="workout-card">
             <h5>TREN SUPERIOR (MANTENIMIENTO)</h5>
             <table class="table-progression">
-                <tr><th>Ejercicio</th><th>Semana 1</th><th>Actual</th></tr>
-                <tr><td>Jalón Supino</td><td>30 kg</td><td>____</td></tr>
-                <tr><td>Remo Unil.</td><td>25 lb</td><td>____</td></tr>
-                <tr><td>Pull Over</td><td>20 kg</td><td>____</td></tr>
-                <tr><td>Flys</td><td>5 kg</td><td>____</td></tr>
+                <tr><th>Ejercicio</th><th>Meta Base</th><th>Tu Logro</th></tr>
+                <tr><td>Jalón Supino</td><td>30 kg</td><td><input type="text" id="v-jalon" class="input-peso" placeholder="Ej: 30kg x 12"></td></tr>
+                <tr><td>Remo Unil.</td><td>25 lb</td><td><input type="text" id="v-remo" class="input-peso" placeholder="Ej: 25lb x 12"></td></tr>
+                <tr><td>Pull Over</td><td>20 kg</td><td><input type="text" id="v-pull" class="input-peso" placeholder="Ej: 20kg x 12"></td></tr>
+                <tr><td>Flys</td><td>5 kg</td><td><input type="text" id="v-flys" class="input-peso" placeholder="Ej: 5kg x 15"></td></tr>
             </table>
         </div>
+        
         <div class="workout-card">
             <h5>TREN INFERIOR (REGISTRAR)</h5>
             <table class="table-progression">
-                <tr><th>Ejercicio</th><th>Semana 1</th><th>Actual</th></tr>
-                <tr><td>Hip Thrust</td><td>____</td><td>____</td></tr>
-                <tr><td>P. Muerto R.</td><td>____</td><td>____</td></tr>
-                <tr><td>Sentadilla Sumo</td><td>____</td><td>____</td></tr>
-                <tr><td>Zancadas</td><td>____</td><td>____</td></tr>
+                <tr><th>Ejercicio</th><th>Meta Base</th><th>Tu Logro</th></tr>
+                <tr><td>Hip Thrust</td><td>---</td><td><input type="text" id="v-hip" class="input-peso" placeholder="Ej: 60kg x 10"></td></tr>
+                <tr><td>P. Muerto R.</td><td>---</td><td><input type="text" id="v-pmr" class="input-peso" placeholder="Ej: 40kg x 10"></td></tr>
+                <tr><td>Sentad. Sumo</td><td>---</td><td><input type="text" id="v-sumo" class="input-peso" placeholder="Ej: 45kg x 10"></td></tr>
+                <tr><td>Zancadas</td><td>---</td><td><input type="text" id="v-zancadas" class="input-peso" placeholder="Ej: 15kg x 10"></td></tr>
             </table>
         </div>
+
+        <button class="btn-whatsapp" onclick="enviarWhatsApp()">ENVIAR REPORTE A ANTHONY 📲</button>
     </div>
 
 </div>
@@ -438,7 +303,7 @@
             return;
         }
         
-        // Clave actualizada para diana
+        // Clave de acceso
         if (inputCodigo === "DIANITA1") {
             document.body.style.backgroundColor = "#e8e8e8";
             document.getElementById('login-screen').style.display = 'none';
@@ -449,15 +314,65 @@
         }
     }
 
-    function cambiarDia(diaId, elementoPestana) {
-        const dias = document.querySelectorAll('.day-content');
-        dias.forEach(dia => dia.classList.remove('active'));
+    function cambiarModo(modoId, elementoTab) {
+        // Ocultar todos los modos
+        document.querySelectorAll('.modo-content').forEach(modo => {
+            modo.style.display = 'none';
+        });
+        
+        // Quitar 'active' de todas las pestañas principales
+        document.querySelectorAll('.main-tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
 
-        const pestanas = document.querySelectorAll('.tab');
+        // Mostrar modo seleccionado y activar pestaña
+        document.getElementById(modoId).style.display = 'block';
+        elementoTab.classList.add('active');
+
+        // Seleccionar automáticamente el "DÍA 1" del modo seleccionado (si aplica)
+        if (modoId === 'modo-5dias') {
+            document.querySelector('#modo-5dias .sub-tab').click();
+        } else if (modoId === 'modo-3dias') {
+            document.querySelector('#modo-3dias .sub-tab').click();
+        }
+    }
+
+    function cambiarDia(diaId, elementoPestana, contenedorPadre) {
+        const padre = document.getElementById(contenedorPadre);
+        
+        // Ocultar días
+        const dias = padre.querySelectorAll('.day-content');
+        dias.forEach(dia => dia.style.display = 'none');
+
+        // Quitar clase activa de las sub-pestañas
+        const pestanas = padre.querySelectorAll('.sub-tab');
         pestanas.forEach(pestana => pestana.classList.remove('active'));
 
-        document.getElementById(diaId).classList.add('active');
+        // Mostrar día y activar pestaña
+        document.getElementById(diaId).style.display = 'block';
         elementoPestana.classList.add('active');
+    }
+
+    function enviarWhatsApp() {
+        // Recolectar datos
+        const jalon = document.getElementById('v-jalon').value || 'Sin registro';
+        const remo = document.getElementById('v-remo').value || 'Sin registro';
+        const pull = document.getElementById('v-pull').value || 'Sin registro';
+        const flys = document.getElementById('v-flys').value || 'Sin registro';
+        
+        const hip = document.getElementById('v-hip').value || 'Sin registro';
+        const pmr = document.getElementById('v-pmr').value || 'Sin registro';
+        const sumo = document.getElementById('v-sumo').value || 'Sin registro';
+        const zancadas = document.getElementById('v-zancadas').value || 'Sin registro';
+
+        // Armar el mensaje
+        const mensaje = `Hola Coach, aquí están mis avances de progresión:%0A%0A*TREN SUPERIOR*%0A- Jalón Supino: ${jalon}%0A- Remo Unilateral: ${remo}%0A- Pull Over: ${pull}%0A- Flys: ${flys}%0A%0A*TREN INFERIOR*%0A- Hip Thrust: ${hip}%0A- Peso Muerto R.: ${pmr}%0A- Sentadilla Sumo: ${sumo}%0A- Zancadas: ${zancadas}`;
+
+        // !IMPORTANTE: Cambia "593999999999" por tu número de WhatsApp real (código de país + número, sin el "+")
+        const numeroWhatsApp = "593999999999"; 
+        const url = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
+        
+        window.open(url, '_blank');
     }
 </script>
 
