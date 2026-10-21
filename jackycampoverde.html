@@ -1,6 +1,3 @@
-
-
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -111,12 +108,42 @@
         .report-section input[type="number"] { width: 100%; padding: 10px; margin-top: 5px; border-radius: 6px; border: 1px solid #ccc; box-sizing: border-box; }
         .btn-enviar { width: 100%; padding: 12px; background-color: #27ae60; color: white; border: none; border-radius: 6px; font-size: 15px; font-weight: bold; cursor: pointer; margin-top: 15px; }
         .btn-enviar:disabled { background-color: #7f8c8d; cursor: not-allowed; }
+
+        /* SISTEMA DE NOTIFICACIONES TOAST */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+        }
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
+        }
+        #toast.success { background-color: #27ae60; }
+        #toast.error { background-color: #c0392b; }
     </style>
 </head>
 <body>
 
 <!-- LOGO DE FONDO GIGANTE -->
 <img src="logo gym.jpeg" id="bg-watermark" class="watermark" alt="Fondo">
+
+<!-- TOAST DE NOTIFICACIONES -->
+<div id="toast">Notificación</div>
 
 <!-- 1. PANTALLA DE LOGIN -->
 <div id="login-screen" class="login-container">
@@ -133,19 +160,19 @@
     <!-- DATOS DEL CLIENTE -->
     <div class="header-card">
         <h2>JAKY CAMPOVERDE</h2>
-        <h4>Plan Nutricional: Superávit Limpio (~2100 kcal)</h4>
+        <h4>Plan Nutricional: Superávit Limpio (~2200 kcal)</h4>
         <div class="stats-row">
-            <div class="stat-box"><span>Peso Act.</span><strong>Por definir</strong></div>
-            <div class="stat-box"><span>Meta</span><strong>Por definir</strong></div>
-            <div class="stat-box"><span>Grasa</span><strong>Por definir</strong></div>
+            <div class="stat-box"><span>Peso Act.</span><strong>49 kg</strong></div>
+            <div class="stat-box"><span>Carbos</span><strong>316g</strong></div>
+            <div class="stat-box"><span>Proteína</span><strong>110g</strong></div>
         </div>
     </div>
 
     <!-- NOTAS IMPORTANTES -->
     <div class="section-title">▶ NOTAS DE ENTRENAMIENTO</div>
     <div class="meal-card note-card">
-        <h5>Carga de Energía</h5>
-        <p>Este plan está diseñado con un incremento estratégico de carbohidratos (especialmente en la cena post-entrenamiento) y grasas densas en el almuerzo. Esto es vital para cubrir tu gasto calórico en las carreras nocturnas y sesiones de fuerza sin entrar en catabolismo muscular.</p>
+        <h5>Carga de Energía (Ajuste 2200 kcal)</h5>
+        <p>Este plan está diseñado con un incremento estratégico de carbohidratos (especialmente en la cena post-entrenamiento martes y viernes). Esto es vital para cubrir tu gasto calórico en las carreras nocturnas de 5km y sesiones de fuerza sin entrar en catabolismo muscular, priorizando el tren inferior.</p>
     </div>
 
     <div class="section-title">▶ TU PLAN NUTRICIONAL Y RUTINAS</div>
@@ -158,7 +185,6 @@
         <div class="tab" onclick="cambiarDia('jueves', this)">JUEVES</div>
         <div class="tab" onclick="cambiarDia('viernes', this)">VIERNES</div>
         <div class="tab" onclick="cambiarDia('finde', this)">FIN DE SEMANA</div>
-        <!-- NUEVA PESTAÑA DE ENTRENAMIENTO -->
         <div class="tab entrenamiento" onclick="cambiarDia('entrenamiento', this)">💪 ENTRENAMIENTO</div>
         <div class="tab especial" onclick="cambiarDia('alternativas', this)">★ OPCIONES RÁPIDAS</div>
     </div>
@@ -167,23 +193,23 @@
     <div id="lunes" class="day-content active">
         <div class="meal-card">
             <h5>Desayuno </h5>
-            <p>1 taza de agua de jamaica, 150g de tortilla de yuca y 3 huevos revueltos.</p>
+            <p>100g de avena cocida en agua o leche de almendras + 1 scoop de proteína + 1 taza de arándanos + 1 cda de chía.</p>
         </div>
         <div class="meal-card">
             <h5>Media Mañana </h5>
-            <p>Café negro o Té. <em>(Opcional: Yogur griego/deslactosado solo si hay hambre).</em></p>
+            <p>Café negro o Té verde.</p>
         </div>
         <div class="meal-card">
             <h5>Almuerzo </h5>
-            <p>150g de pollo a la plancha, crema de zanahoria, 150g de arroz, 1/2 aguacate mediano y agua de horchata.</p>
+            <p>150g de pechuga de pollo a la plancha con cúrcuma, <strong>200g de arroz integral</strong> y 1 taza de brócoli al vapor.</p>
         </div>
         <div class="meal-card">
             <h5>Media Tarde </h5>
-            <p><strong>Batido :</strong> Leche deslactosada (o agua) + 1 scoop de proteína + 8 cdas de avena + 8 nueces.</p>
+            <p>3 rebanadas de pan integral, 80g de queso fresco y 1 plátano mediano.</p>
         </div>
         <div class="meal-card">
             <h5>Cena </h5>
-            <p>150g de pollo asado, 120g de verde majado y ensalada de rábano.</p>
+            <p>150g de filete de tilapia o merluza al horno, <strong>200g de camote</strong>, 1 taza de espárragos o vainitas y 5g de creatina en agua.</p>
         </div>
     </div>
  
@@ -191,7 +217,7 @@
     <div id="martes" class="day-content">
         <div class="meal-card">
             <h5>Desayuno </h5>
-            <p>1 taza de agua de jamaica, 2 tostadas de pan de masa madre y 3 huevos duros.</p>
+            <p>Tortilla de 3 huevos y 2 claras con espinacas y champiñones + 1/2 aguacate + té verde + <strong>2 rebanadas de pan tostado</strong>.</p>
         </div>
         <div class="meal-card">
             <h5>Media Mañana </h5>
@@ -199,15 +225,15 @@
         </div>
         <div class="meal-card">
             <h5>Almuerzo </h5>
-            <p>150g de pollo al jugo, 150g de yuca cocinada y ensalada de vainita con 1.5 cdas de aceite de oliva.</p>
+            <p>Ensalada gigante + 150g de salmón o atún + aderezo de aceite de oliva y limón + <strong>200g de yuca o papa cocida</strong>.</p>
         </div>
         <div class="meal-card">
-            <h5>Media Tarde </h5>
-            <p><strong>Batido:</strong> Leche deslactosada (o agua) + 1 scoop de proteína + 8 cdas de avena + 8 nueces.</p>
+            <h5>Media Tarde (Pre-Carrera)</h5>
+            <p><strong>Batido:</strong> 1 scoop de proteína + 30g de nueces + 1/2 taza de fresas + 5g de creatina + <strong>80g de avena</strong>.</p>
         </div>
         <div class="meal-card">
-            <h5>Cena </h5>
-            <p>150g de corvina a la plancha, 120g de choclito y ensalada zucchini.</p>
+            <h5>Cena (Post 5km)</h5>
+            <p>160g de pechuga de pollo + <strong>250g de tallarines salteados</strong> con aceite de oliva + 1/2 aguacate.</p>
         </div>
     </div>
 
@@ -215,7 +241,7 @@
     <div id="miercoles" class="day-content">
         <div class="meal-card">
             <h5>Desayuno </h5>
-            <p>1 taza de agua de jamaica, 2 rebanadas de pan de centeno y 3 huevos revueltos.</p>
+            <p>Pancakes de avena (80g avena, 1 scoop proteína, 3 claras) + 1 taza de fresas.</p>
         </div>
         <div class="meal-card">
             <h5>Media Mañana </h5>
@@ -223,15 +249,15 @@
         </div>
         <div class="meal-card">
             <h5>Almuerzo </h5>
-            <p>150g de pollo a la plancha, 150g de papa cocinada y ensalada de tomate con 1/2 aguacate mediano.</p>
+            <p>150g de res magra + <strong>200g de arroz integral</strong> + 150g de vainitas + ensalada verde.</p>
         </div>
         <div class="meal-card">
             <h5>Media Tarde </h5>
-            <p><strong>Batido:</strong> Leche deslactosada (o agua) + 1 scoop de proteína + 8 cdas de avena + 8 nueces.</p>
+            <p>1 taza (200g) de yogur griego + 1 manzana + 30g de almendras.</p>
         </div>
         <div class="meal-card">
             <h5>Cena </h5>
-            <p>150g de camarones al ajillo, 180g de arroz con zanahoria y ensalada de tomate.</p>
+            <p>Sopa a elección con 150g de proteína (pollo/carne) + <strong>200g de papa, verde o yuca</strong>.</p>
         </div>
     </div>
 
@@ -239,7 +265,7 @@
     <div id="jueves" class="day-content">
         <div class="meal-card">
             <h5>Desayuno </h5>
-            <p>1 taza de agua de jamaica, 150g de mote y 3 huevos duros.</p>
+            <p>3 huevos revueltos con 30g de queso fresco + tomates cherry salteados + café/té + <strong>1 plátano o pan de centeno</strong>.</p>
         </div>
         <div class="meal-card">
             <h5>Media Mañana</h5>
@@ -247,15 +273,15 @@
         </div>
         <div class="meal-card">
             <h5>Almuerzo </h5>
-            <p>150g de pechuga de pollo, 150g de verde cocinado y ensalada de pimientos con 1.5 cdas de aceite de oliva.</p>
+            <p>Ensalada de col/zanahoria/espinaca + 160g de pollo desmechado + 100g de aguacate + aceite de oliva + <strong>200g de quinoa</strong>.</p>
         </div>
         <div class="meal-card">
             <h5>Media Tarde </h5>
-            <p><strong>Batido :</strong> Leche deslactosada (o agua) + 1 scoop de proteína + 8 cdas de avena + 8 nueces.</p>
+            <p>1 taza de yogur griego + 30g de almendras + 5g de creatina + 1/2 taza de arándanos.</p>
         </div>
         <div class="meal-card">
             <h5>Cena </h5>
-            <p>150g de corvina al vapor, 1 taza de crema de zanahoria, 100g de papa cocinada y Té.</p>
+            <p>160g de lomo de pescado a la plancha + 200g de brócoli o coliflor + batido ligero (1 scoop en agua) + <strong>150g de papa cocinada</strong>.</p>
         </div>
     </div>
 
@@ -263,7 +289,7 @@
     <div id="viernes" class="day-content">
         <div class="meal-card">
             <h5>Desayuno </h5>
-            <p>1 taza de agua de jamaica, 1 empanada de verde grande (aprox. 150g) y 3 huevos revueltos.</p>
+            <p>1 scoop de proteína + <strong>100g de avena</strong> + 1 plátano + 1 cda de linaza + 2 claras cocidas.</p>
         </div>
         <div class="meal-card">
             <h5>Media Mañana </h5>
@@ -271,15 +297,15 @@
         </div>
         <div class="meal-card">
             <h5>Almuerzo </h5>
-            <p>150g de pollo desmechado, crema de tomate, 150g de arroz o yuca, 1/2 aguacate mediano y agua de horchata.</p>
+            <p>150g de pavo o pollo + <strong>1.5 tazas de quinoa cocida</strong> + ensalada + 1/2 taza de maíz dulce.</p>
         </div>
         <div class="meal-card">
-            <h5>Media Tarde </h5>
-            <p><strong>Batido :</strong> Leche deslactosada (o agua) + 1 scoop de proteína + 8 cdas de avena + 8 nueces.</p>
+            <h5>Media Tarde (Pre-Carrera)</h5>
+            <p><strong>3 tostadas de arroz inflado</strong> con 1/2 aguacate y 60g de jamón de pavo + 1 plátano extra.</p>
         </div>
         <div class="meal-card">
-            <h5>Cena </h5>
-            <p>150g de pescado blanco, 100g de suquini amarillo + ensalada verde.</p>
+            <h5>Cena (Post 5km)</h5>
+            <p>150g de salmón a la plancha + <strong>250g de camote</strong> (recuperación total) + ensalada de espinacas + 5g de creatina.</p>
         </div>
     </div>
 
@@ -287,90 +313,88 @@
     <div id="finde" class="day-content">
         <div class="meal-card">
             <h5>Sábado y Domingo</h5>
-            <p style="text-align:center; margin: 20px 0;"><em>Días libres o puedes replicar la estructura de carbohidrato + proteína de tu plantilla de Lunes a Viernes.</em></p>
+            <p style="text-align:center; margin: 20px 0;"><em>Días libres o puedes replicar la estructura de carbohidrato + proteína de tu plantilla de Lunes a Viernes. Mantén la ingesta alta si hay actividad extra.</em></p>
         </div>
     </div>
 
     <!-- ==================== PESTAÑA ENTRENAMIENTO ==================== -->
     <div id="entrenamiento" class="day-content">
         <div class="meal-card note-card">
-            <h5>Plan de Entrenamiento Semanal</h5>
-            <p>Aquí tienes tu rutina de lunes a viernes. Recuerda hacer un calentamiento articular previo de 10 a 15 minutos.</p>
+            <h5>Plan de Entrenamiento Semanal (Actualizado)</h5>
+            <p>Rutina reestructurada para priorizar glúteos/piernas, reducir volumen innecesario en tren superior y evitar interferencias con las carreras de 5km (Martes y Viernes).</p>
         </div>
         <div class="meal-card workout-card">
-            <h5>▶ Lunes:  Tren Inferior</h5>
+            <h5>▶ Lunes: Tren Inferior (Foco Glúteo/Femoral)</h5>
             <ul>
-                <li>Hip trust  3 series de 12-15 reps + 1 superserie bajando el peso al fallo.</li>
-                <li>sentadilla smith 3 x 15 </li>
-                <li>step up 3x 20 en polea.</li>
-                <li>Prensa de piernas: 3 series x 12 rep.</li>
-                     <li>peso muerto en biserie con abductores 10-12/15 3 vueltas</li>
-                  <li>femoral sentado 3x15</li>
+                <li>Hip thrust: 4 series de 10-12 reps (pesado).</li>
+                <li>Peso muerto rumano en biserie con abductores (12/15 reps): 4 vueltas.</li>
+                <li>Sentadilla smith: 3 series de 12 reps.</li>
+                <li>Femoral sentado: 4 series de 12-15 reps.</li>
+                <li>Step up en polea: 3 series de 15 reps por pierna.</li>
             </ul>
         </div>
         <div class="meal-card workout-card">
-            <h5>▶ Martes: tren superior</h5>
+            <h5>▶ Martes: Tren Superior (Mantenimiento) + 5km</h5>
             <ul>
-                <li>press militar 3x12 .</li>
-                <li>Rvuelos laterales con mancuerna 4x 10 </li>
-                <li>posterior en peck deck 3x15 </li>
-                <li>copa 3x15</li>
-                <li>estensiones de triceps con polea alta 3x 15</li>
-                <li>fondos en maquina asistida 3x15</li>
-
-                <li>crunch en polea 3 x 20</li>
-                <li>planchas 5 series de 1' por 30 s de descanso </li>
-                
-                
+                <li>Press militar con mancuernas: 3 series de 12 reps.</li>
+                <li>Vuelos laterales: 3 series de 12 reps.</li>
+                <li>Jalón de espalda agarre prono: 3 series de 12 reps.</li>
+                <li>Extensiones de tríceps en polea alta: 3 series de 15 reps.</li>
+                <li>Planchas: 4 series de 1 minuto.</li>
             </ul>
         </div>
         <div class="meal-card workout-card">
-            <h5>▶ Miércoles: tren inferior</h5>
+            <h5>▶ Miércoles: Tren Inferior (Foco Cuádriceps)</h5>
             <ul>
-                 <li>Hip trust  3 series de 12 reps</li>
-                <li>extensiones de cuadriceps 3 series de 15 reps.</li>
-                <li>sentadilla sumo con agarre triangular 4 series de 12 reps </li>
-                <li>prensa 3 series 20 reps</li>
-                <li>zancadas 3 vueltas con mancuerna</li>
-                      <li>biserie de extensiones con aductores 15/15 3 vueltas </li>
+                <li>Sentadilla sumo con agarre triangular: 4 series de 10-12 reps.</li>
+                <li>Prensa de piernas: 4 series de 15 reps.</li>
+                <li>Zancadas con mancuerna: 3 vueltas.</li>
+                <li>Biserie de extensiones de cuádriceps (15 reps) + aductores (15 reps): 4 vueltas.</li>
             </ul>
         </div>
         <div class="meal-card workout-card">
-            <h5>▶ Jueves: tren superior</h5>
+            <h5>▶ Jueves: Tren Superior (Mantenimiento)</h5>
             <ul>
-                <li>jalon de espalda en agarre prono en barra 4x12.</li>
-                <li>remo en maquina sentado 3x10 /lado.</li>
-                <li>remo con barra agarre supino 3x15</li>
-                <li>hammer de pecho alto 4x15 </li>
-                <li>curl de biceps 4x12</li>
-                <li>martillo con mancuernas 3x15</li>
-
-                <li>5 x 10 rueda para abdomen</li>
-                <li>abs rodillas al pecho en maquina de fondos 3x15 </li>
+                <li>Remo en máquina sentado: 3 series de 12 reps por lado.</li>
+                <li>Hammer de pecho alto: 3 series de 15 reps.</li>
+                <li>Posterior en peck deck: 3 series de 15 reps.</li>
+                <li>Curl de bíceps con barra o mancuerna: 3 series de 12 reps.</li>
+                <li>Rueda para abdomen: 4 series de 10 reps.</li>
             </ul>
         </div>
         <div class="meal-card workout-card">
-            <h5>▶ Viernes:tren inferior</h5>
+            <h5>▶ Viernes: Tren Inferior (Foco Glúteo) + 5km</h5>
             <ul>
-                <li>Hip trust  3 series de 12 reps.</li>
-                <li>patada con polea 3x 15</li>
-                <li>sentadilla hack 3x12 </li>
-             <li>abductores 10 normales y 10 apoyado al frente 3 series </li>
-                  <li>curl de femoral sentado 3x15</li>
-                  <li>extension de cuadriceps  3x12 </li>
+                <li>Hip thrust: 3 series de 12 reps.</li>
+                <li>Sentadilla hack: 3 series de 12 reps.</li>
+                <li>Patada con polea para glúteo: 4 series de 12 reps por pierna.</li>
+                <li>Abductores (10 normales y 10 apoyada al frente): 3 series.</li>
+                <li>Curl femoral sentado: 3 series de 15 reps.</li>
             </ul>
         </div>
     </div>
 
     <!-- ==================== ALTERNATIVAS (OPCIONES RÁPIDAS) ==================== -->
     <div id="alternativas" class="day-content">
-        <div class="meal-card">
-            <h5>Sustituto de Almuerzo rápido</h5>
-            <p>Sándwich de pan integral con doble porción de pechuga de pollo o jamón de pavo, lechuga y tomate.</p>
+        <div class="meal-card note-card">
+            <h5>Sustituciones Digestivas (Cero Huevo)</h5>
+            <p>Opciones amigables para el estómago si el huevo causa pesadez.</p>
         </div>
         <div class="meal-card">
-            <h5>Snack saciante anti-ansiedad</h5>
-            <p>Bastones de apio o zanahoria listos para consumir con yogur griego o queso cottage.</p>
+            <h5>Sustituto Desayuno Martes</h5>
+            <p>120g de pechuga de pollo desmechada o jamón de pavo a la plancha. Acompañar con las espinacas cocidas, el té verde y el pan tostado.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Sustituto Desayuno Miércoles</h5>
+            <p>Tazón de avena cocida (porridge) usando 1 scoop de proteína en polvo para reemplazar las claras, servido con fresas.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Sustituto Desayuno Jueves</h5>
+            <p>120g de lomo de atún conservado en agua o queso fresco bajo en grasa. Servir con pan de centeno, tomate y café/té.</p>
+        </div>
+        <div class="meal-card">
+            <h5>Sustituto Desayuno Viernes</h5>
+            <p>Eliminar las claras cocidas y compensar añadiendo media porción extra de proteína en polvo (1.5 scoops totales) al batido de avena.</p>
         </div>
     </div>
 
@@ -392,21 +416,28 @@
 </div>
 
 <script>
+    // Función para mostrar notificaciones personalizadas
+    function showToast(message, type = 'success') {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = 'show ' + type;
+        setTimeout(() => { toast.className = toast.className.replace('show', '').trim(); }, 3000);
+    }
+
     function iniciarSistema() {
         const inputCodigo = document.getElementById('client-code').value.trim().toUpperCase();
         if (inputCodigo === "") {
-            alert("Por favor, ingresa tu clave de acceso.");
+            showToast("Por favor, ingresa tu clave de acceso.", "error");
             return;
         }
         
-        // CÓDIGO DE ACCESO PARA JAKY CAMPOVERDE
-        if (inputCodigo === "JAKY2026") {
+        if (inputCodigo === "JAKY22026") {
             document.body.style.backgroundColor = "#e8e8e8";
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('tracking-screen').style.display = 'block';
             document.getElementById('bg-watermark').style.display = 'block';
         } else {
-            alert("Código incorrecto. Intenta nuevamente...");
+            showToast("Código incorrecto. Intenta nuevamente...", "error");
         }
     }
 
@@ -429,7 +460,7 @@
         const btn = document.getElementById('btnSubmit');
 
         if(agua === "" || sueno === "" || pasos === "") {
-            alert("Por favor, llena todos los campos antes de enviar.");
+            showToast("Por favor, llena todos los campos antes de enviar.", "error");
             return;
         }
 
@@ -454,7 +485,7 @@
         })
         .then(response => response.json())
         .then(data => {
-            alert("¡Reporte enviado exitosamente!");
+            showToast("¡Reporte enviado exitosamente!", "success");
             document.getElementById('agua').value = "";
             document.getElementById('sueno').value = "";
             document.getElementById('pasos').value = "";
@@ -462,7 +493,7 @@
             btn.disabled = false;
         })
         .catch(error => {
-            alert("Hubo un error de conexión. Inténtalo de nuevo.");
+            showToast("Hubo un error de conexión. Inténtalo de nuevo.", "error");
             btn.innerText = "Enviar Reporte Diario";
             btn.disabled = false;
         });
@@ -471,5 +502,3 @@
 
 </body>
 </html>
-
-```
